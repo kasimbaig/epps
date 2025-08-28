@@ -1,0 +1,576 @@
+/* COMPLETELY NEW NAVAL LOGIN DESIGN - MODERN OCEAN THEME */
+
+/* Main Container */
+.naval-login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0c1445 0%, #1a237e 25%, #0d47a1 50%, #01579b 75%, #0277bd 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Animated Ocean Background */
+.ocean-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100px;
+  background: linear-gradient(45deg, rgba(3, 169, 244, 0.3), rgba(33, 150, 243, 0.2));
+  border-radius: 50% 50% 0 0;
+  animation: wave-animation 8s ease-in-out infinite;
+}
+
+.wave-1 {
+  bottom: -20px;
+  animation-delay: 0s;
+  opacity: 0.7;
+}
+
+.wave-2 {
+  bottom: -40px;
+  animation-delay: 2s;
+  opacity: 0.5;
+}
+
+.wave-3 {
+  bottom: -60px;
+  animation-delay: 4s;
+  opacity: 0.3;
+}
+
+@keyframes wave-animation {
+  0%, 100% { transform: translateX(-50%) translateY(0px); }
+  50% { transform: translateX(-50%) translateY(-20px); }
+}
+
+.floating-ship {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 80px;
+  height: 40px;
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  border-radius: 20px 20px 0 0;
+  animation: ship-float 6s ease-in-out infinite;
+}
+
+.floating-ship::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 20px;
+  background: #8d6e63;
+}
+
+.floating-ship::after {
+  content: '';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 15px;
+  background: #ffd700;
+  border-radius: 10px 10px 0 0;
+}
+
+@keyframes ship-float {
+  0%, 100% { transform: translateY(0px) rotate(2deg); }
+  50% { transform: translateY(-15px) rotate(-2deg); }
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+    radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+    radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: stars-move 20s linear infinite;
+}
+
+@keyframes stars-move {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-100px); }
+}
+
+/* Main Content */
+.login-content {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  gap: 3rem;
+  min-height: 80vh;
+}
+
+/* Left Panel - Navy Information */
+.navy-info-panel {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 400px;
+  height: 600px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navy-logo-section {
+  margin-bottom: 2rem;
+}
+
+.navy-emblem-container {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+  box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+  animation: emblem-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes emblem-glow {
+  from { box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3); }
+  to { box-shadow: 0 20px 40px rgba(255, 215, 0, 0.6); }
+}
+
+.navy-emblem {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.navy-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.system-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+.system-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.navy-motto {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.motto-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #ffd700;
+}
+
+.motto-translation {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.navy-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(10px);
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+}
+
+.feature-text {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Right Panel - Login Form */
+.login-form-panel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-width: 400px;
+  width: 400px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+  width: 100%;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin: 0 0 0.5rem 0;
+}
+
+.welcome-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+}
+
+.modern-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.label-icon {
+  font-size: 1.2rem;
+}
+
+.input-container {
+  position: relative;
+}
+
+.modern-input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: white;
+  transition: all 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.modern-input:focus {
+  border-color: #1a237e;
+  box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
+  transform: translateY(-2px);
+}
+
+.input-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(45deg, #1a237e, #0d47a1);
+  transition: width 0.3s ease;
+}
+
+.modern-input:focus + .input-border {
+  width: 100%;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.password-toggle-btn:hover {
+  background: rgba(26, 35, 126, 0.1);
+}
+
+.toggle-icon {
+  font-size: 1.2rem;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.remember-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #1a237e;
+}
+
+.forgot-link {
+  color: #1a237e;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.forgot-link:hover {
+  color: #0d47a1;
+  text-decoration: underline;
+}
+
+.naval-login-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+  color: white;
+  font-weight: 600;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.naval-login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(26, 35, 126, 0.3);
+}
+
+.naval-login-btn:active {
+  transform: translateY(-1px);
+}
+
+.btn-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.naval-login-btn:hover .btn-ripple {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.form-footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(26, 35, 126, 0.1);
+  color: #1a237e;
+  padding: 0.75rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.security-icon {
+  font-size: 1rem;
+}
+
+.access-note {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Bottom Copyright */
+.copyright-section {
+  position: relative;
+  z-index: 10;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+  margin-top: -5rem;
+}
+
+.copyright-text {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin: 0 0 1rem 0;
+}
+
+.naval-symbols {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.symbol {
+  font-size: 1.5rem;
+  opacity: 0.7;
+  animation: symbol-float 3s ease-in-out infinite;
+}
+
+.symbol:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.symbol:nth-child(3) {
+  animation-delay: 2s;
+}
+
+@keyframes symbol-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .login-content {
+    flex-direction: column;
+    gap: 2rem;
+    min-height: auto;
+  }
+  
+  .navy-info-panel,
+  .login-form-panel {
+    max-width: 100%;
+    min-width: auto;
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-content {
+    padding: 1rem;
+  }
+  
+  .navy-info-panel,
+  .login-form-panel {
+    padding: 2rem 1.5rem;
+    min-height: 450px;
+  }
+  
+  .system-title {
+    font-size: 2.5rem;
+  }
+  
+  .navy-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navy-info-panel,
+  .login-form-panel {
+    padding: 1.5rem 1rem;
+    min-height: 400px;
+  }
+  
+  .form-options {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}

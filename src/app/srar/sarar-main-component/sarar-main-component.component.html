@@ -1,0 +1,87 @@
+<!-- srar-main.component.html -->
+<div class="srar-main-container px-3 py-1 min-h-screen">
+    <!-- SRAR Dashboard Header -->
+    <!-- Sub-navigation for SRAR sections -->
+    <div class="srar-sub-navigation">
+        <button class="nav-item"
+            [ngClass]="{'active': activeSubPath === 'srar-dashboard'}"
+            (click)="navigateToSFD('srar-dashboard')">
+            <i class="fa-solid fa-gauge"></i>
+            <span>Dashboard</span>
+        </button>
+
+        <!-- Masters Button with Dropdown Toggle -->
+        <div class="relative masters-dropdown-container">
+            <button
+                class="nav-item masters-button"
+                [ngClass]="{'active': activeSubPath === 'srar-masters'}"
+                (click)="navigateToSFD('srar-masters')">
+                <i class="fa-solid fa-database"></i>
+                <span>Masters</span>
+                <i class="fa-solid"
+                    [ngClass]="showMasterDropdown ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </button>
+
+            <!-- Masters Dropdown Menu -->
+            <div *ngIf="showMasterDropdown"
+                class="masters-dropdown-menu">
+                <button *ngFor="let item of masterMenuItems"
+                    (click)="navigateToMasterSubItem(item.path)">
+                    <i [ngClass]="item.icon"></i>
+                    {{ item.label }}
+                </button>
+            </div>
+        </div>
+
+        <!-- Transactions Button with Dropdown Toggle -->
+        <div class="relative transactions-dropdown-container">
+            <button
+                class="nav-item transactions-button"
+                [ngClass]="{'active': activeSubPath === 'srar-transactions'}"
+                (click)="navigateToSFD('srar-transactions')">
+                <i class="fa-solid fa-exchange-alt"></i>
+                <span>Transactions</span>
+                <i class="fa-solid"
+                    [ngClass]="showTransactionsDropdown ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </button>
+
+            <!-- Transactions Dropdown Menu -->
+            <div *ngIf="showTransactionsDropdown"
+                class="transactions-dropdown-menu">
+                <button *ngFor="let item of transactionMenuItems"
+                    (click)="navigateToTransactionSubItem(item.path)">
+                    <i [ngClass]="item.icon"></i>
+                    {{ item.label }}
+                </button>
+            </div>
+        </div>
+
+        <!-- Reports Button with Dropdown Toggle -->
+        <div class="relative reports-dropdown-container">
+            <button
+                class="nav-item reports-button"
+                [ngClass]="{'active': activeSubPath === 'reports'}"
+                (click)="toggleReportsDropdown()">
+                <i class="fa-solid fa-chart-bar"></i>
+                <span>Reports</span>
+                <i class="fa-solid"
+                    [ngClass]="showReportsDropdown ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </button>
+
+            <!-- Reports Dropdown Menu -->
+            <div *ngIf="showReportsDropdown"
+                class="reports-dropdown-menu">
+                <button *ngFor="let item of reportsMenuItems"
+                    (click)="navigateToReportsSubItem(item)">
+                    <i [ngClass]="item.icon"></i>
+                    {{ item.label }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Router Outlet for SFD Sub-components -->
+    <div class="" [ngClass]="activeSubPath==='srar-dashboard' ? 'px-0' : 'max-w-screen-xl mx-auto'">
+        <router-outlet></router-outlet>
+    </div>
+</div>

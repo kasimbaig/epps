@@ -1,0 +1,395 @@
+<div class="dashboard-container p-4 overflow-x-hidden">
+  <div class="command-header">
+    <div class="command-title-block">
+      <i class="fa-solid fa-chart-pie"></i>
+      <div>
+        <h2>Naval Fleet Maintenance Dashboard</h2>
+        <p>Comprehensive fleet maintenance overview and analytics</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Completely Redesigned KPI Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6 w-full max-w-full">
+    <!-- Operational Ships Card -->
+    <div class="kpi-card operational-ships">
+      <div class="kpi-card-header">
+        <div class="kpi-icon-container">
+          <i class="fa-solid fa-ship kpi-icon"></i>
+        </div>
+        <div class="kpi-status"></div>
+      </div>
+      <h3 class="kpi-title">Operational Ships</h3>
+      <div class="kpi-value-container">
+        <h2 class="kpi-value">0</h2>
+      </div>
+      <p class="kpi-description">Total active vessels in the fleet</p>
+    </div>
+
+    <!-- Fleet Readiness Card -->
+    <div class="kpi-card fleet-readiness">
+      <div class="kpi-card-header">
+        <div class="kpi-icon-container">
+          <i class="fa-solid fa-leaf kpi-icon"></i>
+        </div>
+        <div class="kpi-status"></div>
+      </div>
+      <h3 class="kpi-title">Fleet Readiness</h3>
+      <div class="kpi-value-container">
+        <h2 class="kpi-value">0%</h2>
+      </div>
+      <p class="kpi-description">Overall operational readiness of the fleet</p>
+    </div>
+
+    <!-- Avg Eq. Health Score Card -->
+    <div class="kpi-card health-score">
+      <div class="kpi-card-header">
+        <div class="kpi-icon-container">
+          <i class="fa-solid fa-heart kpi-icon"></i>
+        </div>
+        <div class="kpi-status"></div>
+      </div>
+      <h3 class="kpi-title">Avg Eq. Health Score</h3>
+      <div class="kpi-value-container">
+        <h2 class="kpi-value">0</h2>
+      </div>
+      <p class="kpi-description">Average health score of critical equipment</p>
+    </div>
+
+    <!-- Equipment Availability Card -->
+    <div class="kpi-card equipment-availability">
+      <div class="kpi-card-header">
+        <div class="kpi-icon-container">
+          <i class="fa-solid fa-check-circle kpi-icon"></i>
+        </div>
+        <div class="kpi-status"></div>
+      </div>
+      <h3 class="kpi-title">Equipment Availability</h3>
+      <div class="kpi-value-container">
+        <h2 class="kpi-value">0%</h2>
+      </div>
+      <p class="kpi-description">Percentage of equipment available for use</p>
+    </div>
+  </div>
+
+  <!-- Enhanced Charts Grid with Modern Design -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12 w-full max-w-full">
+    <!-- Fleet Composition Chart Card -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-icon-container">
+          <i class="pi pi-chart-pie chart-icon"></i>
+        </div>
+        <h6 class="chart-title">Fleet Composition by Command & Type</h6>
+        <div class="chart-status"></div>
+      </div>
+      <div class="chart-content">
+        <app-loading-spinner *ngIf="isLoadingCharts" class="flex items-center justify-center h-full"></app-loading-spinner>
+        <canvas baseChart *ngIf="fleetCompositionChartData && !isLoadingCharts" 
+                [data]="fleetCompositionChartData"
+                [options]="fleetCompositionChartOptions" 
+                [type]="fleetCompositionChartType"
+                class="w-full h-full">
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Common Equipment Distribution Chart Card -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-icon-container">
+          <i class="pi pi-cog chart-icon"></i>
+        </div>
+        <h6 class="chart-title">Common Equipment Distribution</h6>
+        <div class="chart-status"></div>
+      </div>
+      <div class="chart-content">
+        <app-loading-spinner *ngIf="isLoadingCharts" class="flex items-center justify-center h-full"></app-loading-spinner>
+        <canvas baseChart *ngIf="commonEquipmentChartData && !isLoadingCharts" 
+                [data]="commonEquipmentChartData"
+                [options]="commonEquipmentChartOptions" 
+                [type]="commonEquipmentChartType"
+                class="w-full h-full">
+        </canvas>
+      </div>
+    </div>
+
+    <!-- SFD/ILMS Mapping Status Chart Card -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-icon-container">
+          <i class="pi pi-link chart-icon"></i>
+        </div>
+        <h6 class="chart-title">SFD / ILMS Mapping Status</h6>
+        <div class="chart-status"></div>
+      </div>
+      <div class="chart-content">
+        <app-loading-spinner *ngIf="isLoadingCharts" class="flex items-center justify-center h-full"></app-loading-spinner>
+        <div class="sfd-mapping-content relative" *ngIf="sfdIlmsMappingChartData && !isLoadingCharts">
+          <!-- Center Text Overlay -->
+          <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+            <div class="text-center bg-white/90 backdrop-blur-sm rounded-full p-4 shadow-lg">
+              <span class="block text-2xl font-black text-gray-800">{{ mappedPercentage | number:'1.0-0' }}%</span>
+              <span class="block text-sm font-semibold text-gray-600">Mapped</span>
+            </div>
+          </div>
+          <canvas baseChart [data]="sfdIlmsMappingChartData" 
+                  [options]="sfdIlmsMappingChartOptions"
+                  [type]="sfdIlmsMappingChartType"
+                  class="w-full h-full">
+          </canvas>
+        </div>
+      </div>
+      <!-- New Mapped/Unmapped Labels -->
+      <div class="flex justify-center gap-6 mt-4" *ngIf="sfdIlmsMappingChartData">
+        <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-green-50">
+          <span class="w-3 h-3 rounded-full bg-green-500 shadow-sm"></span>
+          <span class="text-sm font-medium text-green-700">Mapped</span>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-50">
+          <span class="w-3 h-3 rounded-full bg-red-500 shadow-sm"></span>
+          <span class="text-sm font-medium text-red-700">Unmapped</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Auxiliary Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 w-full max-w-full">
+    <!-- Recent Critical Alerts Card -->
+    <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+      <!-- Gradient Header Bar -->
+      <div class="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 h-2"></div>
+      
+      <!-- Card Header -->
+      <div class="p-6 pb-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-100 to-orange-100 flex items-center justify-center">
+              <i class="pi pi-exclamation-triangle text-xl text-red-600"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-800">Critical Alerts</h3>
+              <p class="text-sm text-gray-500">Real-time system notifications</p>
+            </div>
+          </div>
+          <div class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">
+            {{ recentAlerts.length }} Active
+          </div>
+        </div>
+      </div>
+      
+      <!-- Alerts Content -->
+      <div class="px-6 pb-6">
+        <app-loading-spinner *ngIf="isLoadingAlerts; else alertsContent" class="flex items-center justify-center h-32"></app-loading-spinner>
+        <ng-template #alertsContent>
+          <div class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar pr-2">
+            <div *ngFor="let alert of recentAlerts; let i = index" 
+                 class="group/alert bg-gradient-to-r from-gray-50 to-white rounded-2xl p-4 border border-gray-200 hover:border-red-300 hover:shadow-lg cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-red-50 hover:to-orange-50"
+                 (click)="onAlertClick(alert)"
+                 [style.animation-delay]="i * 100 + 'ms'">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 mt-1">
+                  <div class="w-8 h-8 rounded-xl flex items-center justify-center"
+                       [ngClass]="{
+                         'bg-yellow-100 text-yellow-700': alert.type === 'Warning',
+                         'bg-red-100 text-red-700': alert.type === 'Critical',
+                         'bg-blue-100 text-blue-700': alert.type === 'Maintenance'
+                       }">
+                    <i class="pi text-sm font-bold"
+                       [ngClass]="{
+                         'pi-exclamation-triangle': alert.type === 'Warning',
+                         'pi-times-circle': alert.type === 'Critical',
+                         'pi-info-circle': alert.type === 'Maintenance'
+                       }"></i>
+                  </div>
+                </div>
+                <div class="flex-grow min-w-0">
+                  <p class="text-sm font-semibold text-gray-800 group-hover/alert:text-gray-900 transition-colors duration-300 leading-tight">{{ alert.message }}</p>
+                  <div class="flex items-center gap-2 mt-2">
+                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{{ alert.timestamp | date:'short' }}</span>
+                    <span class="text-xs font-medium px-2 py-1 rounded-full"
+                          [ngClass]="{
+                            'bg-yellow-100 text-yellow-700': alert.type === 'Warning',
+                            'bg-red-100 text-red-700': alert.type === 'Critical',
+                            'bg-blue-100 text-blue-700': alert.type === 'Maintenance'
+                          }">{{ alert.type }}</span>
+                  </div>
+                </div>
+                <div class="flex-shrink-0">
+                  <i class="pi pi-chevron-right text-gray-400 group-hover/alert:text-red-500 transition-all duration-300 transform group-hover/alert:translate-x-1"></i>
+                </div>
+              </div>
+            </div>
+            
+            <div *ngIf="recentAlerts.length === 0" class="text-center py-12">
+              <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                <i class="pi pi-check-circle text-2xl text-green-600"></i>
+              </div>
+              <p class="text-gray-600 font-medium">All systems operational</p>
+              <p class="text-sm text-gray-400">No critical alerts at this time</p>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Global Fleet Distribution Card -->
+    <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+      <!-- Gradient Header Bar -->
+      <div class="bg-gradient-to-r from-blue-500 via-teal-500 to-emerald-500 h-2"></div>
+      
+      <!-- Card Header -->
+      <div class="p-6 pb-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-100 to-teal-100 flex items-center justify-center">
+              <i class="pi pi-globe text-xl text-blue-600"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-800">Fleet Distribution</h3>
+              <p class="text-sm text-gray-500">Global naval operations</p>
+            </div>
+          </div>
+          <div class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold">
+            Live
+          </div>
+        </div>
+      </div>
+      
+      <!-- Fleet Stats -->
+      <div class="px-6 pb-4">
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-blue-600">127</div>
+            <div class="text-xs text-gray-500 font-medium">Active Ships</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-teal-600">23</div>
+            <div class="text-xs text-gray-500 font-medium">Ports</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-emerald-600">89%</div>
+            <div class="text-xs text-gray-500 font-medium">Operational</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Map Content -->
+      <div class="px-6 pb-6">
+        <div class="relative">
+          <!-- Interactive Map Placeholder -->
+          <div class="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-6 text-center border-2 border-dashed border-blue-200 hover:border-blue-300 transition-colors duration-300">
+            <div class="relative inline-block mb-4">
+              <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-100 to-teal-100 flex items-center justify-center">
+                <i class="pi pi-map text-3xl text-blue-600"></i>
+              </div>
+              <!-- Animated rings -->
+              <div class="absolute inset-0 rounded-2xl border-2 border-blue-300/50 animate-ping"></div>
+              <div class="absolute inset-2 rounded-2xl border-2 border-teal-400/30 animate-ping" style="animation-delay: 0.5s;"></div>
+            </div>
+            
+            <h4 class="text-lg font-bold text-gray-800 mb-2">Interactive Fleet Map</h4>
+            <p class="text-sm text-gray-600 mb-4">Real-time positioning & status tracking</p>
+            
+            <!-- Mini Fleet Indicators -->
+            <div class="flex justify-center gap-6 mb-4">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="text-xs text-gray-600">Operational</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <span class="text-xs text-gray-600">Maintenance</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <span class="text-xs text-gray-600">Alert</span>
+              </div>
+            </div>
+            
+            <!-- Coming Soon Badge -->
+            <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
+              <i class="pi pi-clock"></i>
+              Coming Soon
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Dialog Modals -->
+  <p-dialog header="Common Equipment Details" [(visible)]="showCommonEquipmentDetail" [modal]="true"
+    [style.width]="'80vw'" [closable]="true" styleClass="custom-dialog">
+    <div class="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6">
+      <app-loading-spinner *ngIf="isLoadingCommonEquipmentDetails" class="flex items-center justify-center h-32"></app-loading-spinner>
+      <div *ngIf="!isLoadingCommonEquipmentDetails" class="bg-white rounded-xl shadow-sm border border-gray-200/50 overflow-hidden">
+        <app-data-table [data]="commonEquipmentDetailData" [columns]="commonEquipmentDetailColumns"
+          emptyMessage="No equipment details found for this selection." class="custom-table"></app-data-table>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="flex gap-3">
+        <button pButton icon="pi pi-times" label="Close" 
+                class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-300"
+                (click)="showCommonEquipmentDetail = false"></button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog header="SFD/ILMS Mapped Equipment Details" [(visible)]="showMappedEquipmentDetail" [modal]="true"
+    [style.width]="'80vw'" [closable]="true" styleClass="custom-dialog">
+    <div class="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6">
+      <app-loading-spinner *ngIf="isLoadingMappedEquipmentDetails" class="flex items-center justify-center h-32"></app-loading-spinner>
+      <div *ngIf="!isLoadingMappedEquipmentDetails" class="bg-white rounded-xl shadow-sm border border-gray-200/50 overflow-hidden">
+        <app-data-table [data]="mappedEquipmentDetailData" [columns]="mappedEquipmentDetailColumns"
+          emptyMessage="No mapped equipment details found for this selection." class="custom-table"></app-data-table>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="flex gap-3">
+        <button pButton icon="pi pi-times" label="Close" 
+                class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-300"
+                (click)="showMappedEquipmentDetail = false"></button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog header="SFD Updates Details" [(visible)]="showSFDUpdatesDetail" [modal]="true" [style.width]="'80vw'"
+    [closable]="true" styleClass="custom-dialog">
+    <div class="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6">
+      <app-loading-spinner *ngIf="isLoadingSFDUpdatesDetails" class="flex items-center justify-center h-32"></app-loading-spinner>
+      <div *ngIf="!isLoadingSFDUpdatesDetails" class="bg-white rounded-xl shadow-sm border border-gray-200/50 overflow-hidden">
+        <app-data-table [data]="sfdUpdatesDetailData" [columns]="sfdUpdatesDetailColumns"
+          emptyMessage="No SFD updates found for this selection." class="custom-table"></app-data-table>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="flex gap-3">
+        <button pButton icon="pi pi-times" label="Close" 
+                class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-300"
+                (click)="showSFDUpdatesDetail = false"></button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog header="Fleet Composition Details" [(visible)]="showFleetCompositionDetail" [modal]="true"
+    [style.width]="'80vw'" [closable]="true" styleClass="custom-dialog">
+    <div class="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6">
+      <app-loading-spinner *ngIf="isLoadingFleetCompositionDetails" class="flex items-center justify-center h-32"></app-loading-spinner>
+      <div *ngIf="!isLoadingFleetCompositionDetails" class="bg-white rounded-xl shadow-sm border border-gray-200/50 overflow-hidden">
+        <app-data-table [data]="fleetCompositionDetailData" [columns]="fleetCompositionDetailColumns"
+          emptyMessage="No ship details found for this selection." class="custom-table"></app-data-table>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="flex gap-3">
+        <button pButton icon="pi pi-times" label="Close" 
+                class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-300"
+                (click)="showFleetCompositionDetail = false"></button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+</div>

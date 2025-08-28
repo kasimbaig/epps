@@ -1,0 +1,108 @@
+<div class="naval-login-container">
+  <!-- Animated Ocean Background -->
+  <div class="ocean-background">
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    <div class="wave wave-3"></div>
+    <div class="stars"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="login-content">
+    <!-- Left Panel - Navy Information -->
+    <div class="navy-info-panel">
+      <div class="navy-logo-section">
+        <div class="navy-emblem-container">
+          <img src="/assets/indian-navy-emblem.png" alt="Indian Navy" class="navy-emblem">
+        </div>
+        <h1 class="navy-title">Indian Navy</h1>
+        <h2 class="system-title">CMMS</h2>
+        <p class="system-subtitle text-white">Computerized Maintenance Management System</p>
+      </div>
+      
+      <div class="navy-motto">
+        <div class="motto-text">शं नो वरुणः</div>
+        <div class="motto-translation">May Varuna be auspicious to us</div>
+      </div>
+    </div>
+
+    <!-- Right Panel - Login Form -->
+    <div class="login-form-panel">
+      <div class="form-container">
+        <div class="form-header">
+          <h3 class="welcome-title">Welcome Back</h3>
+          <p class="welcome-subtitle">Access your naval maintenance dashboard</p>
+        </div>
+
+        <form class="modern-login-form" (ngSubmit)="onLogin()">
+          <!-- Username Field -->
+          <div class="form-field-group">
+            <label class="field-label">
+              <span class="label-icon">👤</span>
+              Username
+            </label>
+            <div class="input-container">
+              <input
+                type="email"
+                class="modern-input"
+                placeholder="Enter your naval ID"
+                [(ngModel)]="username"
+                name="email"
+                required
+              />
+              <div class="input-border"></div>
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-field-group">
+            <label class="field-label">
+              <span class="label-icon">🔒</span>
+              Password
+            </label>
+            <div class="input-container">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                class="modern-input"
+                placeholder="Enter your password"
+                [(ngModel)]="password"
+                name="password"
+                required
+              />
+              <div class="input-border"></div>
+              <button type="button" class="password-toggle-btn" (click)="togglePasswordVisibility()">
+                <span class="toggle-icon">{{ showPassword ? '👁️' : '🙈' }}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Remember Me & Forgot Password -->
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox" class="remember-checkbox">
+              <span class="checkmark"></span>
+              Remember me
+            </label>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+          </div>
+
+          <!-- Login Button -->
+          <button type="submit" class="naval-login-btn">
+            <span class="btn-text">Access CMMS</span>
+            <div class="btn-ripple"></div>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Copyright -->
+  <div class="copyright-section">
+    <p class="copyright-text text-white">© {{ 2025 }} Indian Navy - CMMS | All rights reserved</p>
+    <div class="naval-symbols">
+      <span class="symbol">⚓</span>
+      <span class="symbol">🛡️</span>
+      <span class="symbol">🚢</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<aside [ngClass]="{
+    'modern-sidebar-expanded': expanded,
+    'modern-sidebar-collapsed': !expanded
+  }" class="sidebar modern-sidebar">
+
+  <div class="modern-sidebar-header">
+    <span class="modern-icon-text">
+      <i class="fa-solid fa-ferry modern-icon"></i>
+      <span *ngIf="expanded" class="modern-cmms-text"> CMMS </span>
+    </span>
+    <button class="modern-collapse-button" (click)="toggleSidebar()" title="Toggle Sidebar">
+      <span class="modern-collapse-icon" *ngIf="expanded"><</span>
+      <span class="modern-collapse-icon" *ngIf="!expanded">></span>
+    </button>
+  </div>
+
+  <div class="modern-sidebar-container">
+    <ng-container *ngFor="let item of menuItems; let i = index">
+      <button (click)="item.hasChildren ? '' : (item.path && navigateTo(item.path))"
+        class="modern-menu-button" 
+        [class.active]="item.path && isActive(item.path)"
+        [title]="expanded ? item.label : item.label">
+        <span class="modern-menu-icon" *ngIf="item.icon">
+          <i [ngClass]="item.icon"></i>
+        </span>
+        <span *ngIf="expanded" class="modern-menu-label" [title]="item.label">
+          {{ item.label }}
+        </span>
+
+        <span *ngIf="item.hasChildren && expanded && item.path" class="modern-submenu-toggle">
+          {{ openSubMenus[item.path] ? "▲" : "▼" }}
+        </span>
+      </button>
+
+      <ng-container *ngIf="item.path && openSubMenus[item.path] && expanded">
+        <div class="modern-submenu-container">
+          <ng-container *ngFor="let subItem of item.children">
+            <button (click)="
+                subItem.hasChildren
+                  ? ''
+                  : (subItem.path && navigateTo(subItem.path))
+              " class="modern-submenu-button" [class.active]="subItem.path && isActive(subItem.path)">
+              <span class="modern-menu-icon" *ngIf="subItem.icon">
+                <i [ngClass]="subItem.icon"></i>
+              </span>
+              <span class="modern-menu-label">{{ subItem.label }}</span>
+              <span *ngIf="subItem.hasChildren && subItem.path" class="modern-submenu-toggle">
+                {{ openSubMenus[subItem.path] ? "▲" : "▼" }}
+              </span>
+            </button>
+
+            <div *ngIf="subItem.hasChildren && subItem.path && openSubMenus[subItem.path]"
+              class="modern-nested-submenu-container">
+              <ng-container *ngFor="let nested of subItem.children">
+                <button (click)="nested.path && navigateTo(nested.path)"
+                  class="modern-submenu-button modern-nested-item" [class.active]="nested.path && isActive(nested.path)">
+                  <span class="modern-menu-icon" *ngIf="nested.icon">
+                    <i [ngClass]="nested.icon"></i>
+                  </span>
+                  <span class="modern-menu-label">{{ nested.label }}</span>
+                </button>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <div class="modern-sidebar-footer">
+    <button (click)="logOut()" class="modern-menu-button modern-logout-button" title="Logout">
+      <span class="modern-menu-icon">
+        <i class="fa-solid fa-sign-out-alt"></i>
+      </span>
+      <span *ngIf="expanded" class="modern-menu-label">
+        Logout
+      </span>
+    </button>
+  </div>
+</aside>

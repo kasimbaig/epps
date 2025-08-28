@@ -1,0 +1,349 @@
+/* NAVAL TEAL/EMERALD SIDEBAR DESIGN */
+
+.sidebar.modern-sidebar {
+  background: linear-gradient(180deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+  color: var(--text-white);
+  backdrop-filter: blur(20px);
+  width: 260px;
+  height: 100vh;
+  border-right: 2px solid rgba(94, 234, 212, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  box-shadow: 8px 0 30px rgba(15, 23, 42, 0.4);
+  position: relative;
+}
+
+.sidebar.modern-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(94, 234, 212, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.sidebar.modern-sidebar-collapsed {
+  width: 80px;
+}
+
+.modern-sidebar-header {
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid rgba(94, 234, 212, 0.3);
+  background: linear-gradient(135deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.modern-sidebar-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+.modern-icon {
+  font-size: 1.8rem;
+  color: #fbbf24;
+  text-shadow: 0 2px 8px rgba(251, 191, 36, 0.4);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.modern-cmms-text {
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--text-white);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+  margin-left: 0.5rem;
+}
+
+.modern-collapse-button {
+  background: rgba(94, 234, 212, 0.1);
+  border: 2px solid rgba(94, 234, 212, 0.3);
+  color: var(--text-white);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+/* When sidebar is collapsed, remove background and border for cleaner look */
+.sidebar.modern-sidebar-collapsed .modern-collapse-button {
+  background: transparent;
+  border: none;
+  padding: 0.3rem;
+}
+
+/* Style the white arrow when collapsed for better visibility */
+.sidebar.modern-sidebar-collapsed .modern-collapse-icon {
+  color: var(--text-white);
+  font-weight: bold;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.modern-collapse-button:hover {
+  background: rgba(94, 234, 212, 0.2);
+  border-color: rgba(94, 234, 212, 0.6);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(94, 234, 212, 0.3);
+}
+
+/* Subtle hover effect when collapsed */
+.sidebar.modern-sidebar-collapsed .modern-collapse-button:hover {
+  background: rgba(94, 234, 212, 0.1);
+  transform: scale(1.05);
+  box-shadow: none;
+}
+
+.modern-sidebar-container {
+  padding: 1rem 0.5rem;
+}
+
+.modern-menu-button,
+.modern-submenu-button {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: transparent;
+  border: none;
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  margin: 4px 8px;
+  width: calc(100% - 16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.modern-menu-button::before,
+.modern-submenu-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.modern-menu-button:hover::before,
+.modern-submenu-button:hover::before {
+  left: 100%;
+}
+
+.modern-menu-button:hover,
+.modern-submenu-button:hover {
+  background: linear-gradient(90deg, rgba(94, 234, 212, 0.15) 0%, rgba(20, 184, 166, 0.1) 100%);
+  color: var(--text-white);
+  transform: translateX(8px);
+  box-shadow: 0 4px 20px rgba(94, 234, 212, 0.2);
+}
+
+.modern-menu-button.active {
+  background: linear-gradient(90deg, rgba(94, 234, 212, 0.25) 0%, rgba(20, 184, 166, 0.2) 100%);
+  color: #fbbf24;
+  border-left: 4px solid #fbbf24;
+  box-shadow: 0 6px 25px rgba(94, 234, 212, 0.3);
+  transform: translateX(4px);
+}
+
+.modern-menu-icon {
+  font-size: 1.3rem;
+  width: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.modern-menu-button:hover .modern-menu-icon,
+.modern-submenu-button:hover .modern-menu-icon {
+  transform: scale(1.2);
+  color: #fbbf24;
+}
+
+.modern-menu-button.active .modern-menu-icon {
+  color: #fbbf24;
+  transform: scale(1.1);
+}
+
+.modern-menu-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.modern-menu-button:hover .modern-menu-label,
+.modern-submenu-button:hover .modern-menu-label {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.modern-menu-button.active .modern-menu-label {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.modern-submenu-toggle {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.modern-menu-button:hover .modern-submenu-toggle,
+.modern-submenu-button:hover .modern-submenu-toggle {
+  color: #fbbf24;
+  transform: scale(1.1);
+}
+
+.modern-submenu-container,
+.modern-nested-submenu-container {
+  padding-left: 2rem;
+  background: linear-gradient(90deg, rgba(94, 234, 212, 0.08) 0%, transparent 100%);
+  border-left: 3px solid rgba(94, 234, 212, 0.3);
+  margin: 6px 0;
+  border-radius: 0 12px 12px 0;
+  position: relative;
+}
+
+.modern-submenu-container::before,
+.modern-nested-submenu-container::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, rgba(94, 234, 212, 0.6), transparent);
+  border-radius: 2px;
+}
+
+.modern-nested-item {
+  background: linear-gradient(90deg, rgba(94, 234, 212, 0.05) 0%, transparent 100%);
+  border-left: 2px solid rgba(94, 234, 212, 0.2);
+  margin: 3px 0;
+  padding-left: 1.5rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.modern-nested-item:hover {
+  background: linear-gradient(90deg, rgba(94, 234, 212, 0.12) 0%, rgba(20, 184, 166, 0.08) 100%);
+  border-left-color: #fbbf24;
+}
+
+.modern-sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 0.5rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.8) 100%);
+  border-top: 2px solid rgba(94, 234, 212, 0.2);
+}
+
+.modern-logout-button {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.15) 100%);
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  transition: all 0.3s ease;
+}
+
+.modern-logout-button:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.25) 100%);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #fecaca;
+  transform: translateX(8px);
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* Custom Scrollbar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(94, 234, 212, 0.05);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+  border-radius: 3px;
+  border: 1px solid rgba(94, 234, 212, 0.2);
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar.modern-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .sidebar.modern-sidebar-collapsed {
+    width: 100%;
+  }
+  
+  .modern-sidebar-header {
+    padding: 1rem;
+  }
+  
+  .modern-cmms-text {
+    font-size: 1.4rem;
+  }
+}
+
+/* Animation for menu items */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.modern-menu-button,
+.modern-submenu-button {
+  animation: slideInFromLeft 0.3s ease-out;
+}
+
+.modern-menu-button:nth-child(1) { animation-delay: 0.1s; }
+.modern-menu-button:nth-child(2) { animation-delay: 0.2s; }
+.modern-menu-button:nth-child(3) { animation-delay: 0.3s; }
+.modern-menu-button:nth-child(4) { animation-delay: 0.4s; }
+.modern-menu-button:nth-child(5) { animation-delay: 0.5s; }
+.modern-menu-button:nth-child(6) { animation-delay: 0.6s; }
