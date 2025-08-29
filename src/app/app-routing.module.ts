@@ -10,7 +10,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
-  { path: 'login', component: LogComponent },
+  // { path: 'login', component: LogComponent },
   // Public routes without sidebar
   { path: 'home', component: HomeComponent },
   { path: 'contact-us', component: ContactUsComponent },
