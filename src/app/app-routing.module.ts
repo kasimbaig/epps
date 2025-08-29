@@ -18,7 +18,7 @@ const routes: Routes = [
   // { path: 'newlogin', component: LogComponent },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
