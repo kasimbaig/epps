@@ -60,7 +60,7 @@ export class OpsAuthorityService {
     return this.authorities$.asObservable().pipe(
       map((authorities) =>
         authorities.map((auth) => ({
-          label: auth.name,
+          label: auth.authority,
           value: auth.id,
         }))
       )
