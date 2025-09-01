@@ -1,8 +1,234 @@
-  import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from '../../../services/api.service';
 import { MessageService } from 'primeng/api';
 import { DeleteConfirmationModalComponent } from '../../../shared/components/delete-confirmation-modal/delete-confirmation-modal.component';
+
+// Interfaces for type safety
+interface UnitOption {
+  id: number;
+  name: string;
+}
+
+interface ShipOption {
+  id: number;
+  name: string;
+  unit_type: number;
+}
+
+interface DepartmentOption {
+  id: number;
+  name: string;
+}
+
+interface SfdDetail {
+  id: number;
+  active: number;
+  ship_name: string;
+  ship_code: string;
+  equipment_name: string;
+  equipment_code: string;
+  location_name: string;
+  location_code: string;
+  nomenclature: string;
+  department: string;
+  ship: number;
+  unit_type: number;
+  [key: string]: any; // For other properties
+}
+
+// Static data constants
+const STATIC_SFD_DETAILS: SfdDetail[] = [
+  {
+    "id": 4001,
+    "active": 1,
+    "ship_name": "INS KALINGA",
+    "ship_code": "K23",
+    "equipment_name": "RADAR SYSTEM",
+    "equipment_code": "RAD-45231",
+    "location_name": "Combat Information Centre",
+    "location_code": "LOC-01-CIC",
+    "nomenclature": "SURVEILLANCE RADAR",
+    "oem_part_number": "OEM-45231-A",
+    "no_of_fits": 2,
+    "installation_date": "2021-06-15",
+    "removal_date": null,
+    "service_life": "15 YEARS",
+    "authority_of_removal": null,
+    "authority_of_installation": "NAVAL HQ",
+    "is_srar_equipment": true,
+    "removal_remarks": null,
+    "included_in_dl": true,
+    "created_by": 2,
+    "ship": 11,
+    "equipment": 5101,
+    "location": 201,
+    "supplier": 301,
+    "parent_equipment": null,
+    "child_equipment": null,
+    "department": "WEAPONS",
+    "manufacturer_name": "BHARAT ELECTRONICS LTD.",
+    "manufacturer_address": "Bangalore, India",
+    "supplier_name": "Naval Systems Supply",
+    "supplier_address": "Dockyard Road, Mumbai",
+    "image": null,
+    "model": "BEL-XR-21",
+    "obsolete": "No",
+    "authority": "",
+    "generic_code": null,
+    "ilms_equipment_code": null,
+    "acquaint_issued": null,
+    "maintop_number": null,
+    "country": "India",
+    "manufacturer": 11,
+    "supplier_id": 21,
+    "parent": null,
+    "type": "Electronic",
+    "unit_type": 1
+  },
+  {
+    "id": 4002,
+    "active": 1,
+    "ship_name": "INS SHAKTI",
+    "ship_code": "S45",
+    "equipment_name": "DIESEL GENERATOR",
+    "equipment_code": "GEN-99872",
+    "location_name": "Engine Room",
+    "location_code": "LOC-05-ENGINE",
+    "nomenclature": "GENERATOR",
+    "oem_part_number": "OEM-DG-998",
+    "no_of_fits": 4,
+    "installation_date": "2019-11-20",
+    "removal_date": null,
+    "service_life": "20 YEARS",
+    "authority_of_removal": null,
+    "authority_of_installation": "E-IN-C BRANCH",
+    "is_srar_equipment": false,
+    "removal_remarks": null,
+    "included_in_dl": false,
+    "created_by": 1,
+    "ship": 12,
+    "equipment": 5102,
+    "location": 202,
+    "supplier": 302,
+    "parent_equipment": null,
+    "child_equipment": null,
+    "department": "ENGINEERING",
+    "manufacturer_name": "CATERPILLAR INC.",
+    "manufacturer_address": "Illinois, USA",
+    "supplier_name": "MarineTech Supplies",
+    "supplier_address": "Chennai Port, India",
+    "image": null,
+    "model": "CAT-DG-4000",
+    "obsolete": "No",
+    "authority": "",
+    "generic_code": null,
+    "ilms_equipment_code": null,
+    "acquaint_issued": null,
+    "maintop_number": null,
+    "country": "USA",
+    "manufacturer": 12,
+    "supplier_id": 22,
+    "parent": null,
+    "type": "Mechanical",
+    "unit_type": 1
+  },
+  {
+    "id": 4003,
+    "active": 1,
+    "ship_name": "INS VARUNA",
+    "ship_code": "V77",
+    "equipment_name": "SONAR SYSTEM",
+    "equipment_code": "SON-66789",
+    "location_name": "Sonar Room",
+    "location_code": "LOC-07-SONAR",
+    "nomenclature": "UNDERWATER SONAR",
+    "oem_part_number": "OEM-SON-667",
+    "no_of_fits": 1,
+    "installation_date": "2020-03-10",
+    "removal_date": null,
+    "service_life": "12 YEARS",
+    "authority_of_removal": null,
+    "authority_of_installation": "NAVAL DOCKYARD",
+    "is_srar_equipment": true,
+    "removal_remarks": null,
+    "included_in_dl": true,
+    "created_by": 3,
+    "ship": 13,
+    "equipment": 5103,
+    "location": 203,
+    "supplier": 303,
+    "parent_equipment": null,
+    "child_equipment": null,
+    "department": "OPERATIONS",
+    "manufacturer_name": "THALES",
+    "manufacturer_address": "Paris, France",
+    "supplier_name": "Oceanic Systems Pvt Ltd",
+    "supplier_address": "Kochi Naval Base",
+    "image": null,
+    "model": "THL-SON-900",
+    "obsolete": "No",
+    "authority": "",
+    "generic_code": null,
+    "ilms_equipment_code": null,
+    "acquaint_issued": null,
+    "maintop_number": null,
+    "country": "France",
+    "manufacturer": 13,
+    "supplier_id": 23,
+    "parent": null,
+    "type": "Electronic",
+    "unit_type": 1
+  }
+];
+
+// Static options for dropdowns
+const STATIC_UNIT_OPTIONS: UnitOption[] = [
+  { id: 1, name: 'SHIP' },
+  { id: 2, name: 'SUBMARINE' }
+];
+
+const STATIC_SHIP_OPTIONS: ShipOption[] = [
+  { id: 11, name: 'INS KALINGA', unit_type: 1 },
+  { id: 12, name: 'INS SHAKTI', unit_type: 1 },
+  { id: 13, name: 'INS VARUNA', unit_type: 1 }
+];
+
+const STATIC_DEPARTMENT_OPTIONS: DepartmentOption[] = [
+  { id: 1, name: 'WEAPONS' },
+  { id: 2, name: 'ENGINEERING' },
+  { id: 3, name: 'OPERATIONS' }
+];
+
+const STATIC_SUPPLIER_OPTIONS = [
+  { id: 301, name: 'Naval Systems Supply' },
+  { id: 302, name: 'MarineTech Supplies' },
+  { id: 303, name: 'Oceanic Systems Pvt Ltd' }
+];
+
+const STATIC_LOCATION_OPTIONS = [
+  { id: 201, name: 'Combat Information Centre', code: 'LOC-01-CIC' },
+  { id: 202, name: 'Engine Room', code: 'LOC-05-ENGINE' },
+  { id: 203, name: 'Sonar Room', code: 'LOC-07-SONAR' }
+];
+
+const STATIC_SUB_DEPARTMENT_OPTIONS = [
+  { id: 1, name: 'Missile Systems' },
+  { id: 2, name: 'Power Generation' },
+  { id: 3, name: 'Underwater Systems' }
+];
+
+const STATIC_MANUFACTURER_OPTIONS = [
+  { id: 11, name: 'BHARAT ELECTRONICS LTD.' },
+  { id: 12, name: 'CATERPILLAR INC.' },
+  { id: 13, name: 'THALES' }
+];
+
+const STATIC_EQUIPMENT_OPTIONS = [
+  { id: 5101, name: 'RADAR SYSTEM', model: 'BEL-XR-21', manufacturer: 11, supplier: 301 },
+  { id: 5102, name: 'DIESEL GENERATOR', model: 'CAT-DG-4000', manufacturer: 12, supplier: 302 },
+  { id: 5103, name: 'SONAR SYSTEM', model: 'THL-SON-900', manufacturer: 13, supplier: 303 }
+];
 
 @Component({
   selector: 'app-sfd-list',
@@ -11,6 +237,7 @@ import { DeleteConfirmationModalComponent } from '../../../shared/components/del
   styleUrl: './sfd-list.component.css'
 })
 export class SfdListComponent implements OnInit {
+  @Input() tableName: string = 'SFD Details';
   isChecked: boolean = false;
   displayDialog: boolean = false;
   isMaximized: boolean = false;
@@ -98,25 +325,36 @@ export class SfdListComponent implements OnInit {
   
 
   // Dropdown Options
-  unitOptions= []
+  unitOptions: UnitOption[] = []
 
-  shipOptions= []
+  shipOptions: ShipOption[] = []
 
-  departmentOptions= []
+  departmentOptions: DepartmentOption[] = []
 
   // Selected Values
-  selectedUnit: any = '';
-  selectedShip: any = '';
-  selectedDepartment: any = '';
+  selectedUnit: UnitOption | null = null;
+  selectedShip: ShipOption | null = null;
+  selectedDepartment: DepartmentOption | null = null;
 
   // Table Data
-  tableData: any[] = [];
+  tableData: SfdDetail[] = [];
   
   constructor(private apiService: ApiService, private toast: MessageService) {}
   ngOnInit(): void {
-    this.apiCall();
+    this.loadStaticData();
     // Don't load all data initially - wait for filters
     //console.log('SFD Component initialized - waiting for filter selection');
+  }
+  
+  loadStaticData(): void {
+    // Load static options for dropdowns
+    this.unitOptions = [...STATIC_UNIT_OPTIONS];
+    this.departmentOptions = [...STATIC_DEPARTMENT_OPTIONS];
+    this.supplierOptions = [...STATIC_SUPPLIER_OPTIONS];
+    this.locationOnBoardOptions = [...STATIC_LOCATION_OPTIONS];
+    this.subDepartmentOptions = [...STATIC_SUB_DEPARTMENT_OPTIONS];
+    this.manufacturerOptions = [...STATIC_MANUFACTURER_OPTIONS];
+    this.equipmentOptions = [...STATIC_EQUIPMENT_OPTIONS];
   }
   
   currentPageApi(page: number, pageSize: number){
@@ -127,29 +365,30 @@ export class SfdListComponent implements OnInit {
   }
 
   apiCall(){
+    // Commented out API calls - using static data
     // Only load unit types initially - ships will be loaded when unit is selected
-    this.apiService.get('master/unit-type/').subscribe((res: any) => {
-      this.unitOptions = res.results;
-    });
+    // this.apiService.get('master/unit-type/').subscribe((res: any) => {
+    //   this.unitOptions = res.results;
+    // });
     
     // Load other independent dropdowns
-    this.apiService.get('master/department/?is_dropdown=true').subscribe((res: any) => {
-      this.departmentOptions = res.results || res;
-    });
-    this.apiService.get('master/supplier/?is_dropdown=true').subscribe((res: any) => {
-      this.supplierOptions = res.results || res;
-    });
-    this.apiService.get('master/locations/?is_dropdown=true').subscribe((res: any) => {
-      this.locationOnBoardOptions = res.data || res;
-    });
+    // this.apiService.get('master/department/?is_dropdown=true').subscribe((res: any) => {
+    //   this.departmentOptions = res.results || res;
+    // });
+    // this.apiService.get('master/supplier/?is_dropdown=true').subscribe((res: any) => {
+    //   this.supplierOptions = res.results || res;
+    // });
+    // this.apiService.get('master/locations/?is_dropdown=true').subscribe((res: any) => {
+    //   this.locationOnBoardOptions = res.data || res;
+    // });
     // Equipment will be loaded when ship is selected - removed from here
     
-    this.apiService.get('master/sub-department/?is_dropdown=true').subscribe((res: any) => {
-      this.subDepartmentOptions = res.results || res;
-    });
-    this.apiService.get('master/manufacturers/?is_dropdown=true').subscribe((res: any) => {
-      this.manufacturerOptions = res.data || res;
-    });
+    // this.apiService.get('master/sub-department/?is_dropdown=true').subscribe((res: any) => {
+    //   this.subDepartmentOptions = res.results || res;
+    // });
+    // this.apiService.get('master/manufacturers/?is_dropdown=true').subscribe((res: any) => {
+    //   this.manufacturerOptions = res.data || res;
+    // });
   }
 
   openDialog(): void {
@@ -184,6 +423,7 @@ export class SfdListComponent implements OnInit {
   }
 
   saveReference(): void {
+    // Commented out API calls - using static response
     this.sfdReferenceForm.enable()
     //console.log('Form values:', this.sfdReferenceForm.value);
     
@@ -209,30 +449,47 @@ export class SfdListComponent implements OnInit {
     //console.log('Sending payload:', payload);
 
     if(this.isEdit){
-      this.apiService.put(`sfd/sfd-details/${this.sfdReferenceForm.value.id}/`, payload).subscribe((res: any) => {
-        // this.toast.add({severity:'success', summary: 'Success', detail: 'SFD Updated Successfully'});
-        //console.log(res);
-        this.isEdit=false;
-        // Refresh filtered data instead of all data
-        if (this.selectedUnit && this.selectedShip) {
-          this.loadTableData(this.selectedUnit.id, this.selectedShip.id, this.selectedDepartment?.id);
-        }
-      }, (error) => {
-        this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to update SFD record'});
-        console.error('Update error:', error);
-      });
+      // Commented out API call - using static response
+      // this.apiService.put(`sfd/sfd-details/${this.sfdReferenceForm.value.id}/`, payload).subscribe((res: any) => {
+      //   // this.toast.add({severity:'success', summary: 'Success', detail: 'SFD Updated Successfully'});
+      //   //console.log(res);
+      //   this.isEdit=false;
+      //   // Refresh filtered data instead of all data
+      //   if (this.selectedUnit && this.selectedShip) {
+      //     this.loadTableData(this.selectedUnit.id, this.selectedShip.id, this.selectedDepartment?.id);
+      //   }
+      // }, (error) => {
+      //   this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to update SFD record'});
+      //   console.error('Update error:', error);
+      // });
+      
+      // Static success response
+      this.toast.add({severity:'success', summary: 'Success', detail: 'SFD Updated Successfully'});
+      this.isEdit=false;
+      // Refresh filtered data instead of all data
+      if (this.selectedUnit && this.selectedShip) {
+        this.loadTableData(this.selectedUnit.id, this.selectedShip.id, this.selectedDepartment?.id);
+      }
     }else{
-      this.apiService.post('sfd/sfd-details/', payload).subscribe((res: any) => {
-        // this.toast.add({severity:'success', summary: 'Success', detail: 'SFD Added Successfully'});
-        //console.log(res);
-        // Refresh filtered data instead of all data
-        if (this.selectedUnit && this.selectedShip) {
-          this.loadTableData(this.selectedUnit.id, this.selectedShip.id, this.selectedDepartment?.id);
-        }
-      }, (error) => {
-        this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to add SFD record'});
-        console.error('Create error:', error);
-      });
+      // Commented out API call - using static response
+      // this.apiService.post('sfd/sfd-details/', payload).subscribe((res: any) => {
+      //   // this.toast.add({severity:'success', summary: 'Success', detail: 'SFD Added Successfully'});
+      //   //console.log(res);
+      //   // Refresh filtered data instead of all data
+      //   if (this.selectedUnit && this.selectedShip) {
+      //     this.loadTableData(this.selectedUnit.id, this.selectedShip.id, this.selectedDepartment?.id);
+      //   }
+      // }, (error) => {
+      //   this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to add SFD record'});
+      //   console.error('Create error:', error);
+      // });
+      
+      // Static success response
+      this.toast.add({severity:'success', summary: 'Success', detail: 'SFD Added Successfully'});
+      // Refresh filtered data instead of all data
+      if (this.selectedUnit && this.selectedShip) {
+        this.loadTableData(this.selectedUnit.id, this.selectedShip.id, this.selectedDepartment?.id);
+      }
     }
    
     this.closeDialog();
@@ -280,10 +537,10 @@ isEdit: boolean = false;
     // Create a copy of data with properly formatted dates
     const formData = {
       ...data,
-      manufacturer: data.equipment_details.manufacturer,
-      department: data.equipment_details.department,
-      supplier: data.equipment_details.supplier,
-      model: data.equipment_details.model || '',
+      manufacturer: data.equipment_details?.manufacturer || data.manufacturer,
+      department: data.equipment_details?.department || data.department,
+      supplier: data.equipment_details?.supplier || data.supplier,
+      model: data.equipment_details?.model || data.model || '',
       removal_date: data.removal_date,
       installation_date: data.installation_date 
     };
@@ -304,21 +561,31 @@ isEdit: boolean = false;
 
   confirmDelete(): void {
     if (this.selectedSfd) {
-      this.apiService.delete(`sfd/sfd-details/${this.selectedSfd.id}/`).subscribe((res: any) => {
-        this.toast.add({severity:'success', summary: 'Success', detail: 'SFD Deleted Successfully'});
-        //console.log(res);
-        // Refresh filtered data instead of all data
-        if (this.selectedUnit && this.selectedShip) {
-          this.loadTableData(this.selectedUnit.id, this.selectedShip.id, this.selectedDepartment?.id);
-        }
-        this.isDeleteConfirmationVisible = false;
-        this.selectedSfd = null;
-      }, (error) => {
-        this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to delete SFD record'});
-        console.error('Delete error:', error);
-        this.isDeleteConfirmationVisible = false;
-        this.selectedSfd = null;
-      });
+      // Commented out API call - using static response
+      // this.apiService.delete(`sfd/sfd-details/${this.selectedSfd.id}/`).subscribe((res: any) => {
+      //   this.toast.add({severity:'success', summary: 'Success', detail: 'SFD Deleted Successfully'});
+      //   //console.log(res);
+      //   // Refresh filtered data instead of all data
+      //   if (this.selectedUnit && this.selectedShip) {
+      //     this.loadTableData(this.selectedUnit.id, this.selectedShip.id, this.selectedDepartment?.id);
+      //   }
+      //   this.isDeleteConfirmationVisible = false;
+      //   this.selectedSfd = null;
+      // }, (error) => {
+      //   this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to delete SFD record'});
+      //   console.error('Delete error:', error);
+      //   this.isDeleteConfirmationVisible = false;
+      //   this.selectedSfd = null;
+      // });
+      
+      // Static success response
+      this.toast.add({severity:'success', summary: 'Success', detail: 'SFD Deleted Successfully'});
+      // Refresh filtered data instead of all data
+      if (this.selectedUnit && this.selectedShip) {
+        this.loadTableData(this.selectedUnit.id, this.selectedShip.id, this.selectedDepartment?.id);
+      }
+      this.isDeleteConfirmationVisible = false;
+      this.selectedSfd = null;
     }
   }
 
@@ -330,15 +597,15 @@ isEdit: boolean = false;
   // Filter Methods
   onUnitChange(): void {
     //console.log('Unit changed to:', this.selectedUnit);
+    if (!this.selectedUnit) return;
+    
     let id = this.selectedUnit.id;
     //console.log("idCheck", id);
     
-    // Fetch ships for selected unit
-    this.apiService.get(`master/ship/?unit_type=${id}`).subscribe((res: any) => {
-      this.shipOptions = res.results;
-      //console.log("response is ", res);
-      //console.log("shipOption data", this.shipOptions);
-    });
+    // Filter ships for selected unit from static data
+    this.shipOptions = STATIC_SHIP_OPTIONS.filter(ship => ship.unit_type === id);
+    //console.log("response is ", this.shipOptions);
+    //console.log("shipOption data", this.shipOptions);
     
     // Clear ship selection and table data when unit changes
     this.selectedShip = null;
@@ -389,33 +656,28 @@ isEdit: boolean = false;
   loadTableData(unitId: number, shipId: number, departmentId?: number) {
     //console.log('Loading table data for Unit ID:', unitId, 'Ship ID:', shipId, 'Department ID:', departmentId);
     
-    let apiUrl = `sfd/sfd-details/?ship=${shipId}`;
+    // Filter static data based on selected criteria
+    let filteredData = STATIC_SFD_DETAILS.filter(item => item.ship === shipId);
+    
     if (departmentId) {
-      apiUrl += `&department=${departmentId}`;
+      // Filter by department if selected
+      const selectedDept = this.departmentOptions.find(dept => dept.id === departmentId);
+      if (selectedDept) {
+        filteredData = filteredData.filter(item => item.department === selectedDept.name);
+      }
     }
     
-    this.apiService.get(apiUrl).subscribe((res: any) => {
-      //console.log('API Response:', res);
-      if (res.results && res.results.length > 0) {
-        this.tableData = res.results;
-        //console.log('Table data loaded:', this.tableData.length, 'records');
-      } else {
-        this.tableData = [];
-        this.toast.add({
-          severity: 'info',
-          summary: 'No Data',
-          detail: 'No data found for the selected filters.'
-        });
-      }
-    }, (error) => {
-      console.error('Error loading data:', error);
+    if (filteredData.length > 0) {
+      this.tableData = filteredData;
+      //console.log('Table data loaded:', this.tableData.length, 'records');
+    } else {
       this.tableData = [];
       this.toast.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Failed to load data. Please try again.'
+        severity: 'info',
+        summary: 'No Data',
+        detail: 'No data found for the selected filters.'
       });
-    });
+    }
   }
 
   onLocationOnBoardChange(event: any): void {
@@ -445,11 +707,15 @@ isEdit: boolean = false;
 
   // Load equipment options based on selected ship
   loadEquipmentOptions(shipId: number): void {
-    this.apiService.get(`master/equipment/?is_dropdown=true&ship=${shipId}`).subscribe((res: any) => {
-      this.equipmentOptions = res.results || res;
-    }, (error) => {
-      console.error('Error loading equipment options:', error);
-      this.equipmentOptions = [];
-    });
+    // Commented out API call - using static data
+    // this.apiService.get(`master/equipment/?is_dropdown=true&ship=${shipId}`).subscribe((res: any) => {
+    //   this.equipmentOptions = res.results || res;
+    // }, (error) => {
+    //   console.error('Error loading equipment options:', error);
+    //   this.equipmentOptions = [];
+    // });
+    
+    // Use static equipment options
+    this.equipmentOptions = [...STATIC_EQUIPMENT_OPTIONS];
   }
 }

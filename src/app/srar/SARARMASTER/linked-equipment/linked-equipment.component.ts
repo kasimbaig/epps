@@ -40,48 +40,331 @@ export class LinkedEquipmentComponent implements OnInit {
   
 
 
+  // Static Ship Options (same as equipment component)
+  shipOptions = [
+    {
+      id: 1,
+      name: "INS Vikrant",
+      code: "VIK001"
+    },
+    {
+      id: 2,
+      name: "INS Kolkata",
+      code: "KOL001"
+    },
+    {
+      id: 3,
+      name: "INS Udaygiri",
+      code: "NLG001"
+    },
+    {
+      id: 4,
+      name: "INS Kora",
+      code: "KOR001"
+    },
+    {
+      id: 5,
+      name: "INS Sindhughosh",
+      code: "KILO01"
+    },
+    {
+      id: 6,
+      name: "INS Jalashwa",
+      code: "JAL001"
+    },
+    {
+      id: 7,
+      name: "INS Deepak",
+      code: "DEE001"
+    },
+    {
+      id: 8,
+      name: "INS Sandhayak",
+      code: "SAN001"
+    },
+    {
+      id: 9,
+      name: "INS Saksham",
+      code: "SAK001"
+    },
+    {
+      id: 10,
+      name: "INS Karwar",
+      code: "KAR001"
+    }
+  ];
+
+  // Static Location Options
+  locationOptions = [
+    { id: 1, name: "Bridge" },
+    { id: 2, name: "Navigation Bridge" },
+    { id: 3, name: "Combat Information Centre" },
+    { id: 4, name: "Engine Room" },
+    { id: 5, name: "Sonar Room" },
+    { id: 6, name: "Flight Deck" },
+    { id: 7, name: "Fuel Station" },
+    { id: 8, name: "Survey Room" },
+    { id: 9, name: "Damage Control Centre" },
+    { id: 10, name: "EW Operations Room" }
+  ];
+
+  // Static Equipment Options
+  equipmentOptions = [
+    { id: 1, name: "Main Engine" },
+    { id: 2, name: "Auxiliary Engine" },
+    { id: 3, name: "Generator Set" },
+    { id: 4, name: "Pump System" },
+    { id: 5, name: "Valve Assembly" },
+    { id: 6, name: "Control Panel" },
+    { id: 7, name: "Sensor Array" },
+    { id: 8, name: "Actuator System" },
+    { id: 9, name: "Hydraulic Unit" },
+    { id: 10, name: "Electrical Panel" }
+  ];
+
+  // Static Equipment Type Options (SRAR Equipment)
+  equipmentTypeOptions = [
+    { id: 1, equipment_name: "RADAR SYSTEM", nomenclature: "Surveillance Radar" },
+    { id: 2, equipment_name: "ENGINE CONTROL UNIT", nomenclature: "Engine ECU" },
+    { id: 3, equipment_name: "COMMUNICATION SYSTEM", nomenclature: "SATCOM" },
+    { id: 4, equipment_name: "NAVIGATION SYSTEM", nomenclature: "GPS Navigator" },
+    { id: 5, equipment_name: "SONAR SYSTEM", nomenclature: "Active Sonar" },
+    { id: 6, equipment_name: "HELICOPTER HANDLING SYSTEM", nomenclature: "Helipad Equipment" },
+    { id: 7, equipment_name: "FUEL TRANSFER SYSTEM", nomenclature: "Fuel Pump System" },
+    { id: 8, equipment_name: "HYDROGRAPHIC SURVEY SYSTEM", nomenclature: "Survey Equipment" },
+    { id: 9, equipment_name: "DAMAGE CONTROL SYSTEM", nomenclature: "Fire Fighting System" },
+    { id: 10, equipment_name: "ELECTRONIC WARFARE SYSTEM", nomenclature: "EW Suite" }
+  ];
+
+  // Static SRAR Equipment Details Data (for dropdown display)
+  srar_equipment_details_data = [
+    {
+      "id": 1,
+      "equipment_name": "RADAR SYSTEM",
+      "nomenclature": "Surveillance Radar",
+      "code": "RADAR001",
+      "active": 1
+    },
+    {
+      "id": 2,
+      "equipment_name": "ENGINE CONTROL UNIT",
+      "nomenclature": "Engine ECU",
+      "code": "ECU001",
+      "active": 1
+    },
+    {
+      "id": 3,
+      "equipment_name": "COMMUNICATION SYSTEM",
+      "nomenclature": "SATCOM",
+      "code": "SATCOM001",
+      "active": 1
+    },
+    {
+      "id": 4,
+      "equipment_name": "NAVIGATION SYSTEM",
+      "nomenclature": "GPS Navigator",
+      "code": "GPS001",
+      "active": 1
+    },
+    {
+      "id": 5,
+      "equipment_name": "SONAR SYSTEM",
+      "nomenclature": "Active Sonar",
+      "code": "SONAR001",
+      "active": 1
+    },
+    {
+      "id": 6,
+      "equipment_name": "HELICOPTER HANDLING SYSTEM",
+      "nomenclature": "Helipad Equipment",
+      "code": "HELI001",
+      "active": 1
+    },
+    {
+      "id": 7,
+      "equipment_name": "FUEL TRANSFER SYSTEM",
+      "nomenclature": "Fuel Pump System",
+      "code": "FUEL001",
+      "active": 1
+    },
+    {
+      "id": 8,
+      "equipment_name": "HYDROGRAPHIC SURVEY SYSTEM",
+      "nomenclature": "Survey Equipment",
+      "code": "SURVEY001",
+      "active": 1
+    },
+    {
+      "id": 9,
+      "equipment_name": "DAMAGE CONTROL SYSTEM",
+      "nomenclature": "Fire Fighting System",
+      "code": "FIRE001",
+      "active": 1
+    },
+    {
+      "id": 10,
+      "equipment_name": "ELECTRONIC WARFARE SYSTEM",
+      "nomenclature": "EW Suite",
+      "code": "EW001",
+      "active": 1
+    }
+  ];
+
+  // Static Linked Equipment Data
+  linked_equipment_data = [
+    {
+      "id": 4001,
+      "ship_name": "INS Vikrant",
+      "equipment_code": "EQP-001",
+      "equipment_name": "Main Engine",
+      "srar_equipment_nomenclature": "Surveillance Radar",
+      "location_name": "Engine Room",
+      "active": 1,
+      "ship": 1,
+      "equipment": 1,
+      "srar_equipment": 1,
+      "location": 4
+    },
+    {
+      "id": 4002,
+      "ship_name": "INS Kolkata",
+      "equipment_code": "EQP-002",
+      "equipment_name": "Auxiliary Engine",
+      "srar_equipment_nomenclature": "Engine ECU",
+      "location_name": "Engine Room",
+      "active": 1,
+      "ship": 2,
+      "equipment": 2,
+      "srar_equipment": 2,
+      "location": 4
+    },
+    {
+      "id": 4003,
+      "ship_name": "INS Udaygiri",
+      "equipment_code": "EQP-003",
+      "equipment_name": "Generator Set",
+      "srar_equipment_nomenclature": "SATCOM",
+      "location_name": "Bridge",
+      "active": 1,
+      "ship": 3,
+      "equipment": 3,
+      "srar_equipment": 3,
+      "location": 1
+    },
+    {
+      "id": 4004,
+      "ship_name": "INS Kora",
+      "equipment_code": "EQP-004",
+      "equipment_name": "Pump System",
+      "srar_equipment_nomenclature": "GPS Navigator",
+      "location_name": "Navigation Bridge",
+      "active": 1,
+      "ship": 4,
+      "equipment": 4,
+      "srar_equipment": 4,
+      "location": 2
+    },
+    {
+      "id": 4005,
+      "ship_name": "INS Sindhughosh",
+      "equipment_code": "EQP-005",
+      "equipment_name": "Valve Assembly",
+      "srar_equipment_nomenclature": "Active Sonar",
+      "location_name": "Sonar Room",
+      "active": 1,
+      "ship": 5,
+      "equipment": 5,
+      "srar_equipment": 5,
+      "location": 5
+    },
+    {
+      "id": 4006,
+      "ship_name": "INS Jalashwa",
+      "equipment_code": "EQP-006",
+      "equipment_name": "Control Panel",
+      "srar_equipment_nomenclature": "Helipad Equipment",
+      "location_name": "Flight Deck",
+      "active": 1,
+      "ship": 6,
+      "equipment": 6,
+      "srar_equipment": 6,
+      "location": 6
+    },
+    {
+      "id": 4007,
+      "ship_name": "INS Deepak",
+      "equipment_code": "EQP-007",
+      "equipment_name": "Sensor Array",
+      "srar_equipment_nomenclature": "Fuel Pump System",
+      "location_name": "Fuel Station",
+      "active": 1,
+      "ship": 7,
+      "equipment": 7,
+      "srar_equipment": 7,
+      "location": 7
+    },
+    {
+      "id": 4008,
+      "ship_name": "INS Sandhayak",
+      "equipment_code": "EQP-008",
+      "equipment_name": "Actuator System",
+      "srar_equipment_nomenclature": "Survey Equipment",
+      "location_name": "Survey Room",
+      "active": 1,
+      "ship": 8,
+      "equipment": 8,
+      "srar_equipment": 8,
+      "location": 8
+    },
+    {
+      "id": 4009,
+      "ship_name": "INS Saksham",
+      "equipment_code": "EQP-009",
+      "equipment_name": "Hydraulic Unit",
+      "srar_equipment_nomenclature": "Fire Fighting System",
+      "location_name": "Damage Control Centre",
+      "active": 1,
+      "ship": 9,
+      "equipment": 9,
+      "srar_equipment": 9,
+      "location": 9
+    },
+    {
+      "id": 4010,
+      "ship_name": "INS Karwar",
+      "equipment_code": "EQP-010",
+      "equipment_name": "Electrical Panel",
+      "srar_equipment_nomenclature": "EW Suite",
+      "location_name": "EW Operations Room",
+      "active": 1,
+      "ship": 10,
+      "equipment": 10,
+      "srar_equipment": 10,
+      "location": 10
+    }
+  ];
+
   // Table Data
   tableData: any[]   = [];
-  
-  // Dropdown options
-  equipmentTypeOptions: any[] = [];
   
   constructor(private apiService: ApiService, private toast: MessageService) {}
   ngOnInit(): void {
     // Don't load data initially - wait for ship selection
     console.log('Linked Equipment Component initialized - waiting for ship selection');
-    this.apiCall();
+    // All options are now static data, no need for API call
   }
   currentPageApi(page: number, pageSize: number, shipId?: string){
-    let apiUrl = `srar/srar-linked-equipments/`;
-    if (shipId) {
-      apiUrl += `?ship=${shipId}`;
+    if (!shipId) {
+      // If no ship is selected, clear the table
+      this.tableData = [];
+      return;
     }
     
-    this.apiService.get(apiUrl).subscribe((res: any) => {
-      // Handle paginated response structure
-      this.tableData = res.results || res;
-      console.log('Linked Equipment Data loaded for ship:', shipId, 'with', this.tableData.length, 'records');
-    }, (error) => {
-      console.error('Error fetching SRAR linked equipment data:', error);
-      this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to fetch linked equipment data'});
-    });
+    // Use static data instead of API call
+    this.tableData = this.linked_equipment_data.filter(equipment => equipment.ship === parseInt(shipId));
+    console.log('Linked Equipment Data loaded from static data for ship:', shipId, 'with', this.tableData.length, 'records');
   }
-apiCall(){
-  this.apiService.get('master/ship/?is_dropdown=true').subscribe((res: any) => {
-    this.shipOptions = res;
-  });
-  this.apiService.get('master/locations/?is_dropdown=true').subscribe((res: any) => {
-    this.locationOptions = res.data || res.results || res;
-  });
-  this.apiService.get('master/equipment/?is_dropdown=true').subscribe((res: any) => {
-    this.equipmentOptions = res;
-  });
-  this.apiService.get('sfd/sfd-details/?is_srar_equipment=True').subscribe((res: any) => {
-    // Extract equipment_name from the results array
-    this.equipmentTypeOptions = res.results || res;
-  });
-}
+// apiCall method removed - all options are now static data
 
   crudName='Add'
   openDialog(): void {
@@ -111,6 +394,9 @@ apiCall(){
   // Event Handlers
   onView(data: any): void {
     this.crudName='View'
+    // Find the SRAR equipment details for proper dropdown population
+    const srarEquipmentDetails = this.srar_equipment_details_data.find(item => item.id === data.srar_equipment);
+    
     // Map API data to form fields
     const formData = {
       id: data.id,
@@ -119,8 +405,8 @@ apiCall(){
       ship_id: data.ship,
       equipment_name: data.equipment_name,
       equipment_id: data.equipment,
-      sarar_equipemnt: data.sarar_equipemnt,
-      sarar_equipment_id: data.sarar_equipment || data.sarar_equipemnt,
+      sarar_equipemnt: srarEquipmentDetails ? srarEquipmentDetails.equipment_name : data.srar_equipment_nomenclature,
+      sarar_equipment_id: data.srar_equipment,
       location_name: data.location_name,
       location_id: data.location,
       location_on_board: data.location_name,
@@ -136,6 +422,9 @@ apiCall(){
   onEdit(data: any): void {
     this.isEdit = true;
     this.crudName='Edit'
+    // Find the SRAR equipment details for proper dropdown population
+    const srarEquipmentDetails = this.srar_equipment_details_data.find(item => item.id === data.srar_equipment);
+    
     // Map API data to form fields
     const formData = {
       id: data.id,
@@ -144,8 +433,8 @@ apiCall(){
       ship_id: data.ship,
       equipment_name: data.equipment_name,
       equipment_id: data.equipment,
-      sarar_equipemnt: data.sarar_equipemnt,
-      sarar_equipment_id: data.sarar_equipment || data.sarar_equipemnt,
+      sarar_equipemnt: srarEquipmentDetails ? srarEquipmentDetails.equipment_name : data.srar_equipment_nomenclature,
+      sarar_equipment_id: data.srar_equipment,
       location_name: data.location_name,
       location_id: data.location,
       location_on_board: data.location_name,
@@ -170,9 +459,12 @@ apiCall(){
 
   confirmDelete(): void {
     if (this.itemToDelete) {
-      this.apiService.delete(`srar/srar-linked-equipments/${this.itemToDelete.id}/`).subscribe((res: any) => {
+      // Remove item from static data
+      const index = this.linked_equipment_data.findIndex(item => item.id === this.itemToDelete.id);
+      if (index > -1) {
+        this.linked_equipment_data.splice(index, 1);
         this.toast.add({severity:'success', summary: 'Success', detail: 'Linked Equipment Deleted Successfully'});
-        console.log(res);
+        console.log('Linked equipment deleted from static data');
         // Refresh data for the currently selected ship
         const currentShipId = this.selectedShip?.id;
         if (currentShipId) {
@@ -180,12 +472,11 @@ apiCall(){
         }
         this.showDeleteModal = false;
         this.itemToDelete = null;
-      }, (error) => {
-        this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to delete linked equipment record'});
-        console.error('Delete error:', error);
+      } else {
+        this.toast.add({severity:'error', summary: 'Error', detail: 'Linked equipment not found'});
         this.showDeleteModal = false;
         this.itemToDelete = null;
-      });
+      }
     }
   }
 
@@ -197,55 +488,77 @@ apiCall(){
   save(){
     console.log('Form values:', this.sararMasterForm.value);
     
-    // Prepare the payload with the required structure
-    const payload = {
-      equipment: this.sararMasterForm.value.equipment_id || null,
-      ship: this.sararMasterForm.value.ship || null,
-      location: this.sararMasterForm.value.location_id || null,
-      srar_equipment: this.sararMasterForm.value.sarar_equipment_id || null,
-      active: this.sararMasterForm.value.active ? 1 : 0
-    };
-
-    console.log('Sending payload:', payload);
-
-    if(this.isEdit){
-      // Update existing record
-      this.apiService.put(`srar/srar-linked-equipments/${this.sararMasterForm.value.id}/`, payload).subscribe((res: any) => {
-        this.toast.add({severity:'success', summary: 'Success', detail: 'Linked Equipment Updated Successfully'});
-        console.log(res);
-        this.isEdit = false;
-        // Refresh data for the currently selected ship
-        const currentShipId = this.selectedShip?.id || this.sararMasterForm.value.ship;
-        if (currentShipId) {
-          this.currentPageApi(0, 0, currentShipId);
+    if (this.sararMasterForm.valid) {
+      const formData = this.sararMasterForm.value;
+      
+      if (this.isEdit && this.sararMasterForm.value.id) {
+        // Update existing linked equipment in static data
+        const index = this.linked_equipment_data.findIndex(item => item.id === this.sararMasterForm.value.id);
+        if (index > -1) {
+          const selectedShip = this.shipOptions.find(ship => ship.id === formData.ship);
+          const selectedEquipment = this.equipmentOptions.find(equipment => equipment.id === formData.equipment_id);
+          const selectedLocation = this.locationOptions.find(location => location.id === formData.location_id);
+          const selectedSRAREquipment = this.equipmentTypeOptions.find(equipment => equipment.id === formData.sarar_equipment_id);
+          
+          this.linked_equipment_data[index] = {
+            ...this.linked_equipment_data[index],
+            ship_name: selectedShip?.name || '',
+            equipment_code: `EQP-${formData.equipment_id?.toString().padStart(3, '0')}`,
+            equipment_name: selectedEquipment?.name || '',
+            srar_equipment_nomenclature: selectedSRAREquipment?.nomenclature || '',
+            location_name: selectedLocation?.name || '',
+            active: formData.active ? 1 : 0
+          };
+          
+          this.toast.add({severity:'success', summary: 'Success', detail: 'Linked Equipment Updated Successfully'});
+          this.closeDialog();
+          // Refresh data for the currently selected ship
+          const currentShipId = this.selectedShip?.id || this.sararMasterForm.value.ship;
+          if (currentShipId) {
+            this.currentPageApi(0, 0, currentShipId);
+          }
+        } else {
+          this.toast.add({severity:'error', summary: 'Error', detail: 'Linked equipment not found for update'});
         }
-        this.closeDialog();
-      }, (error) => {
-        this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to update linked equipment record'});
-        console.error('Update error:', error);
-      });
-    } else {
-      // Create new record
-      this.apiService.post('srar/srar-linked-equipments/', payload).subscribe((res: any) => {
+      } else {
+        // Create new linked equipment in static data
+        const newId = Math.max(...this.linked_equipment_data.map(item => item.id || 0)) + 1;
+        
+        const selectedShip = this.shipOptions.find(ship => ship.id === formData.ship);
+        const selectedEquipment = this.equipmentOptions.find(equipment => equipment.id === formData.equipment_id);
+        const selectedLocation = this.locationOptions.find(location => location.id === formData.location_id);
+        const selectedSRAREquipment = this.equipmentTypeOptions.find(equipment => equipment.id === formData.sarar_equipment_id);
+        
+        const newLinkedEquipment = {
+          id: newId,
+          ship_name: selectedShip?.name || '',
+          equipment_code: `EQP-${formData.equipment_id?.toString().padStart(3, '0')}`,
+          equipment_name: selectedEquipment?.name || '',
+          srar_equipment_nomenclature: selectedSRAREquipment?.nomenclature || '',
+          location_name: selectedLocation?.name || '',
+          active: formData.active ? 1 : 0,
+          ship: formData.ship,
+          equipment: formData.equipment_id,
+          srar_equipment: formData.sarar_equipment_id,
+          location: formData.location_id
+        };
+        
+        this.linked_equipment_data.push(newLinkedEquipment);
+        
         this.toast.add({severity:'success', summary: 'Success', detail: 'Linked Equipment Added Successfully'});
-        console.log(res);
+        this.closeDialog();
         // Refresh data for the currently selected ship
         const currentShipId = this.selectedShip?.id || this.sararMasterForm.value.ship;
         if (currentShipId) {
           this.currentPageApi(0, 0, currentShipId);
         }
-        this.closeDialog();
-      }, (error) => {
-        this.toast.add({severity:'error', summary: 'Error', detail: 'Failed to add linked equipment record'});
-        console.error('Create error:', error);
-      });
+      }
+    } else {
+      this.toast.add({severity:'warn', summary: 'Warning', detail: 'Please fill all required fields'});
     }
   }
   
-  shipOptions: any[] = [];
-  locationOptions: any[] = [];
-  equipmentOptions: any[] = [];
-  selectedShip: any;
+     selectedShip: any;
   
   onShipChange(event: any): void {
     // Extract the ship ID from the selected ship object
@@ -263,11 +576,7 @@ apiCall(){
           ship_id: shipId
         });
         
-        // Fetch equipment options for the selected ship using master/equipment API
-        this.apiService.get(`master/equipment/?is_dropdown=true&ship=${shipId}`).subscribe((res: any) => {
-          this.equipmentOptions = res;
-        });
-        
+        // Equipment options are already static data, no need to fetch
         // Fetch linked equipment data for the selected ship
         this.currentPageApi(0, 0, shipId);
       }
@@ -320,7 +629,7 @@ apiCall(){
     console.log('Equipment type changed:', event);
     
     // Find the selected equipment to get additional details if needed
-    const selectedEquipment = this.equipmentTypeOptions.find(equipment => equipment.equipment_name === event);
+    const selectedEquipment = this.srar_equipment_details_data.find(equipment => equipment.equipment_name === event);
     if (selectedEquipment) {
       // Store the equipment ID in the form
       this.sararMasterForm.patchValue({

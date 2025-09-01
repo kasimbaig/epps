@@ -24,6 +24,46 @@ import { DeleteConfirmationModalComponent } from '../../../shared/components/del
 import { Department } from '../../../shared/models/department.model';
 import { DepartmentService } from '../ship-services/department.service';
 
+// Static dataset for departments
+const STATIC_DEPARTMENTS: any[] = [
+  {
+    id: 31,
+    active: 1,
+    name: 'Weapons',
+    code: 'WPN77',
+    description: 'Handles missile, torpedo, and gunnery systems',
+    sfd_applicable: 1,
+    created_by: '2'
+  },
+  {
+    id: 32,
+    active: 1,
+    name: 'Combat Systems',
+    code: 'CMB44',
+    description: 'Responsible for radar, sonar, and fire control systems',
+    sfd_applicable: 1,
+    created_by: '3'
+  },
+  {
+    id: 33,
+    active: 1,
+    name: 'Navigation',
+    code: 'NAV19',
+    description: 'Manages bridge systems, autopilot, and navigational charts',
+    sfd_applicable: 1,
+    created_by: '4'
+  },
+  {
+    id: 34,
+    active: 1,
+    name: 'Logistics',
+    code: 'LOG88',
+    description: 'Oversees supply chain, provisions, and fuel storage',
+    sfd_applicable: 0,
+    created_by: '5'
+  }
+];
+
 @Component({
   selector: 'app-department-master',
   standalone: true,
@@ -109,16 +149,10 @@ export class DepartmentMasterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //console.log('🚢 Department Master Component Initializing...');
-    //console.log('API URL:', this.apiUrl);
-    //console.log('Total Count:', this.totalCount);
-    //console.log('Enable URL Fetching: true');
-    
-    // Load master data for dropdowns (but not departments data - paginated table will handle that)
-    this.departmentService.loadAllDepartmentsData();
-    
-    // Note: Table data will be loaded by the paginated table component
-    // No need to call getDepartments() here
+    // Use static data instead of API
+    this.apiUrl = '';
+    this.departments = [...STATIC_DEPARTMENTS] as any;
+    this.filteredDepartments = [...STATIC_DEPARTMENTS] as any;
   }
 
   goBack(): void {

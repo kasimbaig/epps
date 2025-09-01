@@ -6,7 +6,7 @@ import { ApiService } from '../../../services/api.service';
 interface ShipLocation {
   id?: number;
   name: string;
-  status: string;
+  code: string;
   ship_state: number;
   ship_state_name: string;
   active: number;
@@ -71,6 +71,64 @@ export class ShipActivityTypeComponent  implements OnInit {
   // Ship Location Options for Dropdown
   shipLocationOptions: ShipLocation[] = [];
 
+  // Static Ship Location Data for Dropdown (reusing from ship-location component)
+  ship_location_options_data = [
+    {
+        "id": 15,
+        "name": "Dock Bay 3",
+        "code": "DB3",
+        "ship_state": 40,
+        "ship_state_name": "Docked at Base",
+        "ship_state_code": "DCK",
+        "created_by_name": "EPPS",
+        "modified_by_name": "NAVSUP",
+        "active": 1,
+        "active_display": "Active"
+    },
+    {
+        "id": 16,
+        "name": "Harbour Exit",
+        "code": "HEX",
+        "ship_state": 41,
+        "ship_state_name": "Sea Trials",
+        "ship_state_code": "SRT",
+        "created_by_name": "EPPS",
+        "modified_by_name": "SYSTEM",
+        "active": 0,
+        "active_display": "Inactive"
+    }
+  ];
+
+  // Static Ship Activity Data
+  ship_activity_data = [
+    {
+        "id": 5,
+        "name": "DRILL-OPS",
+        "code": "DOPS",
+        "ship_location": 15,
+        "ship_location_name": "Dock Bay 3",
+        "ship_location_code": "DB3",
+        "status": "active",
+        "created_by_name": "EPPS",
+        "modified_by_name": "NAVSUP",
+        "active": 1,
+        "active_display": "Active"
+    },
+    {
+        "id": 6,
+        "name": "MAINT-CHECK",
+        "code": "MCHK",
+        "ship_location": 16,
+        "ship_location_name": "Harbour Exit",
+        "ship_location_code": "HEX",
+        "status": "inactive",
+        "created_by_name": "EPPS",
+        "modified_by_name": "SYSTEM",
+        "active": 0,
+        "active_display": "Inactive"
+    }
+  ];
+
   // Table Columns Configuration
   tableColumns = [
     { field: 'name', header: 'Ship Activity Type', type: 'text', sortable: true, filterable: true },
@@ -93,47 +151,26 @@ export class ShipActivityTypeComponent  implements OnInit {
     this.loadShipActivityTypes();
   }
 
-  // Load ship locations for dropdown
+  // Load ship locations for dropdown from static data
   loadShipLocations(): void {
     this.loading = true;
-    this.apiService.get('srar/ship-locations/?is_dropdown=true').subscribe({
-      next: (response) => {
-        // Handle paginated response structure
-        this.shipLocationOptions = response.results || response|| [];
-        this.loading = false;
-      },
-      error: (error) => {
-        console.error('Error loading ship locations:', error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to load ship locations'
-        });
-        this.loading = false;
-      }
-    });
+    
+    // Use static data instead of API call
+    this.shipLocationOptions = this.ship_location_options_data;
+    this.loading = false;
+    
+    console.log('Ship locations loaded from static data for dropdown:', this.shipLocationOptions.length, 'records');
   }
 
-  // Load ship activity types from API
+  // Load ship activity types from static data
   loadShipActivityTypes(): void {
     this.loading = true;
-    this.apiService.get('srar/ship-activity-types/').subscribe({
-      next: (response) => {
-        // Handle paginated response structure
-        this.tableData = response.results || [];
-        this.loading = false;
-        console.log('Ship activity types loaded:', this.tableData.length, 'records');
-      },
-      error: (error) => {
-        console.error('Error loading ship activity types:', error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to load ship activity types'
-        });
-        this.loading = false;
-      }
-    });
+    
+    // Use static data instead of API call
+    this.tableData = this.ship_activity_data;
+    this.loading = false;
+    
+    console.log('Ship activity types loaded from static data:', this.tableData.length, 'records');
   }
 
   // Helper method to get ship location ID by name
@@ -216,29 +253,29 @@ export class ShipActivityTypeComponent  implements OnInit {
   confirmDelete(): void {
     if (this.itemToDelete && this.itemToDelete.id) {
       this.loading = true;
-      this.apiService.delete(`srar/ship-activity-types/${this.itemToDelete.id}/`).subscribe({
-        next: () => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Ship activity type deleted successfully'
-          });
-          this.loadShipActivityTypes(); // Reload data
-          this.showDeleteModal = false;
-          this.itemToDelete = null;
-        },
-        error: (error) => {
-          console.error('Error deleting ship activity type:', error);
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Failed to delete ship activity type'
-          });
-          this.loading = false;
-          this.showDeleteModal = false;
-          this.itemToDelete = null;
-        }
-      });
+      
+      // Remove item from static data
+      const index = this.ship_activity_data.findIndex(item => item.id === this.itemToDelete!.id);
+      if (index > -1) {
+        this.ship_activity_data.splice(index, 1);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Ship activity type deleted successfully'
+        });
+        this.loadShipActivityTypes(); // Reload data
+        this.showDeleteModal = false;
+        this.itemToDelete = null;
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Ship activity type not found'
+        });
+        this.loading = false;
+        this.showDeleteModal = false;
+        this.itemToDelete = null;
+      }
     }
   }
 
@@ -268,52 +305,66 @@ export class ShipActivityTypeComponent  implements OnInit {
         code: formValue.code
       };
 
-      this.loading = true;
+      // No loading needed for static data operations
 
       if (this.isEdit && this.selectedShipActivityTypeId) {
-        // Update existing ship activity type
-        this.apiService.put(`srar/ship-activity-types/${this.selectedShipActivityTypeId}/`, payload).subscribe({
-          next: () => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: 'Ship activity type updated successfully'
-            });
-            this.closeDialog();
-            this.loadShipActivityTypes(); // Reload data
-          },
-          error: (error) => {
-            console.error('Error updating ship activity type:', error);
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Failed to update ship activity type'
-            });
-            this.loading = false;
-          }
-        });
+        // Update existing ship activity type in static data
+        const index = this.ship_activity_data.findIndex(item => item.id === this.selectedShipActivityTypeId);
+        if (index > -1) {
+          const shipLocation = this.shipLocationOptions.find(location => location.id === selectedShipLocationId);
+          this.ship_activity_data[index] = {
+            ...this.ship_activity_data[index],
+            name: formValue.ship_activity_type,
+            code: formValue.code,
+            ship_location: selectedShipLocationId,
+            ship_location_name: shipLocation?.name || '',
+            ship_location_code: shipLocation?.code || '',
+            active: formValue.status ? 1 : 0,
+            active_display: formValue.status ? 'Active' : 'Inactive'
+          };
+          
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Ship activity type updated successfully'
+          });
+          this.closeDialog();
+          this.loadShipActivityTypes(); // Reload data
+        } else {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Ship activity type not found for update'
+          });
+        }
       } else {
-        // Create new ship activity type
-        this.apiService.post('srar/ship-activity-types/', payload).subscribe({
-          next: () => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: 'Ship activity type created successfully'
-            });
-            this.closeDialog();
-            this.loadShipActivityTypes(); // Reload data
-          },
-          error: (error) => {
-            console.error('Error creating ship activity type:', error);
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Failed to create ship activity type'
-            });
-            this.loading = false;
-          }
+        // Create new ship activity type in static data
+        const shipLocation = this.shipLocationOptions.find(location => location.id === selectedShipLocationId);
+        const newId = Math.max(...this.ship_activity_data.map(item => item.id || 0)) + 1;
+        
+                 const newActivity = {
+           id: newId,
+           name: formValue.ship_activity_type,
+           code: formValue.code,
+           ship_location: selectedShipLocationId,
+           ship_location_name: shipLocation?.name || '',
+           ship_location_code: shipLocation?.code || '',
+           status: formValue.status ? 'active' : 'inactive',
+           created_by_name: 'EPPS',
+           modified_by_name: 'EPPS',
+           active: formValue.status ? 1 : 0,
+           active_display: formValue.status ? 'Active' : 'Inactive'
+         };
+        
+        this.ship_activity_data.push(newActivity);
+        
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Ship activity type created successfully'
         });
+        this.closeDialog();
+        this.loadShipActivityTypes(); // Reload data
       }
     } else {
       this.messageService.add({

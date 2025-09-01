@@ -54,6 +54,30 @@ export class LubricantComponent implements OnInit {
   { field: 'active', header: 'Status', type: 'status', sortable: true, filterable: true },
 ];
 
+  // Static Lubricant Data
+  lubricant_data = [
+    {
+        "id": 12,
+        "name": "Castrol Marine X50",
+        "code": "CMX50",
+        "description": "Marine Engine Oil",
+        "type": "oil",
+        "type_display": "Oil",
+        "active": 1,
+        "active_display": "Active"
+    },
+    {
+        "id": 9,
+        "name": "Shell Turbo T68",
+        "code": "SHT68",
+        "description": "Turbine Oil",
+        "type": "oil",
+        "type_display": "Oil",
+        "active": 1,
+        "active_display": "Active"
+    }
+  ];
+
   // Table Data
   tableData: any[] = [];
   
@@ -69,23 +93,10 @@ export class LubricantComponent implements OnInit {
   }
   
   loadLubricants(): void {
-    this.loading = true;
-    this.apiService.get('master/lubricant/').subscribe({
-      next: (response) => {
-        this.tableData = response.data || response.results || response;
-        this.loading = false;
-        console.log('Lubricants loaded:', this.tableData.length, 'records');
-      },
-      error: (error) => {
-        console.error('Error loading lubricants:', error);
-        this.toast.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to load lubricants'
-        });
-        this.loading = false;
-      }
-    });
+    // Use static data instead of API call
+    this.tableData = this.lubricant_data;
+    
+    console.log('Lubricants loaded from static data:', this.tableData.length, 'records');
   }
 
   crudName='Add'
@@ -131,30 +142,27 @@ export class LubricantComponent implements OnInit {
 
   confirmDelete(): void {
     if (this.itemToDelete && this.itemToDelete.id) {
-      this.apiService.delete(`master/lubricant/${this.itemToDelete.id}/`).subscribe({
-        next: (response) => {
-          console.log('Lubricant deleted successfully:', response);
-          this.toast.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Lubricant deleted successfully'
-          });
-          // Refresh the data
-          this.loadLubricants();
-          this.showDeleteModal = false;
-          this.itemToDelete = null;
-        },
-        error: (error) => {
-          console.error('Error deleting lubricant:', error);
-          this.toast.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Failed to delete lubricant'
-          });
-          this.showDeleteModal = false;
-          this.itemToDelete = null;
-        }
-      });
+      // Remove item from static data
+      const index = this.lubricant_data.findIndex(item => item.id === this.itemToDelete!.id);
+      if (index > -1) {
+        this.lubricant_data.splice(index, 1);
+        this.toast.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Lubricant deleted successfully'
+        });
+        this.loadLubricants(); // Reload data
+        this.showDeleteModal = false;
+        this.itemToDelete = null;
+      } else {
+        this.toast.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Lubricant not found'
+        });
+        this.showDeleteModal = false;
+        this.itemToDelete = null;
+      }
     } else {
       this.toast.add({
         severity: 'error',
@@ -175,7 +183,7 @@ export class LubricantComponent implements OnInit {
     if (this.sararMasterForm.valid) {
       const formData = this.sararMasterForm.value;
       
-      // Convert active boolean to number for API
+      // Convert active boolean to number for static data
       const payload = {
         name: formData.name,
         code: formData.code,
@@ -185,51 +193,58 @@ export class LubricantComponent implements OnInit {
       };
 
       if (this.isEdit && this.selectedLubricantId) {
-        // Handle edit
-        this.apiService.put(`master/lubricant/${this.selectedLubricantId}/`, payload).subscribe({
-          next: (response) => {
-            console.log('Lubricant updated successfully:', response);
-            this.toast.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: 'Lubricant updated successfully'
-            });
-            this.closeDialog();
-            // Refresh the data
-            this.loadLubricants();
-          },
-          error: (error) => {
-            console.error('Error updating lubricant:', error);
-            this.toast.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Failed to update lubricant'
-            });
-          }
-        });
+        // Handle edit - update existing lubricant in static data
+        const index = this.lubricant_data.findIndex(item => item.id === this.selectedLubricantId);
+        if (index > -1) {
+          this.lubricant_data[index] = {
+            ...this.lubricant_data[index],
+            name: formData.name,
+            code: formData.code,
+            description: formData.description,
+            active: formData.active ? 1 : 0,
+            type: formData.type,
+            type_display: formData.type === 'oil' ? 'Oil' : formData.type,
+            active_display: formData.active ? 'Active' : 'Inactive'
+          };
+          
+          this.toast.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Lubricant updated successfully'
+          });
+          this.closeDialog();
+          this.loadLubricants(); // Reload data
+        } else {
+          this.toast.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Lubricant not found for update'
+          });
+        }
       } else {
-        // Handle add
-        this.apiService.post('master/lubricant/', payload).subscribe({
-          next: (response) => {
-            console.log('Lubricant created successfully:', response);
-            this.toast.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: 'Lubricant created successfully'
-            });
-            this.closeDialog();
-            // Refresh the data
-            this.loadLubricants();
-          },
-          error: (error) => {
-            console.error('Error creating lubricant:', error);
-            this.toast.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Failed to create lubricant'
-            });
-          }
+        // Handle add - create new lubricant in static data
+        const newId = Math.max(...this.lubricant_data.map(item => item.id || 0)) + 1;
+        
+        const newLubricant = {
+          id: newId,
+          name: formData.name,
+          code: formData.code,
+          description: formData.description,
+          active: formData.active ? 1 : 0,
+          type: formData.type,
+          type_display: formData.type === 'oil' ? 'Oil' : formData.type,
+          active_display: formData.active ? 'Active' : 'Inactive'
+        };
+        
+        this.lubricant_data.push(newLubricant);
+        
+        this.toast.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Lubricant created successfully'
         });
+        this.closeDialog();
+        this.loadLubricants(); // Reload data
       }
     } else {
       this.toast.add({

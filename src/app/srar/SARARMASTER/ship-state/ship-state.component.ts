@@ -43,6 +43,34 @@ export class ShipStateComponent implements OnInit {
     status: new FormControl(true),
   });
 
+  // Static Ship State Data
+  ship_state_data = [
+    {
+        "id": 40,
+        "active": 1,
+        "code": "DCK",
+        "description": "Docked at Base",
+        "created_by": "SYSTEM",
+        "active_display": "Active"
+    },
+    {
+        "id": 41,
+        "active": 1,
+        "code": "SRT",
+        "description": "Sea Trials",
+        "created_by": "NAVSUP",
+        "active_display": "Active"
+    },
+    {
+        "id": 42,
+        "active": 0,
+        "code": "RSV",
+        "description": "Under Reserve",
+        "created_by": "EPPS",
+        "active_display": "Inactive"
+    }
+  ];
+
   // Table Columns Configuration
   tableColumns = [
     { field: 'name', header: 'Ship State', type: 'text', sortable: true, filterable: true },
@@ -69,36 +97,31 @@ export class ShipStateComponent implements OnInit {
     console.log('Ship State Component initialized with', this.tableData.length, 'records');
   }
 
-  // Load all ship states from API with pagination
+  // Load all ship states from static data with pagination
   loadShipStates(page: number = 1, pageSize: number = this.pageSize): void {
     this.loading = true;
     this.currentPage = page;
     this.pageSize = pageSize;
     
-    // Build query parameters for pagination
-    const params = {
-      page: page,
-      page_size: pageSize
-    };
+    // Use static data instead of API call
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
     
-    this.apiService.get('srar/ship-states/', params).subscribe({
-      next: (response: ApiResponse) => {
-        // Handle paginated response structure
-        this.tableData = response.results || [];
-        this.totalRecords = response.count || 0;
-        this.loading = false;
-        console.log(`Ship states loaded: page ${page}, ${this.tableData.length} records, total: ${this.totalRecords}`);
-      },
-      error: (error) => {
-        console.error('Error loading ship states:', error);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to load ship states'
-        });
-        this.loading = false;
-      }
-    });
+    // Map static data to match the expected interface
+    const mappedData = this.ship_state_data.map(item => ({
+      id: item.id,
+      name: item.description,
+      code: item.code,
+      active: item.active,
+      created_by_name: item.created_by,
+      active_display: item.active_display
+    }));
+    
+    this.tableData = mappedData.slice(startIndex, endIndex);
+    this.totalRecords = mappedData.length;
+    this.loading = false;
+    
+    console.log(`Ship states loaded from static data: page ${page}, ${this.tableData.length} records, total: ${this.totalRecords}`);
   }
 
   // Pagination event handlers
@@ -120,8 +143,8 @@ export class ShipStateComponent implements OnInit {
     this.loadShipStates(1, newPageSize);
   }
 
-  openDialog(): void {
-    this.crudName = 'Add';
+  openDialog(operation: string = 'Add'): void {
+    this.crudName = operation;
     this.displayDialog = true;
   }
 
@@ -136,13 +159,12 @@ export class ShipStateComponent implements OnInit {
 
   // Event Handlers
   onView(data: ShipState): void {
-    this.crudName = 'View';
     this.sararMasterForm.patchValue({
       ship_state: data.name,
       code: data.code,
       status: data.active === 1
     });
-    this.openDialog();
+    this.openDialog('View');
     this.sararMasterForm.disable();
   }
 
@@ -151,14 +173,13 @@ export class ShipStateComponent implements OnInit {
 
   onEdit(data: ShipState): void {
     this.isEdit = true;
-    this.crudName = 'Edit';
     this.selectedShipStateId = data.id || null;
     this.sararMasterForm.patchValue({
       ship_state: data.name,
       code: data.code,
       status: data.active === 1
     });
-    this.openDialog();
+    this.openDialog('Edit');
   }
 
   onDelete(data: ShipState): void {
