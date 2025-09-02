@@ -72,7 +72,7 @@
               <div class="nav-underline"></div>
             </a>
             
-            <div class="export-dropdown-wrapper">
+            <div class="download-menu-container">
               <button class="nav-item modern-nav-item" (click)="toggleDownloadMenu()">
                 <div class="nav-icon">
                   <mat-icon>download</mat-icon>
@@ -80,18 +80,11 @@
                 <span class="nav-text">EXPORT</span>
                 <div class="nav-underline"></div>
               </button>
-
-              <!-- Fixed Export Dropdown -->
-              <div class="export-dropdown-menu" *ngIf="showDownloadMenu">
-                <div class="export-dropdown-arrow"></div>
-                <button class="export-dropdown-item" (click)="downloadFile('pptx')">
-                  <mat-icon>description</mat-icon>
-                  <span>Export PPTX</span>
-                </button>
-                <button class="export-dropdown-item" (click)="downloadFile('pdf')">
-                  <mat-icon>picture_as_pdf</mat-icon>
-                  <span>Export PDF</span>
-                </button>
+      
+              <!-- Popup Menu (side by side) -->
+              <div class="download-popup" *ngIf="showDownloadMenu">
+                <button (click)="downloadFile('pptx')">Export PPTX</button>
+                <button (click)="downloadFile('pdf')">Export PDF</button>
               </div>
             </div>
           </div>
