@@ -97,6 +97,99 @@ export class OpsAuthorityComponent {
   ngOnInit(): void {
     this.getAuthorities();
   }
+  staticOpsAuthData=[
+  {
+    "id": 1,
+    "command": {
+      "id": 10,
+      "active": 1,
+      "name": "Training Command",
+      "code": "TC",
+      "ref": "REF T010",
+      "created_by": 2
+    },
+    "active": 1,
+    "authority": "HQ Training",
+    "code": "TC-001",
+    "name": "Training Division Alpha",
+    "ops_order": "OPS-TC-01",
+    "address": "Mumbai",
+    "created_by": 2
+  },
+  {
+    "id": 2,
+    "command": {
+      "id": 11,
+      "active": 1,
+      "name": "Logistics Command",
+      "code": "LC",
+      "ref": "REF L011",
+      "created_by": 2
+    },
+    "active": 1,
+    "authority": "HQ Logistics",
+    "code": "LC-001",
+    "name": "Logistics Support Unit",
+    "ops_order": "OPS-LC-01",
+    "address": "Visakhapatnam",
+    "created_by": 3
+  },
+  {
+    "id": 3,
+    "command": {
+      "id": 12,
+      "active": 1,
+      "name": "Cyber Operations Command",
+      "code": "COC",
+      "ref": "REF C012",
+      "created_by": 3
+    },
+    "active": 1,
+    "authority": "HQ CyberOps",
+    "code": "COC-001",
+    "name": "Cyber Defence Cell",
+    "ops_order": "OPS-COC-01",
+    "address": "New Delhi",
+    "created_by": 4
+  },
+  {
+    "id": 4,
+    "command": {
+      "id": 13,
+      "active": 1,
+      "name": "Research & Development Command",
+      "code": "RDC",
+      "ref": "REF R013",
+      "created_by": 3
+    },
+    "active": 1,
+    "authority": "HQ R&D",
+    "code": "RDC-001",
+    "name": "Naval Innovation Lab",
+    "ops_order": "OPS-RDC-01",
+    "address": "Hyderabad",
+    "created_by": 5
+  },
+  {
+    "id": 5,
+    "command": {
+      "id": 14,
+      "active": 1,
+      "name": "Maritime Security Command",
+      "code": "MSC",
+      "ref": "REF M014",
+      "created_by": 4
+    },
+    "active": 1,
+    "authority": "HQ Maritime",
+    "code": "MSC-001",
+    "name": "Coastal Security Unit",
+    "ops_order": "OPS-MSC-01",
+    "address": "Chennai",
+    "created_by": 6
+  }
+]
+
   goBack(){
     this.location.back();
   }

@@ -112,6 +112,74 @@ export class UnitsComponent {
   ngOnInit(): void {
     this.getUnits();
   }
+
+  unitStaticData=[
+  {
+    "id": 1,
+    "active": 1,
+    "name": "DSR",
+    "code": "DSR",
+    "description": "Daily Status Report",
+    "created_by": 1
+  },
+  {
+    "id": 2,
+    "active": 1,
+    "name": "QBR",
+    "code": "QBR",
+    "description": "Quarterly Business Review",
+    "created_by": 2
+  },
+  {
+    "id": 3,
+    "active": 1,
+    "name": "SOP",
+    "code": "SOP",
+    "description": "Standard Operating Procedure",
+    "created_by": 2
+  },
+  {
+    "id": 4,
+    "active": 1,
+    "name": "KPI",
+    "code": "KPI",
+    "description": "Key Performance Indicator",
+    "created_by": 3
+  },
+  {
+    "id": 5,
+    "active": 1,
+    "name": "MOM",
+    "code": "MOM",
+    "description": "Minutes of Meeting",
+    "created_by": 3
+  },
+  {
+    "id": 6,
+    "active": 1,
+    "name": "RFI",
+    "code": "RFI",
+    "description": "Request for Information",
+    "created_by": 4
+  },
+  {
+    "id": 7,
+    "active": 1,
+    "name": "RFP",
+    "code": "RFP",
+    "description": "Request for Proposal",
+    "created_by": 4
+  },
+  {
+    "id": 8,
+    "active": 1,
+    "name": "SLA",
+    "code": "SLA",
+    "description": "Service Level Agreement",
+    "created_by": 5
+  }
+]
+
   goBack() {
     this.location.back();
   }
