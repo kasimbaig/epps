@@ -387,8 +387,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       datasets: [{
         label: 'Filtered Frequency',
         data: [3, 2, 4],
-        backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
-        borderColor: ['#1976D2', '#388E3C', '#F57C00'],
+        backgroundColor: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
+        borderColor: ['#FF5252', '#26A69A', '#2196F3'],
         borderWidth: 2
       }]
     };
@@ -418,8 +418,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       datasets: [{
         label: 'Filtered Frequency',
         data: [3, 2, 4],
-        backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
-        borderColor: ['#1976D2', '#388E3C', '#F57C00'],
+        backgroundColor: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
+        borderColor: ['#FF5252', '#26A69A', '#2196F3'],
         borderWidth: 2
       }]
     };

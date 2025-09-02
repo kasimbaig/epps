@@ -1,65 +1,121 @@
 <app-shared-layout>
-  <div class="home-content">
-    <!-- <div class="top-section"> -->
-      <!-- Mission Statement -->
-       <div class = "rows">
-      <div class="mission-statement">
-        <h2>MISSION STATEMENT</h2>
-        <p>Provide Authoritative Decision Support towards Sustained Reliability & Combat Readiness of Indian Navy Platforms through Comprehensive Maintenance Management System.</p>
-      </div>
+  <div class="modern-home-container">
+    <!-- Hero Section with All Cards -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <!-- Login Card -->
+        <div class="login-card">
+          <div class="login-header">
+            <div class="login-icon">
+              <mat-icon>security</mat-icon>
+            </div>
+            <h2 class="login-title">CMMS-UM2 LOGIN</h2>
+          </div>
+          
+          <div class="login-form">
+            <div class="input-group">
+              <div class="input-icon">
+                <mat-icon>person</mat-icon>
+              </div>
+              <input 
+                type="text" 
+                placeholder="User Login" 
+                [(ngModel)]="userLogin" 
+                name="userLogin"
+                class="form-input"
+              >
+            </div>
+            
+            <div class="input-group">
+              <div class="input-icon">
+                <mat-icon>lock</mat-icon>
+              </div>
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                placeholder="Password" 
+                [(ngModel)]="password" 
+                name="password"
+                class="form-input"
+              >
+              <button class="password-toggle" (click)="togglePasswordVisibility()">
+                <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+              </button>
+            </div>
+            
+            <div class="login-actions">
+              <button class="login-btn" (click)="onLogin()">
+                <mat-icon>login</mat-icon>
+                <span>Login</span>
+              </button>
+              <button class="register-btn" (click)="onNewUser()">
+                <mat-icon>person_add</mat-icon>
+                <span>New User</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="login-decoration"></div>
+        </div>
 
-      <!-- Search Bar -->
-      <div class="search-row">
-        <!-- <div class="anwesh-logo">A</div> -->
-        <div class="search-input">
-          <input type="text" placeholder="Anwesh Search" [(ngModel)]="searchQuery" name="searchQuery">
+        <!-- Mission Statement Card -->
+        <div class="mission-card">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>flag</mat-icon>
+            </div>
+            <h2 class="card-title">MISSION STATEMENT</h2>
+          </div>
+          <div class="card-body">
+            <p class="mission-text">
+              Provide Authoritative Decision Support towards Sustained Reliability & Combat Readiness of Indian Navy Platforms through Comprehensive Maintenance Management System.
+            </p>
+          </div>
+          <div class="card-glow"></div>
         </div>
-        <button mat-mini-fab class="search-button" (click)="onSearch()">
-          <mat-icon>search</mat-icon>
-        </button>
-      </div>
 
-      <!-- CMMS-UM2 Login -->
-      <div class="login-card">
-        <h2>CMMS-UM2 LOGIN</h2>
-        <div class="input-field">
-          <mat-icon class="input-icon">person</mat-icon>
-          <input type="text" placeholder="User Login" [(ngModel)]="userLogin" name="userLogin">
-        </div>
-        
-        <div class="input-field">
-          <mat-icon class="input-icon">lock</mat-icon>
-          <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" [(ngModel)]="password" name="password">
-          <mat-icon class="input-icon password-toggle" (click)="togglePasswordVisibility()">
-            {{ showPassword ? 'visibility' : 'visibility_off' }}
-          </mat-icon>
-        </div>
-        
-        <div class="login-buttons">
-          <button class="login-btn" (click)="onLogin()">Login</button>
-          <button class="new-user-btn" (click)="onNewUser()">New User</button>
+        <!-- Resource Cards Container -->
+        <div class="resource-cards-container">
+          <div class="resource-card" (click)="openVideoGallery('installation')">
+            <div class="resource-icon">
+              <mat-icon>build</mat-icon>
+            </div>
+            <div class="resource-content">
+              <h3 class="resource-title">INSTALLATION VIDEOS</h3>
+            </div>
+          </div>
+
+          <div class="resource-card" (click)="openVideoGallery('patch')">
+            <div class="resource-icon">
+              <mat-icon>system_update</mat-icon>
+            </div>
+            <div class="resource-content">
+              <h3 class="resource-title">STEPS FOR UPDATING PATCH</h3>
+            </div>
+          </div>
+
+          <div class="resource-card" (click)="openVideoGallery('sfd')">
+            <div class="resource-icon">
+              <mat-icon>analytics</mat-icon>
+            </div>
+            <div class="resource-content">
+              <h3 class="resource-title">SFD, EMAPS & SRAR VIDEOS</h3>
+            </div>
+          </div>
+
+          <div class="resource-card" (click)="openVideoGallery('dart')">
+            <div class="resource-icon">
+              <mat-icon>precision_manufacturing</mat-icon>
+            </div>
+            <div class="resource-content">
+              <h3 class="resource-title">DART, DL, OPDEF & FUSS VIDEOS</h3>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Video Links -->
-    <div class="video-rows">
-      <button class="video-link-button" (click)="openVideoGallery('installation')">
-        INSTALLATION VIDEOS
-      </button>
-      <button class="video-link-button" (click)="openVideoGallery('patch')">
-        STEPS FOR UPDATING PATCH
-      </button>
-      <button class="video-link-button" (click)="openVideoGallery('sfd')">
-        SFD, EMAPS & SRAR VIDEOS
-      </button>
-      <button class="video-link-button" (click)="openVideoGallery('dart')">
-        DART, DL, OPDEF & FUSS VIDEOS
-      </button>
-    </div>
+    </section>
   </div>
 
-  <!-- Add Form Component for Registration -->
+  <!-- Registration Form Modal -->
   <app-add-form
     [open]="showRegistrationForm"
     [formConfig]="formConfig"
@@ -71,24 +127,35 @@
     (onSubmit)="onRegistrationSubmit($event)"
   ></app-add-form>
 
-  <!-- Video Gallery Dialog -->
-  <div class="video-gallery-overlay" *ngIf="showVideoGallery" (click)="closeVideoGallery()">
-    <div class="video-gallery-dialog" (click)="$event.stopPropagation()">
-      <div class="video-gallery-header">
-        <h2>VIDEO GALLERY</h2>
-        <h3>{{ getSelectedCategoryTitle() }}</h3>
-        <button class="close-btn" (click)="closeVideoGallery()">
+  <!-- Modern Video Gallery Modal -->
+  <div class="modern-video-overlay" *ngIf="showVideoGallery" (click)="closeVideoGallery()">
+    <div class="modern-video-dialog" (click)="$event.stopPropagation()">
+      <div class="video-dialog-header">
+        <div class="dialog-title-section">
+          <h2 class="dialog-title">Video Gallery</h2>
+          <h3 class="dialog-subtitle">{{ getSelectedCategoryTitle() }}</h3>
+        </div>
+        <button class="dialog-close-btn" (click)="closeVideoGallery()">
           <mat-icon>close</mat-icon>
         </button>
       </div>
       
-      <div class="video-grid">
+      <div class="modern-video-grid">
         <div 
           *ngFor="let video of getSelectedCategoryVideos()" 
-          class="video-item"
+          class="modern-video-item"
           (click)="downloadVideo(video.id, video.title)"
         >
-          <h4>{{ video.title }}</h4>
+          <div class="video-item-icon">
+            <mat-icon>play_circle</mat-icon>
+          </div>
+          <div class="video-item-content">
+            <h4 class="video-item-title">{{ video.title }}</h4>
+            <p class="video-item-desc">{{ video.description }}</p>
+          </div>
+          <div class="video-item-action">
+            <mat-icon>download</mat-icon>
+          </div>
         </div>
       </div>
     </div>

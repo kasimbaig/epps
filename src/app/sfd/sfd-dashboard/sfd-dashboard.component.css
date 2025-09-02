@@ -975,7 +975,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 280px;
+  min-height: 200px;
   position: relative;
 }
 
@@ -1063,6 +1063,14 @@
   justify-content: center;
   position: relative;
   z-index: 2;
+  max-height: 220px;
+  min-height: 220px;
+}
+
+/* Chart Canvas Height Control */
+.chart-content canvas {
+  max-height: 220px !important;
+  height: 220px !important;
 }
 
 /* Floating Elements */
@@ -1088,7 +1096,7 @@
   .chart-card {
     padding: 1.25rem;
     border-radius: 16px;
-    min-height: 240px;
+    min-height: 180px;
   }
   
   .chart-title {
@@ -1099,13 +1107,23 @@
     width: 45px;
     height: 45px;
   }
+  
+  .chart-content {
+    max-height: 100px;
+    min-height: 100px;
+  }
+  
+  .chart-content canvas {
+    max-height: 100px !important;
+    height: 100px !important;
+  }
 }
 
 @media (max-width: 480px) {
   .chart-card {
     padding: 1rem;
     border-radius: 14px;
-    min-height: 200px;
+    min-height: 160px;
   }
   
   .chart-title {
@@ -1116,4 +1134,22 @@
     width: 40px;
     height: 40px;
   }
+  
+  .chart-content {
+    max-height: 80px;
+    min-height: 80px;
+  }
+  
+  .chart-content canvas {
+    max-height: 80px !important;
+    height: 80px !important;
+  }
+}
+
+/* Line clamp utility for alert cards */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

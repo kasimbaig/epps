@@ -1,24 +1,39 @@
 <div class="w-full bg-transparent shadow-xs px-1 pt-2">
-  <div class="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-    <div class="flex min-w-max mb-3">
-      <ng-container *ngFor="let operation of Operation; let i = index">
-        <div>
-          <div (click)="openOperation(operation)" class="flex-shrink-0 px-4 py-3 border cursor-pointer transition-all duration-200 rounded mr-2 flex items-center" [ngClass]="operation.colorClass">
-            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full  text-xs font-bold mr-2 border-2  " [ngClass]="operation.colorClass">
-              {{ i + 1 }}
-            </span>
-            <div class="flex items-center space-x-2 min-w-max">
-              <i [class]="'fas ' + operation.icon + ' text-sm'"></i>
-              <span class="text-sm font-medium whitespace-nowrap">
-                {{ operation.name }}
+  <!-- Navigation with Left/Right Arrow Buttons -->
+  <div class="flex items-start mb-3">
+    <!-- Left Arrow Button -->
+    <button (click)="scrollLeft()" class="flex-shrink-0 w-10 h-10 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-full flex items-center justify-center mr-3 mt-3 transition-all duration-200 border-2 border-teal-600 hover:border-teal-700">
+      <i class="fas fa-chevron-left text-lg"></i>
+    </button>
+    
+    <!-- Tabs Container -->
+    <div class="flex-1 overflow-hidden">
+      <div #tabsContainer class="flex space-x-3 transition-transform duration-300 ease-in-out" [style.transform]="'translateX(' + scrollOffset + 'px)'">
+        <ng-container *ngFor="let operation of Operation; let i = index">
+          <div class="flex-shrink-0">
+            <div (click)="openOperation(operation)" class="px-4 py-3 border cursor-pointer transition-all duration-200 rounded-lg flex items-center min-w-max" [ngClass]="operation.colorClass">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold mr-3 border-2 border-white bg-white bg-opacity-30 text-gray-800">
+                {{ i + 1 }}
               </span>
+              <div class="flex items-center space-x-2">
+                <i [class]="'fas ' + operation.icon + ' text-sm'"></i>
+                <span class="text-sm font-medium whitespace-nowrap">
+                  {{ operation.name }}
+                </span>
+              </div>
+            </div>
+            <div class="text-center mt-2" *ngIf="activeOperation.id == operation.id">
+              <i class="fa-solid fa-angles-down fa-beat-fade text-2xl text-teal-600"></i>
             </div>
           </div>
-          <div class="mx-auto text-center" *ngIf="activeOperation.id == operation.id"><i class="fa-solid fa-angles-down fa-beat-fade fa-xl"></i></div>
-
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
     </div>
+    
+    <!-- Right Arrow Button -->
+    <button (click)="scrollRight()" class="flex-shrink-0 w-10 h-10 text-teal-600 hover:text-teal-700 hover:bg-teal-50 rounded-full flex items-center justify-center ml-3 mt-3 transition-all duration-200 border-2 border-teal-600 hover:border-teal-700">
+      <i class="fas fa-chevron-right text-lg"></i>
+    </button>
   </div>
 
   <!-- Only load the active component -->

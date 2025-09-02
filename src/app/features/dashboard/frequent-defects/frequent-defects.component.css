@@ -1,8 +1,15 @@
 .chart-card{
-  /* background-color: #f6f9fc;
+  background-color: #f6f9fc;
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05); */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  }
 
   .chart-header {
     display: flex;

@@ -36,7 +36,9 @@ export class OpdefComponent implements OnInit, OnChanges {
       datasets: [{
         label: `${selectedShip} Defects`,
         data: [12, 5, 8],
-        backgroundColor: '#42A5F5'
+        backgroundColor: ['#FF6B6B', '#4ECDC4', '#45B7D1'],
+        borderColor: ['#FF5252', '#26A69A', '#2196F3'],
+        borderWidth: 2
       }]
     };
   }

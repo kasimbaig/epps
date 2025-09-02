@@ -14,8 +14,7 @@ import { DepartmentService } from '../../masters/ship-master/ship-services/depar
 export class MainLayoutComponent implements OnInit, OnDestroy {
     isChatbotOpen: boolean = false;
 
-  sidebarCollapsed: boolean = false;
-  sidebarOpen: boolean = false;
+  // Sidebar collapse properties removed - fixed navigation
   isUserMenuOpen: boolean = false;
   isMastersDropdownOpen: boolean = false;
   title = 'Dashboard';
@@ -38,19 +37,17 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.checkScreenSize();
     this.commandService.loadAllCommandsData();
     this.shipService.loadAllShipsData(); // Load all ship data
     this.departmentService.loadAllDepartmentsData(); // Load all department data
 
-    window.addEventListener('resize', () => this.checkScreenSize());
     this.roleService.role$.subscribe((role: any) => {
       this.role = role;
     });
   }
 
   ngOnDestroy(): void {
-    window.removeEventListener('resize', () => this.checkScreenSize());
+    // Cleanup removed - no longer needed for fixed navigation
   }
 
   // Navigation methods
@@ -83,43 +80,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
-  checkScreenSize(): void {
-    if (window.innerWidth <= 1024) {
-      this.sidebarCollapsed = true;
-    } else {
-      this.sidebarCollapsed = false;
-    }
-
-    // Always close sidebar on resize for mobile
-    if (window.innerWidth <= 768) {
-      this.sidebarOpen = false;
-      document.body.style.overflow = 'auto';
-    }
-  }
-
-  toggleSidebar(): void {
-    if (window.innerWidth <= 768) {
-      this.sidebarOpen = !this.sidebarOpen;
-      document.body.style.overflow = this.sidebarOpen ? 'hidden' : 'auto';
-    } else {
-      this.sidebarCollapsed = !this.sidebarCollapsed;
-    }
-  }
-
-  autoCollapseSidebar(): void {
-    console.log('autoCollapseSidebar called');
-    // Auto-collapse sidebar on navigation (only on desktop)
-    if (window.innerWidth > 768) {
-      console.log('Desktop detected, collapsing sidebar');
-      this.sidebarCollapsed = true;
-    }
-    // Close mobile sidebar on navigation
-    if (window.innerWidth <= 768 && this.sidebarOpen) {
-      console.log('Mobile detected, closing sidebar');
-      this.sidebarOpen = false;
-      document.body.style.overflow = 'auto';
-    }
-  }
+  // Sidebar collapse methods removed - fixed navigation
 
   toggleUserMenu(): void {
     this.isUserMenuOpen = !this.isUserMenuOpen;
@@ -138,7 +99,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     }
 
     // Close sidebar when clicking outside on mobile
-    if (window.innerWidth <= 768 && this.sidebarOpen) {
+    if (window.innerWidth <= 768) {
       const target = event.target as HTMLElement;
       const sidebarEl = document.querySelector('.sidebar');
       const toggleBtn = document.querySelector('.mobile-toggle');
@@ -149,7 +110,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
         toggleBtn &&
         !toggleBtn.contains(target)
       ) {
-        this.sidebarOpen = false;
+
         document.body.style.overflow = 'auto';
       }
     }

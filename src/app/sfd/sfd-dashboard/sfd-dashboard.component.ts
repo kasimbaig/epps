@@ -92,8 +92,32 @@ export class SfdDashboardComponent implements OnInit, OnDestroy {
   public fleetCompositionChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
-    scales: { x: { stacked: true }, y: { stacked: true } },
-    plugins: { legend: { position: 'bottom' } },
+    scales: { 
+      x: { 
+        stacked: false,
+        title: {
+          display: true,
+          text: 'Naval Commands'
+        }
+      }, 
+      y: { 
+        stacked: false,
+        title: {
+          display: true,
+          text: 'Number of Ships'
+        },
+        beginAtZero: true
+      } 
+    },
+    plugins: { 
+      legend: { 
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          padding: 20
+        }
+      } 
+    },
     onClick: (event, elements) => this.onChartClick(event, elements, 'fleetComposition')
   };
   showAllEquipmentDetail: boolean = false;
@@ -115,7 +139,7 @@ export class SfdDashboardComponent implements OnInit, OnDestroy {
     plugins: { legend: { position: 'right' } },
     onClick: (event, elements) => this.onChartClick(event, elements, 'commonEquipment')
   };
-  public commonEquipmentChartType: ChartType = 'doughnut';
+  public commonEquipmentChartType: ChartType = 'pie';
 
   public sfdIlmsMappingChartData!: ChartConfiguration['data'];
   public sfdIlmsMappingChartOptions: ChartOptions = {

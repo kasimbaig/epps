@@ -1,76 +1,150 @@
 <div class="shared-container">
-  <!-- Header Banner -->
-  <header class="header-banner">
-    <div class="header-content">
-      <div class="navy-emblem">
-        <img
-          src="assets/indian-navy-emblem.png"
-          alt="Indian Navy Emblem"
-          class="emblem-img"
-        />
-      </div>
-
-      <div class="header-text">
-        <h1 class="main-title">INDIAN NAVAL SHIP MAINTENANCE AUTHORITY</h1>
-        <p class="subtitle">CENTRE OF EXCELLENCE FOR DATA ANALYTICS</p>
-      </div>
-    </div>
-
-    <!-- Navigation Bar -->
-    <nav class="nav-bar">
-      <a
-        routerLink="/home"
-        class="nav-item"
-        [class.active]="isActiveRoute('/home') || isActiveRoute('/')"
-      >
-        <mat-icon>home</mat-icon>
-        <span>HOME</span>
-      </a>
-      <a
-        routerLink="/about-us"
-        class="nav-item"
-        [class.active]="isActiveRoute('/about-us')"
-      >
-        <mat-icon>person</mat-icon>
-        <span>ABOUT US</span>
-      </a>
-      <a
-        routerLink="/contact-us"
-        class="nav-item"
-        [class.active]="isActiveRoute('/contact-us')"
-      >
-        <mat-icon>phone</mat-icon>
-        <span>CONTACT US</span>
-      </a>
-      <div class="download-menu-container">
-        <button class="nav-item" (click)="toggleDownloadMenu()">
-          <mat-icon>download</mat-icon>
-          Export
-        </button>
-
-        <!-- Popup Menu (side by side) -->
-        <div class="download-popup" *ngIf="showDownloadMenu">
-          <button (click)="downloadFile('pptx')">Export PPTX</button>
-          <button (click)="downloadFile('pdf')">Export PDF</button>
+  <!-- Modern Header with Glassmorphism -->
+  <header class="modern-header">
+    <div class="header-glass">
+      <div class="header-content">
+        <div class="emblem-section">
+          <div class="emblem-container">
+            <img
+              src="assets/indian-navy-emblem.png"
+              alt="Indian Navy Emblem"
+              class="emblem-img"
+            />
+            <div class="emblem-glow"></div>
+          </div>
         </div>
+
+        <div class="title-section">
+          <div class="title-container">
+            <h1 class="main-title">
+              <span class="title-line-1">INDIAN NAVAL SHIP</span>
+              <span class="title-line-2">MAINTENANCE AUTHORITY</span>
+            </h1>
+            <div class="subtitle-container">
+              <div class="subtitle-line"></div>
+              <p class="subtitle">CENTRE OF EXCELLENCE FOR DATA ANALYTICS</p>
+              <div class="subtitle-line"></div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
-    </nav>
+
+      <!-- Modern Navigation -->
+      <nav class="modern-nav">
+        <div class="nav-container">
+          <!-- Navigation Buttons Group -->
+          <div class="nav-buttons-group">
+            <a
+              routerLink="/home"
+              class="nav-item modern-nav-item"
+              [class.active]="isActiveRoute('/home') || isActiveRoute('/')"
+            >
+              <div class="nav-icon">
+                <mat-icon>home</mat-icon>
+              </div>
+              <span class="nav-text">HOME</span>
+              <div class="nav-underline"></div>
+            </a>
+            
+            <a
+              routerLink="/about-us"
+              class="nav-item modern-nav-item"
+              [class.active]="isActiveRoute('/about-us')"
+            >
+              <div class="nav-icon">
+                <mat-icon>person</mat-icon>
+              </div>
+              <span class="nav-text">ABOUT US</span>
+              <div class="nav-underline"></div>
+            </a>
+            
+            <a
+              routerLink="/contact-us"
+              class="nav-item modern-nav-item"
+              [class.active]="isActiveRoute('/contact-us')"
+            >
+              <div class="nav-icon">
+                <mat-icon>phone</mat-icon>
+              </div>
+              <span class="nav-text">CONTACT US</span>
+              <div class="nav-underline"></div>
+            </a>
+            
+            <div class="export-dropdown-wrapper">
+              <button class="nav-item modern-nav-item" (click)="toggleDownloadMenu()">
+                <div class="nav-icon">
+                  <mat-icon>download</mat-icon>
+                </div>
+                <span class="nav-text">EXPORT</span>
+                <div class="nav-underline"></div>
+              </button>
+
+              <!-- Fixed Export Dropdown -->
+              <div class="export-dropdown-menu" *ngIf="showDownloadMenu">
+                <div class="export-dropdown-arrow"></div>
+                <button class="export-dropdown-item" (click)="downloadFile('pptx')">
+                  <mat-icon>description</mat-icon>
+                  <span>Export PPTX</span>
+                </button>
+                <button class="export-dropdown-item" (click)="downloadFile('pdf')">
+                  <mat-icon>picture_as_pdf</mat-icon>
+                  <span>Export PDF</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Search Bar -->
+          <div class="nav-search-container">
+            <div class="nav-search-bar">
+              <input 
+                type="text" 
+                placeholder="Anwesh Search" 
+                class="nav-search-input"
+              >
+              <button class="nav-search-btn">
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <!-- Main Content Area - This will be replaced by each page -->
-  <main class="main-content">
+  <!-- Main Content Area -->
+  <main class="modern-main-content">
     <ng-content></ng-content>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="visitor-count">
-      <p>Total Visitor Count : {{ visitorCount.total }}</p>
-      <p>Since 01-Jan-25 : {{ visitorCount.sinceJan25 }}</p>
-      <p>Today's Count : {{ visitorCount.today }}</p>
-    </div>
-    <div class="copyright">
-      <p>COMPREHENSIVE MAINTENANCE MANAGEMENT SYSTEM © COPYRIGHT 2021</p>
+  <!-- Modern Footer -->
+  <footer class="modern-footer">
+    <div class="footer-content">
+      <div class="visitor-stats">
+        <div class="stat-item">
+          <div class="stat-number">{{ visitorCount.total | number }}</div>
+          <div class="stat-label">Total Visitors</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ visitorCount.sinceJan25 | number }}</div>
+          <div class="stat-label">Since Jan 2025</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ visitorCount.today }}</div>
+          <div class="stat-label">Today</div>
+        </div>
+      </div>
+      
+      <div class="footer-divider"></div>
+      
+      <div class="copyright-section">
+        <p class="copyright-text">
+          COMPREHENSIVE MAINTENANCE MANAGEMENT SYSTEM
+        </p>
+        <p class="copyright-year">© COPYRIGHT 2021</p>
+      </div>
     </div>
   </footer>
 </div>

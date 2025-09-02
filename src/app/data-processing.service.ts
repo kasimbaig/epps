@@ -166,7 +166,7 @@ export class DataProcessingService {
    * @param commands All command data.
    * @returns Chart.js data configuration.
    */
-  processFleetCompositionData(ships: Ship[], commands: Command[]): ChartConfiguration<'bar'>['data'] {
+  processFleetCompositionData(ships: Ship[], commands: Command[]): ChartConfiguration<'line'>['data'] {
     const commandNames = [...new Set(commands.map(c => c.CommandName))].sort();
     const shipTypes = [...new Set(ships.map(s => s.ShipType))].sort();
 
@@ -177,8 +177,17 @@ export class DataProcessingService {
           return ships.filter(s => s.CommandID === commandId && s.Status === 'Active' && s.ShipType === type).length;
         }),
         label: type,
-        backgroundColor: this.getShipTypeColor(type),
-        hoverBackgroundColor: this.getShipTypeColor(type, true)
+        borderColor: this.getShipTypeColor(type),
+        backgroundColor: this.getShipTypeColor(type) + '20', // Semi-transparent fill
+        borderWidth: 3,
+        fill: false,
+        tension: 0.4, // Smooth curves
+        pointBackgroundColor: this.getShipTypeColor(type),
+        pointBorderColor: this.getShipTypeColor(type),
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        pointHoverBackgroundColor: this.getShipTypeColor(type),
+        pointHoverBorderColor: this.getShipTypeColor(type)
       };
     });
 
@@ -193,7 +202,7 @@ export class DataProcessingService {
    * @param equipment All equipment data.
    * @returns Chart.js data configuration.
    */
-  processCommonEquipmentData(equipment: Equipment[]): ChartConfiguration<'doughnut'>['data'] {
+  processCommonEquipmentData(equipment: Equipment[]): ChartConfiguration<'pie'>['data'] {
     const commonEquipmentCounts = new Map<string, number>();
 
     equipment.forEach(e => {

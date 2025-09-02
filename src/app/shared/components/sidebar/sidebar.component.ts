@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 interface MenuItem {
@@ -17,21 +17,15 @@ interface MenuItem {
   styleUrls: ['./sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarComponent implements OnChanges {
-  @Input() isCollapsed: boolean = false;
-  @Output() collapseSidebar = new EventEmitter<void>();
+export class SidebarComponent {
+  // Input/Output properties removed - fixed navigation
 
-  public expanded: boolean = true;
+  // expanded property removed - fixed navigation
 
-  // Watch for changes to isCollapsed input
-  ngOnChanges() {
-    if (this.isCollapsed !== undefined) {
-      this.expanded = !this.isCollapsed;
-    }
-  }
+  // ngOnChanges removed - no longer needed for fixed navigation
   
   activeItem: string = '/dashboard';
-  openSubMenus: { [key: string]: boolean } = {};
+  // openSubMenus removed - no longer needed
 
   themeMode: 'light' | 'dark' = 'light';
 
@@ -39,10 +33,7 @@ export class SidebarComponent implements OnChanges {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.activeItem = event.urlAfterRedirects;
-        // Auto-collapse sidebar on navigation
-        console.log('NavigationEnd detected, collapsing sidebar');
-        this.expanded = false;
-        this.collapseSidebar.emit();
+        console.log('NavigationEnd detected, updating active item:', this.activeItem);
       }
     });
   }
@@ -97,29 +88,14 @@ export class SidebarComponent implements OnChanges {
     return currentUrl === path || currentUrl.startsWith(path + '/');
   }
   
-  toggleSidebar() {
-    this.expanded = !this.expanded;
-    if (!this.expanded) {
-      this.openSubMenus = {};
-    }
-    console.log('toggleSidebar called, expanded:', this.expanded);
-    // Emit to parent to sync the state
-    this.collapseSidebar.emit();
-  }
+  // toggleSidebar method removed - fixed navigation
+
+  // toggleSubMenu method removed - no longer needed for simplified navigation
 
   navigateTo(path: string) {
     this.activeItem = path;
     console.log('navigateTo called with path:', path);
-    
-    // Auto-collapse sidebar when navigating
-    this.expanded = false;
-    this.openSubMenus = {};
-    
     this.router.navigate([path]);
-    
-    // Emit to parent to sync the state
-    console.log('Emitting collapseSidebar from navigateTo');
-    this.collapseSidebar.emit();
   }
 
   logOut() {

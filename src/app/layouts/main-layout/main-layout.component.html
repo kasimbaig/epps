@@ -1,12 +1,9 @@
 <!-- <ngx-ui-loader /> -->
 
 <!-- Wrapper -->
-<div class="layout-container" [class.sidebar-open]="sidebarOpen">
+<div class="layout-container">
   <!-- Sidebar -->
-  <app-sidebar class="sidebar" [ngClass]="{
-      collapsed: sidebarCollapsed,
-      'mobile-visible': sidebarOpen
-    }" [isCollapsed]="sidebarCollapsed" (collapseSidebar)="autoCollapseSidebar()"></app-sidebar>
+  <app-sidebar class="sidebar"></app-sidebar>
 
   <!-- Main Content -->
   <div class="main-content bg-theme-light">

@@ -1,19 +1,21 @@
-/* NAVAL TEAL/EMERALD SIDEBAR DESIGN */
+/* NAVAL TEAL/EMERALD TOP NAVIGATION DESIGN */
 
-.sidebar.modern-sidebar {
+.topnav.modern-topnav {
   background: linear-gradient(180deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
   color: var(--text-white);
   backdrop-filter: blur(20px);
-  width: 260px;
-  height: 100vh;
-  border-right: 2px solid rgba(94, 234, 212, 0.2);
+  width: 100%;
+  height: 80px;
+  border-bottom: 2px solid rgba(94, 234, 212, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow-y: auto;
-  box-shadow: 8px 0 30px rgba(15, 23, 42, 0.4);
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.4);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.sidebar.modern-sidebar::before {
+.topnav.modern-topnav::before {
   content: '';
   position: absolute;
   top: 0;
@@ -26,12 +28,10 @@
   pointer-events: none;
 }
 
-.sidebar.modern-sidebar-collapsed {
-  width: 80px;
-}
+/* Collapsed state removed - fixed navigation */
 
-.modern-sidebar-header {
-  padding: 1.5rem 1rem;
+.modern-topnav-header {
+  padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,9 +39,11 @@
   background: linear-gradient(135deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
   position: relative;
   overflow: hidden;
+  height: 80px;
+  gap: 1rem;
 }
 
-.modern-sidebar-header::before {
+.modern-topnav-header::before {
   content: '';
   position: absolute;
   top: 0;
@@ -74,66 +76,43 @@
   margin-left: 0.5rem;
 }
 
-.modern-collapse-button {
-  background: rgba(94, 234, 212, 0.1);
-  border: 2px solid rgba(94, 234, 212, 0.3);
-  color: var(--text-white);
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0.5rem;
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
+/* Collapse button styles removed - fixed navigation */
+
+.modern-menu-items {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  overflow: hidden;
+  justify-content: center;
 }
 
-/* When sidebar is collapsed, remove background and border for cleaner look */
-.sidebar.modern-sidebar-collapsed .modern-collapse-button {
-  background: transparent;
-  border: none;
-  padding: 0.3rem;
-}
+/* Menu item wrapper styles removed - simplified navigation */
 
-/* Style the white arrow when collapsed for better visibility */
-.sidebar.modern-sidebar-collapsed .modern-collapse-icon {
-  color: var(--text-white);
-  font-weight: bold;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.modern-collapse-button:hover {
-  background: rgba(94, 234, 212, 0.2);
-  border-color: rgba(94, 234, 212, 0.6);
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(94, 234, 212, 0.3);
-}
-
-/* Subtle hover effect when collapsed */
-.sidebar.modern-sidebar-collapsed .modern-collapse-button:hover {
-  background: rgba(94, 234, 212, 0.1);
-  transform: scale(1.05);
-  box-shadow: none;
-}
-
-.modern-sidebar-container {
-  padding: 1rem 0.5rem;
+.modern-topnav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .modern-menu-button,
 .modern-submenu-button {
-  width: 100%;
-  padding: 1rem 1.2rem;
+  width: auto;
+  min-width: 120px;
+  max-width: 180px;
+  padding: 0.5rem 1rem;
   background: transparent;
   border: none;
   color: var(--text-white);
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 12px;
-  margin: 4px 8px;
-  width: calc(100% - 16px);
+  border-radius: 6px;
+  margin: 1px;
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .modern-menu-button::before,
@@ -157,21 +136,21 @@
 .modern-submenu-button:hover {
   background: linear-gradient(90deg, rgba(94, 234, 212, 0.15) 0%, rgba(20, 184, 166, 0.1) 100%);
   color: var(--text-white);
-  transform: translateX(8px);
+  transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(94, 234, 212, 0.2);
 }
 
 .modern-menu-button.active {
   background: linear-gradient(90deg, rgba(94, 234, 212, 0.25) 0%, rgba(20, 184, 166, 0.2) 100%);
   color: #fbbf24;
-  border-left: 4px solid #fbbf24;
+  border-bottom: 3px solid #fbbf24;
   box-shadow: 0 6px 25px rgba(94, 234, 212, 0.3);
-  transform: translateX(4px);
+  transform: translateY(-1px);
 }
 
 .modern-menu-icon {
-  font-size: 1.3rem;
-  width: 24px;
+  font-size: 1.1rem;
+  width: 20px;
   text-align: center;
   transition: all 0.3s ease;
   color: rgba(255, 255, 255, 0.8);
@@ -193,9 +172,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   transition: all 0.3s ease;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .modern-menu-button:hover .modern-menu-label,
@@ -209,64 +188,9 @@
   font-weight: 700;
 }
 
-.modern-submenu-toggle {
-  margin-left: auto;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
-  transition: all 0.3s ease;
-  font-weight: bold;
-}
+/* Dropdown and submenu styles removed - simplified navigation */
 
-.modern-menu-button:hover .modern-submenu-toggle,
-.modern-submenu-button:hover .modern-submenu-toggle {
-  color: #fbbf24;
-  transform: scale(1.1);
-}
-
-.modern-submenu-container,
-.modern-nested-submenu-container {
-  padding-left: 2rem;
-  background: linear-gradient(90deg, rgba(94, 234, 212, 0.08) 0%, transparent 100%);
-  border-left: 3px solid rgba(94, 234, 212, 0.3);
-  margin: 6px 0;
-  border-radius: 0 12px 12px 0;
-  position: relative;
-}
-
-.modern-submenu-container::before,
-.modern-nested-submenu-container::before {
-  content: '';
-  position: absolute;
-  left: -3px;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, transparent, rgba(94, 234, 212, 0.6), transparent);
-  border-radius: 2px;
-}
-
-.modern-nested-item {
-  background: linear-gradient(90deg, rgba(94, 234, 212, 0.05) 0%, transparent 100%);
-  border-left: 2px solid rgba(94, 234, 212, 0.2);
-  margin: 3px 0;
-  padding-left: 1.5rem;
-  border-radius: 0 8px 8px 0;
-}
-
-.modern-nested-item:hover {
-  background: linear-gradient(90deg, rgba(94, 234, 212, 0.12) 0%, rgba(20, 184, 166, 0.08) 100%);
-  border-left-color: #fbbf24;
-}
-
-.modern-sidebar-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem 0.5rem;
-  background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.8) 100%);
-  border-top: 2px solid rgba(94, 234, 212, 0.2);
-}
+/* Topnav footer styles removed - actions moved to header */
 
 .modern-logout-button {
   background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.15) 100%);
@@ -279,66 +203,86 @@
   background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.25) 100%);
   border-color: rgba(239, 68, 68, 0.6);
   color: #fecaca;
-  transform: translateX(8px);
+  transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
 }
 
 /* Custom Scrollbar */
-.sidebar::-webkit-scrollbar {
-  width: 6px;
+.topnav::-webkit-scrollbar {
+  height: 6px;
 }
 
-.sidebar::-webkit-scrollbar-track {
+.topnav::-webkit-scrollbar-track {
   background: rgba(94, 234, 212, 0.05);
   border-radius: 3px;
 }
 
-.sidebar::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+.topnav::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
   border-radius: 3px;
   border: 1px solid rgba(94, 234, 212, 0.2);
 }
 
-.sidebar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
+.topnav::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, var(--secondary-gradient-start) 0%, var(--secondary-gradient-end) 100%);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .sidebar.modern-sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
+  .topnav.modern-topnav {
+    height: 60px;
   }
   
-  .sidebar.modern-sidebar-collapsed {
-    width: 100%;
-  }
-  
-  .modern-sidebar-header {
-    padding: 1rem;
+  .modern-topnav-header {
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+    height: 60px;
   }
   
   .modern-cmms-text {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+  
+  .modern-menu-button,
+  .modern-submenu-button {
+    min-width: 80px;
+    max-width: 120px;
+    padding: 0.4rem 0.75rem;
+  }
+  
+  .modern-menu-label {
+    font-size: 0.75rem;
+  }
+  
+  .modern-menu-icon {
+    font-size: 1rem;
+    width: 18px;
+  }
+  
+  .modern-menu-items {
+    gap: 0.3rem;
+  }
+  
+  .modern-topnav-actions {
+    gap: 0.2rem;
   }
 }
 
 /* Animation for menu items */
-@keyframes slideInFromLeft {
+@keyframes slideInFromTop {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
 .modern-menu-button,
 .modern-submenu-button {
-  animation: slideInFromLeft 0.3s ease-out;
+  animation: slideInFromTop 0.3s ease-out;
 }
 
 .modern-menu-button:nth-child(1) { animation-delay: 0.1s; }

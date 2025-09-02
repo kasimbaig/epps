@@ -73,7 +73,7 @@
   </div>
 
   <!-- Enhanced Charts Grid with Modern Design -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12 w-full max-w-full">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 w-full max-w-full">
     <!-- Fleet Composition Chart Card -->
     <div class="chart-card">
       <div class="chart-header">
@@ -114,8 +114,8 @@
       </div>
     </div>
 
-    <!-- SFD/ILMS Mapping Status Chart Card -->
-    <div class="chart-card">
+    <!-- SFD/ILMS Mapping Status Chart Card - COMMENTED OUT -->
+    <!-- <div class="chart-card">
       <div class="chart-header">
         <div class="chart-icon-container">
           <i class="pi pi-link chart-icon"></i>
@@ -126,7 +126,6 @@
       <div class="chart-content">
         <app-loading-spinner *ngIf="isLoadingCharts" class="flex items-center justify-center h-full"></app-loading-spinner>
         <div class="sfd-mapping-content relative" *ngIf="sfdIlmsMappingChartData && !isLoadingCharts">
-          <!-- Center Text Overlay -->
           <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
             <div class="text-center bg-white/90 backdrop-blur-sm rounded-full p-4 shadow-lg">
               <span class="block text-2xl font-black text-gray-800">{{ mappedPercentage | number:'1.0-0' }}%</span>
@@ -140,7 +139,6 @@
           </canvas>
         </div>
       </div>
-      <!-- New Mapped/Unmapped Labels -->
       <div class="flex justify-center gap-6 mt-4" *ngIf="sfdIlmsMappingChartData">
         <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-green-50">
           <span class="w-3 h-3 rounded-full bg-green-500 shadow-sm"></span>
@@ -151,7 +149,7 @@
           <span class="text-sm font-medium text-red-700">Unmapped</span>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <!-- Enhanced Auxiliary Grid -->
@@ -183,40 +181,43 @@
       <div class="px-6 pb-6">
         <app-loading-spinner *ngIf="isLoadingAlerts; else alertsContent" class="flex items-center justify-center h-32"></app-loading-spinner>
         <ng-template #alertsContent>
-          <div class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar pr-2">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-80 overflow-y-auto custom-scrollbar pr-2">
             <div *ngFor="let alert of recentAlerts; let i = index" 
-                 class="group/alert bg-gradient-to-r from-gray-50 to-white rounded-2xl p-4 border border-gray-200 hover:border-red-300 hover:shadow-lg cursor-pointer transition-all duration-300 hover:bg-gradient-to-r hover:from-red-50 hover:to-orange-50"
+                 class="group/alert bg-gradient-to-br from-white to-gray-50 rounded-2xl p-4 border border-gray-200 hover:border-red-300 hover:shadow-xl cursor-pointer transition-all duration-300 hover:bg-gradient-to-br hover:from-red-50 hover:to-orange-50 transform hover:-translate-y-1"
                  (click)="onAlertClick(alert)"
                  [style.animation-delay]="i * 100 + 'ms'">
-              <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 mt-1">
-                  <div class="w-8 h-8 rounded-xl flex items-center justify-center"
+              <div class="flex flex-col h-full">
+                <!-- Alert Header -->
+                <div class="flex items-center justify-between mb-3">
+                  <div class="w-10 h-10 rounded-xl flex items-center justify-center"
                        [ngClass]="{
                          'bg-yellow-100 text-yellow-700': alert.type === 'Warning',
                          'bg-red-100 text-red-700': alert.type === 'Critical',
                          'bg-blue-100 text-blue-700': alert.type === 'Maintenance'
                        }">
-                    <i class="pi text-sm font-bold"
+                    <i class="pi text-lg font-bold"
                        [ngClass]="{
                          'pi-exclamation-triangle': alert.type === 'Warning',
                          'pi-times-circle': alert.type === 'Critical',
                          'pi-info-circle': alert.type === 'Maintenance'
                        }"></i>
                   </div>
+                  <span class="text-xs font-medium px-3 py-1 rounded-full"
+                        [ngClass]="{
+                          'bg-yellow-100 text-yellow-700': alert.type === 'Warning',
+                          'bg-red-100 text-red-700': alert.type === 'Critical',
+                          'bg-blue-100 text-blue-700': alert.type === 'Maintenance'
+                        }">{{ alert.type }}</span>
                 </div>
-                <div class="flex-grow min-w-0">
-                  <p class="text-sm font-semibold text-gray-800 group-hover/alert:text-gray-900 transition-colors duration-300 leading-tight">{{ alert.message }}</p>
-                  <div class="flex items-center gap-2 mt-2">
-                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{{ alert.timestamp | date:'short' }}</span>
-                    <span class="text-xs font-medium px-2 py-1 rounded-full"
-                          [ngClass]="{
-                            'bg-yellow-100 text-yellow-700': alert.type === 'Warning',
-                            'bg-red-100 text-red-700': alert.type === 'Critical',
-                            'bg-blue-100 text-blue-700': alert.type === 'Maintenance'
-                          }">{{ alert.type }}</span>
-                  </div>
+                
+                <!-- Alert Message -->
+                <div class="flex-grow mb-3">
+                  <p class="text-sm font-semibold text-gray-800 group-hover/alert:text-gray-900 transition-colors duration-300 leading-tight line-clamp-3">{{ alert.message }}</p>
                 </div>
-                <div class="flex-shrink-0">
+                
+                <!-- Alert Footer -->
+                <div class="flex items-center justify-between">
+                  <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{{ alert.timestamp | date:'short' }}</span>
                   <i class="pi pi-chevron-right text-gray-400 group-hover/alert:text-red-500 transition-all duration-300 transform group-hover/alert:translate-x-1"></i>
                 </div>
               </div>
