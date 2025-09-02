@@ -102,6 +102,89 @@ export class CommandsComponent implements OnInit {
     this.getCommands();
     // this.getSFDHierarchyDetails();
   }
+  commandStaticData= [
+  {
+    "id": 5,
+    "active": 1,
+    "name": "Logistics Command",
+    "code": "LC",
+    "ref": "REF L005",
+    "created_by": 2
+  },
+  {
+    "id": 6,
+    "active": 1,
+    "name": "Training Command",
+    "code": "TC",
+    "ref": "REF T006",
+    "created_by": 2
+  },
+  {
+    "id": 7,
+    "active": 1,
+    "name": "Maintenance Command",
+    "code": "MC",
+    "ref": "REF M007",
+    "created_by": 3
+  },
+  {
+    "id": 8,
+    "active": 1,
+    "name": "Research & Development Command",
+    "code": "RDC",
+    "ref": "REF R008",
+    "created_by": 3
+  },
+  {
+    "id": 9,
+    "active": 1,
+    "name": "Cyber Operations Command",
+    "code": "COC",
+    "ref": "REF C009",
+    "created_by": 4
+  },
+  {
+    "id": 10,
+    "active": 1,
+    "name": "Maritime Security Command",
+    "code": "MSC",
+    "ref": "REF M010",
+    "created_by": 4
+  },
+  {
+    "id": 11,
+    "active": 1,
+    "name": "Fleet Support Command",
+    "code": "FSC",
+    "ref": "REF F011",
+    "created_by": 5
+  },
+  {
+    "id": 12,
+    "active": 1,
+    "name": "Intelligence Command",
+    "code": "IC",
+    "ref": "REF I012",
+    "created_by": 5
+  },
+  {
+    "id": 13,
+    "active": 1,
+    "name": "Technical Command",
+    "code": "TEC",
+    "ref": "REF T013",
+    "created_by": 6
+  },
+  {
+    "id": 14,
+    "active": 1,
+    "name": "Operations Command",
+    "code": "OPC",
+    "ref": "REF O014",
+    "created_by": 6
+  }
+]
+
   goBack(){
     this.location.back();
   }

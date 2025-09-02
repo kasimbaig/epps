@@ -122,6 +122,149 @@ export class EstablishmentComponent implements OnInit {
     // Note: Table data will be loaded by the paginated table component
     // No need to call getEstablishments() here
   }
+  establishmentStaticData = [
+  {
+    "id": 10,
+    "name": "NAVCOM HQ",
+    "establishment_category": "Military",
+    "command": 2,
+    "command_name": "Eastern Naval Command",
+    "command_code": "ENC",
+    "ops_authority": {
+      "id": 20,
+      "command": {
+        "id": 5,
+        "active": 1,
+        "name": "Training Command",
+        "code": "TC",
+        "ref": "REF T005",
+        "created_by": 2
+      },
+      "active": 1,
+      "authority": "HQ Training Ops",
+      "code": "TC-OPS-01",
+      "name": "Training Authority Alpha",
+      "ops_order": "OPS-TC-01",
+      "address": "Mumbai",
+      "created_by": 2
+    },
+    "active": 1,
+    "active_display": "Active"
+  },
+  {
+    "id": 11,
+    "name": "LOGSUP BASE",
+    "establishment_category": "Support",
+    "command": 4,
+    "command_name": "Logistics Command",
+    "command_code": "LC",
+    "ops_authority": {
+      "id": 21,
+      "command": {
+        "id": 6,
+        "active": 1,
+        "name": "Fleet Support Command",
+        "code": "FSC",
+        "ref": "REF F006",
+        "created_by": 3
+      },
+      "active": 1,
+      "authority": "HQ Logistics Ops",
+      "code": "LC-OPS-01",
+      "name": "Logistics Authority Bravo",
+      "ops_order": "OPS-LC-01",
+      "address": "Visakhapatnam",
+      "created_by": 3
+    },
+    "active": 1,
+    "active_display": "Active"
+  },
+  {
+    "id": 12,
+    "name": "CYBER DEFENCE UNIT",
+    "establishment_category": "Technical",
+    "command": 7,
+    "command_name": "Cyber Operations Command",
+    "command_code": "COC",
+    "ops_authority": {
+      "id": 22,
+      "command": {
+        "id": 7,
+        "active": 1,
+        "name": "Research & Development Command",
+        "code": "RDC",
+        "ref": "REF R007",
+        "created_by": 4
+      },
+      "active": 1,
+      "authority": "HQ CyberOps",
+      "code": "COC-OPS-01",
+      "name": "Cyber Authority Gamma",
+      "ops_order": "OPS-COC-01",
+      "address": "New Delhi",
+      "created_by": 4
+    },
+    "active": 1,
+    "active_display": "Active"
+  },
+  {
+    "id": 13,
+    "name": "MARSEC UNIT",
+    "establishment_category": "Security",
+    "command": 8,
+    "command_name": "Maritime Security Command",
+    "command_code": "MSC",
+    "ops_authority": {
+      "id": 23,
+      "command": {
+        "id": 8,
+        "active": 1,
+        "name": "Intelligence Command",
+        "code": "IC",
+        "ref": "REF I008",
+        "created_by": 5
+      },
+      "active": 1,
+      "authority": "HQ Maritime Ops",
+      "code": "MSC-OPS-01",
+      "name": "Maritime Authority Delta",
+      "ops_order": "OPS-MSC-01",
+      "address": "Chennai",
+      "created_by": 5
+    },
+    "active": 1,
+    "active_display": "Active"
+  },
+  {
+    "id": 14,
+    "name": "INNOVATION LAB",
+    "establishment_category": "Research",
+    "command": 9,
+    "command_name": "R&D Command",
+    "command_code": "RDC",
+    "ops_authority": {
+      "id": 24,
+      "command": {
+        "id": 9,
+        "active": 1,
+        "name": "Operations Command",
+        "code": "OPC",
+        "ref": "REF O009",
+        "created_by": 6
+      },
+      "active": 1,
+      "authority": "HQ R&D Ops",
+      "code": "RDC-OPS-01",
+      "name": "R&D Authority Epsilon",
+      "ops_order": "OPS-RDC-01",
+      "address": "Hyderabad",
+      "created_by": 6
+    },
+    "active": 1,
+    "active_display": "Active"
+  }
+]
+
 
   goBack() {
     this.location.back();

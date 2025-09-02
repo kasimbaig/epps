@@ -155,6 +155,106 @@ export class ManufacturerMasterComponent implements OnInit { // Renamed componen
     // No need to call getManufacturers() here
   }
 
+  manufacturerStaticData = [
+  {
+    "id": 10,
+    "name": "OCEANIC SYSTEMS LTD",
+    "code": "OSL-1001",
+    "country": 5,
+    "country_name": "INDIA",
+    "country_code": "IN",
+    "address": "Plot 45, Marine Tech Park",
+    "area": "Navi Mumbai",
+    "city": "Mumbai",
+    "contact_person": "Arjun Mehta",
+    "contact_number": "+91-9988776655",
+    "email": "arjun.mehta@oceanicsys.com",
+    "active": 1,
+    "active_display": "Active"
+  },
+  {
+    "id": 11,
+    "name": "GLOBAL MARINE SUPPLIERS",
+    "code": "GMS-202",
+    "country": 7,
+    "country_name": "UNITED ARAB EMIRATES(THE)",
+    "country_code": "AE",
+    "address": "Al Mina Street, Sector 12",
+    "area": "Port Rashid",
+    "city": "Dubai",
+    "contact_person": "Fatima Al Mansoori",
+    "contact_number": "+971-501234567",
+    "email": "fatima@gms.ae",
+    "active": 1,
+    "active_display": "Active"
+  },
+  {
+    "id": 12,
+    "name": "AERO NAVAL TECH",
+    "code": "ANT-303",
+    "country": 8,
+    "country_name": "AFGHANISTAN",
+    "country_code": "AF",
+    "address": "Industrial Estate, Zone B",
+    "area": "Kabul West",
+    "city": "Kabul",
+    "contact_person": "Mohammad Rahim",
+    "contact_number": "+93-701112233",
+    "email": "rahim@aeronaval.af",
+    "active": 1,
+    "active_display": "Active"
+  },
+  {
+    "id": 13,
+    "name": "BLUEWAVE SHIPBUILDERS",
+    "code": "BWS-404",
+    "country": 9,
+    "country_name": "ANTIGUA & BARBUDA",
+    "country_code": "AG",
+    "address": "Harbor Industrial Area",
+    "area": "Saint John’s",
+    "city": "Antigua",
+    "contact_person": "Samuel Richards",
+    "contact_number": "+1-268-7643210",
+    "email": "samuel.richards@bluewave.com",
+    "active": 1,
+    "active_display": "Active"
+  },
+  {
+    "id": 14,
+    "name": "TRIDENT DEFENCE SOLUTIONS",
+    "code": "TDS-505",
+    "country": 10,
+    "country_name": "ANGUILLA",
+    "country_code": "AI",
+    "address": "Defence Park, Block A",
+    "area": "North Valley",
+    "city": "The Valley",
+    "contact_person": "Sophia Johnson",
+    "contact_number": "+1-264-7723456",
+    "email": "sophia.johnson@trident.ai",
+    "active": 1,
+    "active_display": "Active"
+  },
+  {
+    "id": 15,
+    "name": "MARITIME RESEARCH CORP",
+    "code": "MRC-606",
+    "country": 11,
+    "country_name": "ALBAINA",
+    "country_code": "AL",
+    "address": "Science Hub, Zone C",
+    "area": "Durres",
+    "city": "Tirana",
+    "contact_person": "Elira Dervishi",
+    "contact_number": "+355-692233445",
+    "email": "elira.dervishi@mrc.al",
+    "active": 1,
+    "active_display": "Active"
+  }
+]
+
+
   goBack(): void {
     this.location.back();
   }
