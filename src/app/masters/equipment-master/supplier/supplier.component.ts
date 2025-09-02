@@ -190,6 +190,95 @@ export class SupplierComponent implements OnInit {
     // Note: Table data will be loaded by the paginated table component
     // No need to call getDepartments() here
   }
+
+  staticSuppliers = [
+  {
+    id: 1,
+    country_name: "India",
+    country_code: "IN",
+    active: 1,
+    code: "SUP-101",
+    name: "Oceanic Marine Services",
+    address: "Dockyard Road, Vishakhapatnam",
+    area_street: "Harbour Main Street",
+    city: "Vishakhapatnam",
+    supplier_manufacture: "Ship Repair & Maintenance",
+    contact_person: "Amit Verma",
+    contact_number: "9876543210",
+    email_id: "amit.verma@oceanicmarine.com",
+    created_by: 1,
+    country: 1
+  },
+  {
+    id: 2,
+    country_name: "Singapore",
+    country_code: "SG",
+    active: 1,
+    code: "SUP-102",
+    name: "HarbourTech Solutions",
+    address: "15 Marina Bay, Singapore",
+    area_street: "Marina Drive",
+    city: "Singapore",
+    supplier_manufacture: "Navigation Equipment",
+    contact_person: "Sophia Tan",
+    contact_number: "6589234567",
+    email_id: "sophia.tan@harbourtech.sg",
+    created_by: 2,
+    country: 2
+  },
+  {
+    id: 3,
+    country_name: "United Arab Emirates",
+    country_code: "AE",
+    active: 1,
+    code: "SUP-103",
+    name: "Desert Engineering Works",
+    address: "Industrial Zone, Abu Dhabi",
+    area_street: "Sheikh Zayed Street",
+    city: "Abu Dhabi",
+    supplier_manufacture: "Oil & Gas Machinery",
+    contact_person: "Mohammed Ali",
+    contact_number: "971509876543",
+    email_id: "m.ali@desertengg.ae",
+    created_by: 3,
+    country: 3
+  },
+  {
+    id: 4,
+    country_name: "Germany",
+    country_code: "DE",
+    active: 1,
+    code: "SUP-104",
+    name: "KraftWerks Industries",
+    address: "Bremen Shipyard, Dock 5",
+    area_street: "Werftstraße 12",
+    city: "Bremen",
+    supplier_manufacture: "Marine Engines",
+    contact_person: "Hans Müller",
+    contact_number: "4917612345678",
+    email_id: "hans.muller@kraftwerks.de",
+    created_by: 4,
+    country: 4
+  },
+  {
+    id: 5,
+    country_name: "Japan",
+    country_code: "JP",
+    active: 1,
+    code: "SUP-105",
+    name: "Nippon Marine Systems",
+    address: "Tokyo Bay Industrial Zone",
+    area_street: "Harumi Street 22",
+    city: "Tokyo",
+    supplier_manufacture: "Shipbuilding Components",
+    contact_person: "Kenji Sato",
+    contact_number: "81345678901",
+    email_id: "kenji.sato@nipponmarine.jp",
+    created_by: 5,
+    country: 5
+  }
+];
+
   goBack(){
     this.location.back();
   }

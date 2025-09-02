@@ -76,6 +76,76 @@ export class SararStatusComponent implements OnInit {
     this.loadMissingSrarData('IN');
   }
 
+staticMissingShips = [
+  {
+    ship: "INS SURYA",
+    command: "Western Naval Command",
+    ops_authority: "Fleet Operations HQ",
+    missing_months: "January 2025, February 2025"
+  },
+  {
+    ship: "INS VIKRAMADITYA",
+    command: "Eastern Naval Command",
+    ops_authority: "Naval Operations Division",
+    missing_months: "March 2025, April 2025"
+  },
+  {
+    ship: "INS KALINGA",
+    command: "Southern Naval Command",
+    ops_authority: "Training Command HQ",
+    missing_months: "May 2025, June 2025"
+  },
+  {
+    ship: "INS SHIVALIK",
+    command: "Western Naval Command",
+    ops_authority: "Fleet Command Centre",
+    missing_months: "July 2025, August 2025"
+  },
+  {
+    ship: "INS SATPURA",
+    command: "Eastern Naval Command",
+    ops_authority: "Naval Strategy Division",
+    missing_months: "September 2025, October 2025"
+  },
+  {
+    ship: "INS KIRPAN",
+    command: "Western Naval Command",
+    ops_authority: "Fleet Maintenance Authority",
+    missing_months: "November 2025, December 2025"
+  },
+  {
+    ship: "INS KHANDERI",
+    command: "Southern Naval Command",
+    ops_authority: "Submarine Operations HQ",
+    missing_months: "January 2024, February 2024"
+  },
+  {
+    ship: "INS TALWAR",
+    command: "Western Naval Command",
+    ops_authority: "Surface Combatants HQ",
+    missing_months: "March 2024, April 2024"
+  },
+  {
+    ship: "INS RANA",
+    command: "Eastern Naval Command",
+    ops_authority: "Destroyer Squadron HQ",
+    missing_months: "May 2024, June 2024"
+  },
+  {
+    ship: "INS SAGAR",
+    command: "Southern Naval Command",
+    ops_authority: "Coastal Defence HQ",
+    missing_months: "July 2024, August 2024"
+  },
+  {
+    ship: "INS KAVERI",
+    command: "Western Naval Command",
+    ops_authority: "Fleet Logistics HQ",
+    missing_months: "September 2024, October 2024"
+  }
+];
+
+
   loadCommandOptions(): void {
     // Load command options and map them to tab abbreviations
     this.apiService.get('master/command/?is_dropdown=true').subscribe({

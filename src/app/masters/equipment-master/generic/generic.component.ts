@@ -112,6 +112,50 @@ export class GenericComponent implements OnInit {
     // Note: Table data will be loaded by the paginated table component
     // No need to call getDepartments() here
   }
+
+  genericList = [
+  {
+    id: 1,
+    active: 1,
+    sr_no: "EQP_1001",
+    code: "PUMP_01",
+    type: "WATER PUMP",
+    created_by: 1
+  },
+  {
+    id: 2,
+    active: 1,
+    sr_no: "EQP_1002",
+    code: "GEN_01",
+    type: "DIESEL GENERATOR",
+    created_by: 2
+  },
+  {
+    id: 3,
+    active: 1,
+    sr_no: "EQP_1003",
+    code: "FAN_01",
+    type: "VENTILATION FAN",
+    created_by: 1
+  },
+  {
+    id: 4,
+    active: 1,
+    sr_no: "EQP_1004",
+    code: "COMP_01",
+    type: "AIR COMPRESSOR",
+    created_by: 3
+  },
+  {
+    id: 5,
+    active: 1,
+    sr_no: "EQP_1005",
+    code: "PUMP_02",
+    type: "FUEL TRANSFER PUMP",
+    created_by: 2
+  }
+];
+
   goBack() {
     this.location.back();
   }

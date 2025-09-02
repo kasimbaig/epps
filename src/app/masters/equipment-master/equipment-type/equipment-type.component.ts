@@ -97,6 +97,51 @@ export class EquipmentTypeComponent implements OnInit {
     // Note: Table data will be loaded by the paginated table component
     // No need to call getDepartments() here
   }
+  staticEquipmentData = [
+  {
+    id: 3,
+    active: 1,
+    code: "Standard",
+    name: "Standard",
+    created_by: 1
+  },
+  {
+    id: 1,
+    active: 1,
+    code: "TMain",
+    name: "Main",
+    created_by: 1
+  },
+  {
+    id: 4,
+    active: 0,
+    code: "Backup",
+    name: "Backup System",
+    created_by: 2
+  },
+  {
+    id: 5,
+    active: 1,
+    code: "Aux",
+    name: "Auxiliary",
+    created_by: 3
+  },
+  {
+    id: 6,
+    active: 1,
+    code: "Test",
+    name: "Testing Unit",
+    created_by: 4
+  },
+  {
+    id: 7,
+    active: 0,
+    code: "Legacy",
+    name: "Legacy Equipment",
+    created_by: 1
+  }
+];
+
   goBack(){
     this.location.back();
   }
