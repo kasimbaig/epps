@@ -64,105 +64,105 @@ export class SfdMainComponentComponent implements OnInit {
   // ];
   masterMenuItems: MasterMenuItem[] = [
     {
-      icon: 'fa-solid fa-sitemap',
+      icon: '',
       label: 'Section',
       path: 'sfd-masters/section',
     },
     {
-      icon: 'fa-solid fa-users',
+      icon: '',
       label: 'Group',
       path: 'sfd-masters/group',
     },
     {
-      icon: 'fa-solid fa-globe',
+      icon: '',
       label: 'Country',
       path: 'sfd-masters/country',
     },
     {
-      icon: 'fa-solid fa-layer-group',
+      icon: '',
       label: 'Class',
       path: 'sfd-masters/class',
     },
     {
-      icon: 'fa-solid fa-ship',
+      icon: '',
       label: 'Ship Master',
       path: 'sfd-masters/ship-master',
     },
     {
-      icon: 'fa-solid fa-truck',
+      icon: '',
       label: 'Supplier',
       path: 'sfd-masters/supplier',
     },
     {
-      icon: 'fa-solid fa-user-shield',
+      icon: '',
       label: 'OPS Authority',
       path: 'sfd-masters/ops-authority',
     },
     {
-      icon: 'fa-solid fa-chart-line',
+      icon: '',
       label: 'Generic',
       path: 'sfd-masters/generic',
     },
     {
-      icon: 'fa-solid fa-toolbox',
+      icon: '',
       label: 'Equipments',
       path: 'sfd-masters/equipments',
     },
     {
-      icon: 'fa-solid fa-building',
+      icon: '',
       label: 'Establishment',
       path: 'sfd-masters/establishment',
     },
     {
-      icon: 'fa-solid fa-cog',
+      icon: '',
       label: 'Propulsion',
       path: 'sfd-masters/propulsion',
     },
     {
-      icon: 'fa-solid fa-industry',
+      icon: '',
       label: 'Manufacturer',
       path: 'sfd-masters/manufacturer',
     },
   ];
   transactionMenuItems: MasterMenuItem[] = [
     {
-      icon: 'fa-solid fa-paperclip',
+      icon: '',
       label: 'Attach SFD By Reference',
       path: 'sfd-transactions/attach-sfd-by-reference',
     },
     {
-      icon: 'fa-solid fa-list',
+      icon: '',
       label: 'SFD List',
       path: 'sfd-transactions/sfd-list',
     },
     {
-      icon: 'fa-solid fa-ship',
+      icon: '',
       label: 'Equipment Ship Detail',
       path: 'sfd-transactions/equipment-ship-details',
     },
     {
-      icon: 'fa-solid fa-file-alt',
+      icon: '',
       label: 'Ship Equipment Document Details',
       path: 'sfd-transactions/ship-equipment-doc-details',
     },
     
     {
-      icon: 'fa-solid fa-plus-circle',
+      icon: '',
       label: 'SFD Change Request (Add)',
       path: 'sfd-transactions/sfd-change-request',
     },
     {
-      icon: 'fa-solid fa-check',
+      icon: '',
       label: 'SFD Approve/Removal/Change Request',
       path: 'sfd-transactions/sfd-approve-removal-change-request',
     },
     {
-      icon: 'fa-solid fa-sitemap',
+      icon: '',
       label: 'Equipment Hierarchy',
       path: 'sfd-transactions/equipment-hierarchy',
     },
     {
-      icon: 'fa-solid fa-map-marker-alt',
+      icon: '',
       label: 'Eqpt Nomenclature, Location On Board',
       path: 'sfd-transactions/eqpt-nomenclature-location',
     },
@@ -171,49 +171,49 @@ export class SfdMainComponentComponent implements OnInit {
   reportsMenuItems: ReportMenuItem[] = [
     {
       id: 1,
-      icon: 'fa-solid fa-cogs',
+      icon: '',
       label: 'Platform Equipment Fit',
       path: 'sfd-reports',
     },
     {
       id: 2,
-      icon: 'fa-solid fa-ship',
+      icon: '',
       label: 'Equipment Distribution Across Ship',
       path: 'sfd-reports',
     },
     {
       id: 3,
-      icon: 'fa-solid fa-anchor',
+      icon: '',
       label: 'SHIP - SFD',
       path: 'sfd-reports',
     },
     {
       id: 4,
-      icon: 'fa-solid fa-link',
+      icon: '',
       label: 'SFD Link For ILMS',
       path: 'sfd-reports',
     },
     {
       id: 5,
-      icon: 'fa-solid fa-address-book',
+      icon: '',
       label: 'Supplier/Manufacturer - Address',
       path: 'sfd-reports',
     },
     {
       id: 6,
-      icon: 'fa-solid fa-tools',
+      icon: '',
       label: 'Equipment - Ship',
       path: 'sfd-reports',
     },
     {
       id: 7,
-      icon: 'fa-solid fa-sitemap',
+      icon: '',
       label: 'GROUP CODE-EQPT-Ship Detail',
       path: 'sfd-reports',
     },
     {
       id: 8,
-      icon: 'fa-solid fa-file-alt',
+      icon: '',
       label: 'Equipment Details Across Navy Documents AVL In CMMS Ship Wise',
       path: 'sfd-reports',
     },

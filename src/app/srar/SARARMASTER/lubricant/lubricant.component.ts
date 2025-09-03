@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ApiService } from '../../../services/api.service';
+import { ViewDetailsComponent } from '../../../shared/components/view-details/view-details.component';
 
 interface Lubricant {
   id?: number;
@@ -84,6 +85,20 @@ export class LubricantComponent implements OnInit {
   // Delete confirmation modal properties
   showDeleteModal: boolean = false;
   itemToDelete: Lubricant | null = null;
+
+  // View details properties
+  isViewDetailsOpen: boolean = false;
+  selectedDetails: any = null;
+  viewDetailsTitle: string = 'Lubricant Details';
+  viewDetailsHeaders: any[] = [
+    { key: 'name', label: 'Lubricant Name', type: 'text' },
+    { key: 'code', label: 'Code', type: 'text' },
+    { key: 'description', label: 'Description', type: 'text' },
+    { key: 'type_display', label: 'Type', type: 'text' },
+    { key: 'active', label: 'Active Status', type: 'text' },
+    { key: 'created_on', label: 'Created On', type: 'text' },
+    { key: 'modified_on', label: 'Modified On', type: 'text' }
+  ];
   
   constructor(private apiService: ApiService, private toast: MessageService) {}
   
@@ -115,11 +130,8 @@ export class LubricantComponent implements OnInit {
 
   // Event Handlers
   onView(data: Lubricant): void {
-    this.crudName='View'
-    this.sararMasterForm.patchValue(data);
-    this.sararMasterForm.get('active')?.setValue(data.active == 1 ? true : false);
-    this.sararMasterForm.disable();
-    this.openDialog();
+    this.selectedDetails = data;
+    this.isViewDetailsOpen = true;
   }
   
   isEdit: boolean = false;

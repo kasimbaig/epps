@@ -52,7 +52,7 @@ export class SidebarComponent {
       hasChildren: false,
     },
     {
-      icon: 'fa-solid fa-anchor',
+      icon: 'fa-solid fa-earth',
       label: 'SFD',
       path: '/sfd',
       hasChildren: false,

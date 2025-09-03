@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ApiService } from '../../../services/api.service';
+import { ViewDetailsComponent } from '../../../shared/components/view-details/view-details.component';
 
 interface ShipState {
   id?: number;
@@ -90,6 +91,20 @@ export class ShipStateComponent implements OnInit {
   showDeleteModal: boolean = false;
   itemToDelete: ShipState | null = null;
 
+  // View details properties
+  isViewDetailsOpen: boolean = false;
+  selectedDetails: any = null;
+  viewDetailsTitle: string = 'Ship State Details';
+  viewDetailsHeaders: any[] = [
+    { key: 'name', label: 'Ship State Name', type: 'text' },
+    { key: 'code', label: 'Code', type: 'text' },
+    { key: 'active', label: 'Active Status', type: 'text' },
+    { key: 'created_by_name', label: 'Created By', type: 'text' },
+    { key: 'modified_by_name', label: 'Modified By', type: 'text' },
+    { key: 'created_on', label: 'Created On', type: 'text' },
+    { key: 'modified_on', label: 'Modified On', type: 'text' }
+  ];
+
   constructor(private apiService: ApiService, private messageService: MessageService) {}
 
   ngOnInit(): void {
@@ -159,13 +174,8 @@ export class ShipStateComponent implements OnInit {
 
   // Event Handlers
   onView(data: ShipState): void {
-    this.sararMasterForm.patchValue({
-      ship_state: data.name,
-      code: data.code,
-      status: data.active === 1
-    });
-    this.openDialog('View');
-    this.sararMasterForm.disable();
+    this.selectedDetails = data;
+    this.isViewDetailsOpen = true;
   }
 
   isEdit: boolean = false;

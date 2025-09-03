@@ -31,39 +31,39 @@ export class SararMainComponentComponent implements OnInit {
   showReportsDropdown: boolean = false;
   masterMenuItems: MasterMenuItem[] = [
     {
-      icon: 'fa-solid fa-ship',
+      icon: '',
       label: 'Ship-State',
       path: 'sarar-master/sarar/master-ship-state',
     },{
-      icon: 'fa-solid fa-map-marker-alt',
+      icon: '',
       label: 'Ship Location',
       path: 'sarar-master/sarar/master-ship-location',
     },{
-      icon: 'fa-solid fa-microchip',
+      icon: '',
       label: 'Ship Activity Type',
       path: 'sarar-master/sarar/master-ship-activity-type',
     }, {
-      icon: 'fa-solid fa-toolbox',
+      icon: '',
       label: 'Ship Activity Detail',
       path: 'sarar-master/sarar/master-ship-activity-detail',
     },
     {
-      icon: 'fa-solid fa-industry',
+      icon: '',
       label: 'Lubricant',
       path: 'sarar-master/sarar/master-lubricant',
     },
    
     {
-      icon: 'fa-solid fa-chart-line',
+      icon: '',
       label: 'Equipment',
       path: 'sarar-master/sarar/master-equipment',
     },{
-      icon: 'fa-solid fa-ship',
+      icon: '',
       label: 'Linked Equipment',
       path: 'sarar-master/sarar/master-linked-equipment',
     },
     {
-      icon: 'fa-solid fa-sitemap',
+      icon: '',
       label: 'FPT CST Form',
       path: 'sarar-master/sarar/master-fpt-cst-form',
     },
@@ -72,17 +72,17 @@ export class SararMainComponentComponent implements OnInit {
 
   transactionMenuItems: MasterMenuItem[] = [
     {
-      icon: 'fa-solid fa-paperclip',
+      icon: '',
       label: 'Adjustment',
       path: 'sarar-transaction/sarar/transaction-adjustment',
     },
     {
-      icon: 'fa-solid fa-list',
+      icon: '',
       label: 'Monthly',
       path: 'sarar-transaction/sarar/transaction-monthly',
     },
     {
-      icon: 'fa-solid fa-ship',
+      icon: '',
       label: 'Status',
       path: 'sarar-transaction/sarar/transaction-status',
     },
@@ -95,97 +95,97 @@ export class SararMainComponentComponent implements OnInit {
   reportsMenuItems: ReportMenuItem[] = [
     {
       id: 'equipment-running-hours',
-      icon: 'fa-solid fa-clock',
+      icon: '',
       label: 'Equipment Running Hours',
       path: 'srar-reports',
     },
     {
       id: 'boiler-running-hour-and-inspection-detail',
-      icon: 'fa-solid fa-fire',
+      icon: '',
       label: 'Boiler-Running Hour and Inspection Detail',
       path: 'srar-reports',
     },
     {
       id: 3,
-      icon: 'fa-solid fa-oil-can',
+      icon: '',
       label: 'Consumption of Lubricant',
       path: 'srar-reports',
     },
     {
       id: "hours-underway",
-      icon: 'fa-solid fa-route',
+      icon: '',
       label: 'Hours Underway/Distance Run',
       path: 'srar-reports',
     },
     {
       id: 5,
-      icon: 'fa-solid fa-anchor',
+      icon: '',
       label: 'Cumulative Ship Activity-At Sea / Harbour',
       path: 'srar-reports',
     },
     {
       id: 6,
-      icon: 'fa-solid fa-list-alt',
+      icon: '',
       label: 'Ship Activity Details',
       path: 'srar-reports',
     },
     {
       id: 7,
-      icon: 'fa-solid fa-expand-arrows-alt',
+      icon: '',
       label: 'EQPT RH Extension',
       path: 'srar-reports',
     },
     {
       id: 8,
-      icon: 'fa-solid fa-building',
+      icon: '',
       label: 'Overall Activity - In Platforms',
       path: 'srar-reports',
     },
     {
       id: 9,
-      icon: 'fa-solid fa-gas-pump',
+      icon: '',
       label: 'Fuel Consumption - Month Wise',
       path: 'srar-reports',
     },
     {
       id: 10,
-      icon: 'fa-solid fa-ship',
+      icon: '',
       label: 'Fuel Consumption - Propulsion Wise',
       path: 'srar-reports',
     },
     {
       id: 11,
-      icon: 'fa-solid fa-exclamation-triangle',
+      icon: '',
       label: 'H2S Sensor Status',
       path: 'srar-reports',
     },
     {
       id: 12,
-      icon: 'fa-solid fa-calendar-alt',
+      icon: '',
       label: 'Yearly Cumulative Ship Activity Report',
       path: 'srar-reports',
     },
     {
       id: 13,
-      icon: 'fa-solid fa-calendar',
+      icon: '',
       label: 'Monthly Cumulative Ship Activity Report',
       path: 'srar-reports',
     },
     {
       id: 14,
-      icon: 'fa-solid fa-cogs',
+      icon: '',
       label: 'SRAR GTG Utilisation',
       path: 'srar-reports',
     },
     {
       id: 15,
-      icon: 'fa-solid fa-tachometer-alt',
+      icon: '',
       label: 'SRAR Average Speed Annual Report',
       path: 'srar-reports',
     },
     {
       id: 16,
-      icon: 'fa-solid fa-file-alt',
+      icon: '',
       label: 'FPTCST Report',
       path: 'srar-reports',
     },

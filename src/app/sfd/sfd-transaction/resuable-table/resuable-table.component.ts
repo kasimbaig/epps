@@ -61,6 +61,7 @@ ResuableTableComponent {
   @Input() editButtonname: string = 'Edit';
   @Input() uploadDataName: string = '';
   @Input() generateReportName: string = '';
+  @Input() isLoading: boolean = false;
   
   // Server-side pagination properties
   @Input() totalRecords: number = 0;

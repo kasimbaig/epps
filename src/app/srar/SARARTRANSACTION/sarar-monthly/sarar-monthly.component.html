@@ -1,4 +1,4 @@
-<div class="container mx-auto p-6">
+<div class="p-6">
     <!-- Header -->
     <div class="mb-6">
         <h2 class="text-2xl font-bold text-gray-800 mb-2">SRAR <span class="text-teal-500">Monthly</span></h2>
@@ -80,9 +80,9 @@
 <!-- Dialog for SFD Reference Form -->
 <p-dialog  [header]=" crudName+ ' Monthly SRAR'"   [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '50vw', height:'60vh'}" [baseZIndex]="10000" [draggable]="false" [maximizable]="true" [resizable]="true">
 
-    <div class="p-6 bg-lime-50 shadow-md border border-lime-200  h-full mx-auto">
+    <div class="p-6 bg-teal-50 shadow-md border border-teal-200  h-full mx-auto">
         <!-- Dropdown Filters -->
-    <div class=" rounded-lg  p-6 mb-4 border border-amber-200 bg-amber-50  text-blue-500">
+    <div class=" rounded-lg  p-6 mb-4 border border-teal-200 bg-teal-50  text-blue-500">
         <form [formGroup]="sararMasterForm">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Unit Dropdown -->
@@ -136,8 +136,6 @@
                     optionLabel="name"
                     [filter]="true"
                     filterBy="name"
-                    
-                   
                     styleClass="flex-1">
                 </p-dropdown>
             </div>

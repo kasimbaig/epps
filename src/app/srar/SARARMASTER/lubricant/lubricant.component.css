@@ -1,0 +1,54 @@
+/* Custom styles for teal-50 background on form inputs */
+::ng-deep input[type="text"] {
+  background-color: #f0fdfa !important; /* teal-50 */
+  border: 2px solid #134e4a !important; /* teal-900 */
+  border-radius: 0.5rem !important; /* rounded-lg */
+  transition: all 0.3s ease !important;
+}
+
+::ng-deep input[type="text"]:focus {
+  border-color: #134e4a !important; /* teal-900 */
+  box-shadow: 0 0 0 0.2rem rgba(19, 78, 74, 0.25) !important;
+}
+
+::ng-deep select {
+  background-color: #f0fdfa !important; /* teal-50 */
+  border: 2px solid #134e4a !important; /* teal-900 */
+  border-radius: 0.5rem !important; /* rounded-lg */
+  transition: all 0.3s ease !important;
+}
+
+::ng-deep select:focus {
+  border-color: #134e4a !important; /* teal-900 */
+  box-shadow: 0 0 0 0.2rem rgba(19, 78, 74, 0.25) !important;
+}
+
+/* Checkbox styling with teal-900 border and rounded corners */
+::ng-deep input[type="checkbox"] {
+  accent-color: #134e4a !important; /* teal-900 */
+  border: 2px solid #134e4a !important; /* teal-900 */
+  border-radius: 0.25rem !important; /* rounded corners */
+  background-color: #f0fdfa !important; /* teal-50 */
+}
+
+::ng-deep input[type="checkbox"]:checked {
+  background-color: #134e4a !important; /* teal-900 */
+  border-color: #134e4a !important; /* teal-900 */
+}
+
+/* Additional styling for form container */
+::ng-deep .p-dialog .p-dialog-content {
+  background-color: #f0fdfa !important; /* teal-50 */
+}
+
+/* Button styling to match the theme */
+::ng-deep .p-dialog .p-dialog-footer button {
+  border-radius: 0.5rem !important; /* rounded-lg */
+  border: 2px solid transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+::ng-deep .p-dialog .p-dialog-footer button:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}

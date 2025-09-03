@@ -3,8 +3,7 @@
     <div class="command-title-block">
       <i class="fa-solid fa-chart-pie"></i>
       <div>
-        <h2>Naval Fleet Maintenance Dashboard</h2>
-        <p>Comprehensive fleet maintenance overview and analytics</p>
+        <h2>SFD Dashboard</h2>
       </div>
     </div>
   </div>
@@ -13,12 +12,6 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6 w-full max-w-full">
     <!-- Operational Ships Card -->
     <div class="kpi-card operational-ships">
-      <div class="kpi-card-header">
-        <div class="kpi-icon-container">
-          <i class="fa-solid fa-ship kpi-icon"></i>
-        </div>
-        <div class="kpi-status"></div>
-      </div>
       <h3 class="kpi-title">Operational Ships</h3>
       <div class="kpi-value-container">
         <h2 class="kpi-value">113</h2>
@@ -28,12 +21,6 @@
 
     <!-- Fleet Readiness Card -->
     <div class="kpi-card fleet-readiness">
-      <div class="kpi-card-header">
-        <div class="kpi-icon-container">
-          <i class="fa-solid fa-leaf kpi-icon"></i>
-        </div>
-        <div class="kpi-status"></div>
-      </div>
       <h3 class="kpi-title">Fleet Readiness</h3>
       <div class="kpi-value-container">
         <h2 class="kpi-value">80%</h2>
@@ -43,12 +30,6 @@
 
     <!-- Avg Eq. Health Score Card -->
     <div class="kpi-card health-score">
-      <div class="kpi-card-header">
-        <div class="kpi-icon-container">
-          <i class="fa-solid fa-heart kpi-icon"></i>
-        </div>
-        <div class="kpi-status"></div>
-      </div>
       <h3 class="kpi-title">Avg Eq. Health Score</h3>
       <div class="kpi-value-container">
         <h2 class="kpi-value">80</h2>
@@ -58,12 +39,6 @@
 
     <!-- Equipment Availability Card -->
     <div class="kpi-card equipment-availability">
-      <div class="kpi-card-header">
-        <div class="kpi-icon-container">
-          <i class="fa-solid fa-check-circle kpi-icon"></i>
-        </div>
-        <div class="kpi-status"></div>
-      </div>
       <h3 class="kpi-title">Equipment Availability</h3>
       <div class="kpi-value-container">
         <h2 class="kpi-value">90%</h2>
@@ -77,11 +52,7 @@
     <!-- Fleet Composition Chart Card -->
     <div class="chart-card">
       <div class="chart-header">
-        <div class="chart-icon-container">
-          <i class="pi pi-chart-pie chart-icon"></i>
-        </div>
         <h6 class="chart-title">Fleet Composition by Command & Type</h6>
-        <div class="chart-status"></div>
       </div>
       <div class="chart-content">
         <app-loading-spinner *ngIf="isLoadingCharts" class="flex items-center justify-center h-full"></app-loading-spinner>
@@ -97,11 +68,7 @@
     <!-- Common Equipment Distribution Chart Card -->
     <div class="chart-card">
       <div class="chart-header">
-        <div class="chart-icon-container">
-          <i class="pi pi-cog chart-icon"></i>
-        </div>
         <h6 class="chart-title">Common Equipment Distribution</h6>
-        <div class="chart-status"></div>
       </div>
       <div class="chart-content">
         <app-loading-spinner *ngIf="isLoadingCharts" class="flex items-center justify-center h-full"></app-loading-spinner>
@@ -163,9 +130,6 @@
       <div class="p-6 pb-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-100 to-orange-100 flex items-center justify-center">
-              <i class="pi pi-exclamation-triangle text-xl text-red-600"></i>
-            </div>
             <div>
               <h3 class="text-xl font-bold text-gray-800">Critical Alerts</h3>
               <p class="text-sm text-gray-500">Real-time system notifications</p>
@@ -244,9 +208,6 @@
       <div class="p-6 pb-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-100 to-teal-100 flex items-center justify-center">
-              <i class="pi pi-globe text-xl text-blue-600"></i>
-            </div>
             <div>
               <h3 class="text-xl font-bold text-gray-800">Fleet Distribution</h3>
               <p class="text-sm text-gray-500">Global naval operations</p>

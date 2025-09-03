@@ -99,17 +99,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   userRank = 'Commander';
   userRole = 'Maintenance Supervisor';
   isApprover: boolean = true;
-  totalEquipment: number = 245;
-  activeMaintenanceTasks: number = 87;
-  activeMaintenanceProgress: number = 62;
-  openDefects: number = 34;
-  criticalDefects: number = 8;
-  majorDefects: number = 15;
-  minorDefects: number = 11;
-  equipmentFitProgress: number = 100;
-  equipmentFitSystemsCount: string = '191/245 systems';
-  taskCompletionRate: number = 92;
-  overdueTasks: number = 5;
+  totalEquipment: number = 179;
+  activeMaintenanceTasks: number = 100;
+  activeMaintenanceProgress: number = 96;
+  // openDefects: number = 34;
+  criticalDefects: number = 3;
+  majorDefects: number = 17;
+  minorDefects: number = 14;
+  equipmentFitProgress: number = 96;
+  equipmentFitSystemsCount: string = '185/185 systems';
+  taskCompletionRate: number = 96;
+  overdueTasks: number = 2;
   timelineData: OcrcEvent[] = [];
 
   commands$: Observable<Option[]>;
@@ -131,7 +131,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   kpiMetrics = [
     {
       title: 'Total Equipment',
-      value: 245,
+      value: 179,
       description: 'Total equipment across all units.',
       iconClass: 'pi pi-cog',
       type: 'TOTAL_EQUIPMENT',
@@ -144,14 +144,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     },
     {
       title: 'Active Tasks',
-      value: 87,
+      value: 100,
       iconClass: 'pi pi-calendar',
       type: 'ACTIVE_MAINTENANCE_TASKS',
       backgroundColor: 'white',
       iconColor: '#6B7C8F',
       titleColor: '#6B7C8F',
       valueColor: '#6B7C8F',
-      progressBarValue: 62,
+      progressBarValue: 96,
     },
     {
       title: 'Open Defects',
@@ -162,29 +162,29 @@ export class DashboardComponent implements OnInit, OnDestroy {
       iconColor: '#E53935',
       titleColor: '#E53935',
       valueColor: '#E53935',
-      severityDetails: { critical: 8, major: 15, minor: 11 }
-    },
+      severityDetails: { critical: 3, major: 17, minor: 14 }
+      },
     {
       title: 'Equipment Fit Progress',
-      value: '100%',
+      value: '86%',
       iconClass: 'pi pi-check-square',
       type: 'EQUIPMENT_FIT_PROGRESS',
       backgroundColor: 'white',
       iconColor: '#4CAF50',
       titleColor: '#4CAF50',
       valueColor: '#4CAF50',
-      subText: '191/245 systems'
+      subText: '185/185 systems'
     },
     {
       title: 'Task Completion Rate',
-      value: '92%',
+      value: '96%',
       iconClass: 'pi pi-chart-line',
       type: 'TASK_COMPLETION_RATE',
       backgroundColor: 'white',
       iconColor: '#FF6B35',
       titleColor: '#FF6B35',
       valueColor: '#FF6B35',
-      subText: '5 overdue tasks'
+      subText: '2 overdue tasks'
     },
   ];
 
@@ -277,6 +277,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   showApprovePlanDialog: boolean = false;
   approverComments: string = '';
   currentTime: Date = new Date();
+  hoveredTab: number | null = null;
 
   // Defects Form Configuration for Reusable Form
   showDefectsFormDialog: boolean = false;
@@ -775,6 +776,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
       summary: 'Export Feature',
       detail: 'Dashboard export functionality will be implemented soon!'
     });
+  }
+
+  // KPI Tab hover methods
+  showKpiData(tabIndex: number): void {
+    this.hoveredTab = tabIndex;
+  }
+
+  hideKpiData(tabIndex: number): void {
+    this.hoveredTab = null;
   }
 
   // File handling methods

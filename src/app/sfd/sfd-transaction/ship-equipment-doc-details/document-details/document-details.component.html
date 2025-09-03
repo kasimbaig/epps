@@ -84,7 +84,7 @@
     <form [formGroup]="documentForm" >
         <div class="grid grid-cols-1 gap-4 p-4 mt-4">
             <!-- Document Type -->
-            <div class="grid grid-cols-6 gap-4 items-center">
+            <div class="space-y-2">
                 <label class="text-sm font-medium text-gray-700 col-span-2">Document Type<span class="text-red-500">*</span>:</label>
                 <p-dropdown 
                     formControlName="document_type"
@@ -99,7 +99,7 @@
             </div>
 
             <!-- Reference No -->
-            <div class="grid grid-cols-6 gap-4 items-center">
+            <div class="space-y-2">
                 <label class="text-sm font-medium text-gray-700 col-span-2">Reference No:</label>
                 <input 
                     type="text" 
@@ -110,7 +110,7 @@
             </div>
 
             <!-- Category -->
-            <div class="grid grid-cols-6 gap-4 items-center">
+            <div class="space-y-2">
                 <label class="text-sm font-medium text-gray-700 col-span-2">Category:</label>
                 <input 
                     type="text" 
@@ -121,7 +121,7 @@
             </div>
 
             <!-- Location -->
-            <div class="grid grid-cols-6 gap-4 items-center">
+            <div class="space-y-2">
                 <label class="text-sm font-medium text-gray-700 col-span-2">Location:</label>
                 <p-dropdown 
                     formControlName="location"
@@ -136,7 +136,7 @@
             </div>
 
             <!-- Description -->
-            <div class="grid grid-cols-6 gap-4 items-start">
+            <div class="space-y-2">
                 <label class="text-sm font-medium text-gray-700 col-span-2 pt-2">Description:</label>
                 <textarea 
                     pInputTextarea 

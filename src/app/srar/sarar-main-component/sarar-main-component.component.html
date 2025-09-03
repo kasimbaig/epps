@@ -1,4 +1,4 @@
-<!-- srar-main.component.html -->
+<!-- sarar-main.component.html -->
 <div class="srar-main-container px-3 py-1 min-h-screen">
     <!-- SRAR Dashboard Header -->
     <!-- Sub-navigation for SRAR sections -->
@@ -6,7 +6,6 @@
         <button class="nav-item"
             [ngClass]="{'active': activeSubPath === 'srar-dashboard'}"
             (click)="navigateToSFD('srar-dashboard')">
-            <i class="fa-solid fa-gauge"></i>
             <span>Dashboard</span>
         </button>
 
@@ -16,7 +15,6 @@
                 class="nav-item masters-button"
                 [ngClass]="{'active': activeSubPath === 'srar-masters'}"
                 (click)="navigateToSFD('srar-masters')">
-                <i class="fa-solid fa-database"></i>
                 <span>Masters</span>
                 <i class="fa-solid"
                     [ngClass]="showMasterDropdown ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -39,7 +37,6 @@
                 class="nav-item transactions-button"
                 [ngClass]="{'active': activeSubPath === 'srar-transactions'}"
                 (click)="navigateToSFD('srar-transactions')">
-                <i class="fa-solid fa-exchange-alt"></i>
                 <span>Transactions</span>
                 <i class="fa-solid"
                     [ngClass]="showTransactionsDropdown ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -62,7 +59,6 @@
                 class="nav-item reports-button"
                 [ngClass]="{'active': activeSubPath === 'reports'}"
                 (click)="toggleReportsDropdown()">
-                <i class="fa-solid fa-chart-bar"></i>
                 <span>Reports</span>
                 <i class="fa-solid"
                     [ngClass]="showReportsDropdown ? 'fa-chevron-up' : 'fa-chevron-down'"></i>

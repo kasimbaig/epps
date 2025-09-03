@@ -24,16 +24,16 @@
         
         <!-- Left Column -->
         <div class=" ">
-          <div *ngFor="let field of getLeftColumnFields(); let i = index"  class=" grid grid-cols-9 mb-3 ">
+          <div *ngFor="let field of getLeftColumnFields(); let i = index"  class="mb-3">
             <ng-container *ngIf="!field.hide">
-            <!-- Label on the left -->
-            <label [for]="field.key" class="text-sm font-semibold text-gray-800 col-span-3">
+            <!-- Label above input -->
+            <label [for]="field.key" class="block text-sm font-semibold text-gray-800 mb-2">
               {{ field.label }} 
               <span *ngIf="field.required" class="text-red-500">*</span>
             </label>
 
-            <!-- Input on the right -->
-            <div class="col-span-6 space-y-2">
+            <!-- Input below label -->
+            <div class="space-y-2">
               
               <!-- Text/Number/Email inputs -->
               <input
@@ -50,7 +50,7 @@
                 [id]="field.key"
                 [type]="field.type"
                 [formControlName]="field.key"
-                class="w-full p-2 border-2 border-gray-500 rounded-sm bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 "
+                class="w-full p-2 border-2 border-teal-900 rounded-lg bg-teal-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 "
                 [class.input-error]="form.get(field.key)?.invalid && (form.get(field.key)?.dirty || form.get(field.key)?.touched)"
                 [placeholder]="field.placeholder"
               />
@@ -61,7 +61,7 @@
                 [id]="field.key"
                 type="date"
                 [formControlName]="field.key"
-                class="w-full p-2 border-2 border-gray-500 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                class="w-full p-2 border-2 border-teal-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50"
                 [class.input-error]="form.get(field.key)?.invalid && (form.get(field.key)?.dirty || form.get(field.key)?.touched)"
                 [placeholder]="field.placeholder"
               />
@@ -72,7 +72,7 @@
                   [id]="field.key"
                   type="checkbox"
                   [formControlName]="field.key"
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-500 rounded focus:ring-blue-500"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-teal-900 rounded focus:ring-blue-500"
                 />
                 <label [for]="field.key" class="ml-2 text-sm text-gray-700 cursor-pointer">
                   {{ field.placeholder || 'Check this option' }}
@@ -85,7 +85,7 @@
                 [id]="field.key"
                 [formControlName]="field.key"
                 (change)="handleSelectChange($event, field.key)"
-                class="w-full p-2 border-2 border-gray-500 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                class="w-full p-2 border-2 border-teal-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50"
                 [class.input-error]="form.get(field.key)?.invalid && (form.get(field.key)?.dirty || form.get(field.key)?.touched)"
               >
                 <option value="" disabled>Select an option</option>
@@ -100,7 +100,7 @@
               <!-- File upload -->
               <div
                 *ngIf="field.type === 'file'"
-                class="w-full p-2 border-2 border-dashed border-gray-500 rounded-sm bg-gray-50 hover:border-blue-400 transition-colors cursor-pointer text-center"
+                class="w-full p-2 border-2 border-dashed border-teal-900 rounded-lg bg-gray-50 hover:border-blue-400 transition-colors cursor-pointer text-center"
                 (click)="triggerFileInputClick(fileInputRef)"
                 (dragover)="onDragOver($event)"
                 (dragleave)="onDragLeave($event)"
@@ -135,7 +135,7 @@
                 *ngIf="field.type === 'textarea' || field.type === 'address'"
                 [id]="field.key"
                 [formControlName]="field.key"
-                class="w-full p-2 border-2 border-gray-500 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white resize-vertical"
+                class="w-full p-2 border-2 border-teal-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50 resize-vertical"
                 [class.input-error]="form.get(field.key)?.invalid && (form.get(field.key)?.dirty || form.get(field.key)?.touched)"
                 [rows]="field.type === 'address' ? 3 : 2"
                 [placeholder]="field.placeholder"
@@ -146,7 +146,7 @@
                 *ngIf="field.type === 'text'"
                 [id]="field.key"
                 [formControlName]="field.key"
-                class="w-full p-2 border-2 border-gray-500 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                class="w-full p-2 border-2 border-teal-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50"
                 placeholder=" "
               />
 
@@ -163,16 +163,16 @@
 
         <!-- Right Column -->
         <div class="space-y-4">
-          <div *ngFor="let field of getRightColumnFields(); let i = index" class=" grid grid-cols-9 mb-3 ">
+          <div *ngFor="let field of getRightColumnFields(); let i = index" class="mb-3">
             
-            <!-- Label on the left -->
-            <label [for]="field.key" class="text-sm font-semibold text-gray-800 col-span-3 ">
+            <!-- Label above input -->
+            <label [for]="field.key" class="block text-sm font-semibold text-gray-800 mb-2">
               {{ field.label }} 
               <span *ngIf="field.required" class="text-red-500">*</span>
             </label>
 
-            <!-- Input on the right -->
-            <div class="col-span-6">
+            <!-- Input below label -->
+            <div>
               
               <!-- Text/Number/Email inputs -->
               <input
@@ -189,7 +189,7 @@
                 [id]="field.key"
                 [type]="field.type"
                 [formControlName]="field.key"
-                class="w-full p-2 border-2 border-gray-500 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                class="w-full p-2 border-2 border-teal-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50"
                 [class.input-error]="form.get(field.key)?.invalid && (form.get(field.key)?.dirty || form.get(field.key)?.touched)"
                 [placeholder]="field.placeholder"
               />
@@ -200,7 +200,7 @@
                 [id]="field.key"
                 type="date"
                 [formControlName]="field.key"
-                class="w-full p-2 border-2 border-gray-500 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                class="w-full p-2 border-2 border-teal-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50"
                 [class.input-error]="form.get(field.key)?.invalid && (form.get(field.key)?.dirty || form.get(field.key)?.touched)"
                 [placeholder]="field.placeholder"
               />
@@ -211,7 +211,7 @@
                   [id]="field.key"
                   type="checkbox"
                   [formControlName]="field.key"
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-500 rounded focus:ring-blue-500"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-teal-900 rounded focus:ring-blue-500"
                 />
                 <label [for]="field.key" class="ml-2 text-sm text-gray-700 cursor-pointer">
                   {{ field.placeholder || 'Check this option' }}
@@ -223,7 +223,7 @@
                 *ngIf="field.type === 'select'"
                 [id]="field.key"
                 [formControlName]="field.key"
-                class="w-full p-2 border-2 border-gray-500 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                class="w-full p-2 border-2 border-teal-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50"
                 [class.input-error]="form.get(field.key)?.invalid && (form.get(field.key)?.dirty || form.get(field.key)?.touched)"
               >
                 <option value="" disabled>Select an option</option>
@@ -242,7 +242,7 @@
                   [options]="getOptionsForField(field.key)"
                   optionLabel="label"
                   optionValue="value"
-                  class="w-full p-1 border-2 border-gray-800 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                  class="w-full p-1 border-2 border-gray-800 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50"
                   [class.input-error]="form.get(field.key)?.invalid && (form.get(field.key)?.dirty || form.get(field.key)?.touched)"
                   defaultLabel="Select options"
                 ></p-multiSelect>
@@ -250,7 +250,7 @@
               <!-- File upload -->
               <div
                 *ngIf="field.type === 'file'"
-                class="w-full p-2 border-2 border-dashed border-gray-500 rounded-sm bg-gray-50 hover:border-blue-400 transition-colors cursor-pointer text-center"
+                class="w-full p-2 border-2 border-dashed border-teal-900 rounded-lg bg-gray-50 hover:border-blue-400 transition-colors cursor-pointer text-center"
                 (click)="triggerFileInputClick(fileInputRef)"
                 (dragover)="onDragOver($event)"
                 (dragleave)="onDragLeave($event)"
@@ -285,7 +285,7 @@
                 *ngIf="field.type === 'textarea' || field.type === 'address'"
                 [id]="field.key"
                 [formControlName]="field.key"
-                class="w-full p-2 border-2 border-gray-500 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white resize-vertical"
+                class="w-full p-2 border-2 border-teal-900 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50 resize-vertical"
                 [class.input-error]="form.get(field.key)?.invalid && (form.get(field.key)?.dirty || form.get(field.key)?.touched)"
                 [rows]="field.type === 'address' ? 3 : 2"
                 [placeholder]=" "
@@ -296,7 +296,7 @@
                 *ngIf="field.type === 'text'"
                 [id]="field.key"
                 [formControlName]="field.key"
-                class="w-full p-2 border-2  border-gray-500 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                class="w-full p-2 border-2  border-teal-900 rounded-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-teal-50"
                 placeholder=" "
               />
 
@@ -315,14 +315,13 @@
       <div class="flex justify-end gap-3 pt-6 border-t border-gray-200">
         <button 
           type="button" 
-          class="px-6 py-2 text-white rounded-sm transition-colors duration-200"
-          style="background-color: #ff6800;"
+          class="px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200"
           (click)="closeSidebar()">
           Cancel
         </button>
         <button 
           type="submit" 
-          class="px-6 py-2 bg-blue-600 text-white rounded-sm hover:bg-blue-700 transition-colors duration-200"
+          class="px-6 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors duration-200"
           [disabled]="!form.valid">
           {{ submitLabel || 'Save' }}
         </button>
@@ -345,7 +344,7 @@
         <div class="space-y-2">
           <div
             *ngFor="let media of mediaFiles; let i = index"
-            class="flex items-center justify-between p-3 bg-white rounded-sm border border-gray-200 hover:shadow-md transition-shadow"
+            class="flex items-center justify-between p-3 bg-teal-50 rounded-sm border border-gray-200 hover:shadow-md transition-shadow"
           >
             <a
               [href]="media.file"
@@ -373,7 +372,7 @@
         <div class="space-y-2">
           <div
             *ngFor="let document of documentFiles; let i = index"
-            class="flex items-center justify-between p-3 bg-white rounded-sm border border-gray-200 hover:shadow-md transition-shadow"
+            class="flex items-center justify-between p-3 bg-teal-50 rounded-sm border border-gray-200 hover:shadow-md transition-shadow"
           >
             <a
               [href]="document.file"

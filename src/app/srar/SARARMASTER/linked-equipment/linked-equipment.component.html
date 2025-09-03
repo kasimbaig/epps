@@ -1,7 +1,7 @@
-<div class="container mx-auto p-6">
+<div class="p-6">
     <!-- Header -->
     <div class="mb-6">
-        <h2 class="text-2xl font-bold text-gray-800 mb-2">SRAR <span class="text-teal-500">Linked Equipment Details</span></h2>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">SRAR Linked Equipment Details</h2>
         <!-- <div class="h-1 w-20 bg-blue-600 rounded"></div> -->
     </div>
 
@@ -55,11 +55,13 @@
 <p-dialog  [header]=" crudName+ ' Linked Equipment'"   [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '70vw'}" [baseZIndex]="10000" [draggable]="false" [maximizable]="true" [resizable]="true">
 
     <div class="p-6 bg-slate-100 shadow-md border border-gray-200  mx-auto">
-        <form [formGroup]="sararMasterForm" class="space-y-4">
-            <div class="grid grid-cols-1 gap-4" >
+        <form [formGroup]="sararMasterForm" class="space-y-6">
+            <div class="grid grid-cols-1 gap-6" >
                 <!-- Ship Name -->
-                <div class="grid grid-cols-6 gap-4 items-center">
-                    <label class="text-sm font-medium text-gray-700 col-span-2">Ship Name <span class="text-red-500">*</span></label>
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-800">
+                        Ship Name <span class="text-red-500">*</span>
+                    </label>
                     <p-dropdown 
                         [options]="shipOptions" 
                         formControlName="ship"
@@ -69,12 +71,15 @@
                         [filter]="true"
                         filterBy="name"
                         (onChange)="onShipChange($event.value)"
-                        styleClass="w-full col-span-4">
+                        styleClass="w-full">
                     </p-dropdown>
                 </div>
+                
                 <!-- Equipment Name -->
-                <div class="grid grid-cols-6 gap-4 items-center">
-                    <label class="text-sm font-medium text-gray-700 col-span-2">Equipment Name<span class="text-red-500">*</span></label>
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-800">
+                        Equipment Name <span class="text-red-500">*</span>
+                    </label>
                     <p-dropdown 
                         [options]="equipmentOptions" 
                         formControlName="equipment_name"
@@ -84,12 +89,15 @@
                         [filter]="true"
                         filterBy="name"
                         (onChange)="onEquipmentChange($event.value)"
-                        styleClass="w-full col-span-4">
+                        styleClass="w-full">
                     </p-dropdown>
                 </div>
+                
                 <!-- Sarar Equipment -->
-                <div class="grid grid-cols-6 gap-4 items-center">
-                    <label class="text-sm font-medium text-gray-700 col-span-2">Srar Equipment<span class="text-red-500">*</span></label>
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-800">
+                        SRAR Equipment <span class="text-red-500">*</span>
+                    </label>
                     <p-dropdown 
                         [options]="equipmentTypeOptions" 
                         formControlName="sarar_equipemnt"
@@ -99,12 +107,15 @@
                         [filter]="true"
                         filterBy="equipment_name"
                         (onChange)="onEquipmentTypeChange($event.value)"
-                        styleClass="w-full col-span-4">
+                        styleClass="w-full">
                     </p-dropdown>
                 </div>
+                
                 <!-- Location On Board -->
-                <div class="grid grid-cols-6 gap-4 items-center">
-                    <label class="text-sm font-medium text-gray-700 col-span-2">Location On Board<span class="text-red-500">*</span></label>
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-800">
+                        Location On Board <span class="text-red-500">*</span>
+                    </label>
                     <p-dropdown 
                         [options]="locationOptions" 
                         formControlName="location_on_board"
@@ -114,19 +125,22 @@
                         [filter]="true"
                         filterBy="name"
                         (onChange)="onLocationOnBoardChange($event.value)"
-                        styleClass="w-full col-span-4">
+                        styleClass="w-full">
                     </p-dropdown>
                 </div>
+                
                 <!-- Active Status -->
-                <div class="grid grid-cols-6 gap-4 items-center">
-                    <label class="text-sm font-medium text-gray-700 col-span-2">Active</label>
-                    <div class="col-span-4 flex items-center">
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-gray-800">
+                        Active Status
+                    </label>
+                    <div class="flex items-center space-x-3">
                         <input 
                             type="checkbox" 
                             formControlName="active"
                             class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-500 rounded"
                             id="status-checkbox">
-                        <label for="status-checkbox" class="ml-2 text-sm text-gray-700">Active</label>
+                        <label for="status-checkbox" class="text-sm ml-2 text-gray-700">Mark as Active</label>
                     </div>
                 </div>
             </div>
@@ -135,12 +149,12 @@
         <div class="flex justify-end gap-2 mt-6 pt-4 border-t border-gray-200">
             <button (click)="closeDialog()"
                 type="button" 
-                class="px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors duration-200">
+                class="px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200">
                 Cancel
             </button>
             <button 
                 type="button" 
-                class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+                class="px-6 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors duration-200"
                 (click)="save()">
                 Save
             </button>
@@ -156,3 +170,13 @@
     (onConfirm)="confirmDelete()"
     (onCancel)="cancelDelete()">
 </app-delete-confirmation-modal>
+
+<!-- View Details Modal -->
+<app-view-details 
+    *ngIf="isViewDetailsOpen" 
+    [open]="isViewDetailsOpen" 
+    [viewDetails]="selectedDetails"
+    [headers]="viewDetailsHeaders" 
+    (onOpenChange)="isViewDetailsOpen = $event"
+    [title]="viewDetailsTitle">
+</app-view-details>

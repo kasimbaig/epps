@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ApiService } from '../../../services/api.service';
+import { ViewDetailsComponent } from '../../../shared/components/view-details/view-details.component';
 
 @Component({
   selector: 'app-equipment',
@@ -700,23 +701,8 @@ implements OnInit {
 
   // Event Handlers
   onView(data: any): void {
-    this.crudName='View'
-    
-    // Use static data for equipment options
-    if (data.ship) {
-      const equipmentData = this.srar_equipment_data.filter(equipment => equipment.ship === data.ship);
-        // Format equipment options to show "Equipment Code - Equipment Name" in dropdown
-        this.equipmentOptions = equipmentData.map((equipment: any) => ({
-          ...equipment,
-          displayName: `${equipment.equipment_code} - ${equipment.equipment_name}`
-        }));
-        
-        // Now set the form values after equipment options are loaded
-        this.setViewFormData(data);
-    } else {
-      // If no ship data, set form directly
-      this.setViewFormData(data);
-    }
+    this.selectedDetails = data;
+    this.isViewDetailsOpen = true;
   }
 
   private setViewFormData(data: any): void {
@@ -799,6 +785,27 @@ implements OnInit {
   // Delete confirmation modal properties
   showDeleteModal: boolean = false;
   itemToDelete: any = null;
+
+  // View details properties
+  isViewDetailsOpen: boolean = false;
+  selectedDetails: any = null;
+  viewDetailsTitle: string = 'Equipment Details';
+  viewDetailsHeaders: any[] = [
+    { key: 'ship_name', label: 'Ship Name', type: 'text' },
+    { key: 'equipment_code', label: 'Equipment Code', type: 'text' },
+    { key: 'equipment_name', label: 'Equipment Name', type: 'text' },
+    { key: 'nomenclature', label: 'Nomenclature', type: 'text' },
+    { key: 'oem_part_number', label: 'OEM Part Number', type: 'text' },
+    { key: 'no_of_fits', label: 'No. of Fits', type: 'text' },
+    { key: 'location_name', label: 'Location', type: 'text' },
+    { key: 'equipment_type', label: 'Equipment Type', type: 'text' },
+    { key: 'active', label: 'Active Status', type: 'text' },
+    { key: 'installation_date', label: 'Installation Date', type: 'text' },
+    { key: 'removal_date', label: 'Removal Date', type: 'text' },
+    { key: 'service_life', label: 'Service Life', type: 'text' },
+    { key: 'authority_of_installation', label: 'Installation Authority', type: 'text' },
+    { key: 'department', label: 'Department', type: 'text' }
+  ];
 
   onDelete(data: any): void {
     console.log('Delete Equipment:', data);

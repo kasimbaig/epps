@@ -6,11 +6,10 @@
   <div class="command-header">
     <div class="command-title-block">
       <div class="header-icon-container">
-        <i class="fa-solid fa-ship"></i>
+        <i class="fa-solid fa-ferry"></i>
       </div>
       <div class="header-text-content">
-        <h2>Naval Fleet Maintenance Dashboard</h2>
-        <p>Comprehensive fleet maintenance overview and analytics</p>
+        <h2>Dashboard</h2>
         <div class="header-stats">
           <span class="stat-item">
             <i class="pi pi-ship"></i>
@@ -37,85 +36,77 @@
 
   <!-- Dashboard Content -->
   <div class="dashboard-container w-full max-w-full" *ngIf="activeTab === 'dashboard'">
-    <!-- KPI Cards Section -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 mb-8 w-full max-w-full">
-      <!-- Total Equipment Card -->
-      <div class="kpi-card total-equipment">
-        <div class="kpi-card-header">
-          <div class="kpi-icon-container">
-            <i class="pi pi-wrench kpi-icon"></i>
+    <!-- KPI Tabs Section -->
+    <div class="kpi-tabs-container mb-8 w-full max-w-full">
+      <div class="kpi-tabs-grid">
+        <!-- Total Equipment Tab -->
+        <div class="kpi-tab total-equipment" (mouseenter)="showKpiData(0)" (mouseleave)="hideKpiData(0)">
+          <div class="tab-label">
+            <h3 class="tab-title">Total Equipment</h3>
           </div>
-          <div class="kpi-status"></div>
+          <div class="tab-data" [class.show]="hoveredTab === 0">
+            <div class="kpi-value-container">
+              <h2 class="kpi-value">{{ kpiMetrics[0]?.value }}</h2>
+            </div>
+            <p class="kpi-description">{{ kpiMetrics[0]?.description }}</p>
+          </div>
         </div>
-        <h3 class="kpi-title">Total Equipment</h3>
-        <div class="kpi-value-container">
-          <h2 class="kpi-value">{{ kpiMetrics[0]?.value }}</h2>
-        </div>
-        <p class="kpi-description">{{ kpiMetrics[0]?.description }}</p>
-      </div>
 
-      <!-- Active Tasks Card -->
-      <div class="kpi-card active-tasks">
-        <div class="kpi-card-header">
-          <div class="kpi-icon-container">
-            <i class="pi pi-calendar-plus kpi-icon"></i>
+        <!-- Active Tasks Tab -->
+        <div class="kpi-tab active-tasks" (mouseenter)="showKpiData(1)" (mouseleave)="hideKpiData(1)">
+          <div class="tab-label">
+            <h3 class="tab-title">Active Tasks</h3>
           </div>
-          <div class="kpi-status"></div>
+          <div class="tab-data" [class.show]="hoveredTab === 1">
+            <div class="kpi-value-container">
+              <h2 class="kpi-value">{{ kpiMetrics[1]?.value }}</h2>
+            </div>
+            <p class="kpi-description">{{ kpiMetrics[1]?.progressBarValue }}% Complete</p>
+          </div>
         </div>
-        <h3 class="kpi-title">Active Tasks</h3>
-        <div class="kpi-value-container">
-          <h2 class="kpi-value">{{ kpiMetrics[1]?.value }}</h2>
-        </div>
-        <p class="kpi-description">{{ kpiMetrics[1]?.progressBarValue }}% Complete</p>
-      </div>
 
-      <!-- Open Defects Card -->
-      <div class="kpi-card open-defects">
-        <div class="kpi-card-header">
-          <div class="kpi-icon-container">
-            <i class="pi pi-exclamation-circle kpi-icon"></i>
+        <!-- Open Defects Tab -->
+        <div class="kpi-tab open-defects" (mouseenter)="showKpiData(2)" (mouseleave)="hideKpiData(2)">
+          <div class="tab-label">
+            <h3 class="tab-title">Open Defects</h3>
           </div>
-          <div class="kpi-status"></div>
+          <div class="tab-data" [class.show]="hoveredTab === 2">
+            <div class="kpi-value-container">
+              <!-- <h2 class="kpi-value">{{ kpiMetrics[2]?.value }}</h2> -->
+            </div>
+            <p class="kpi-description">
+              <span *ngIf="kpiMetrics[2]?.severityDetails?.critical" class="severity-badge critical">{{ kpiMetrics[2]?.severityDetails?.critical }} Critical</span>
+              <span *ngIf="kpiMetrics[2]?.severityDetails?.major" class="severity-badge major">{{ kpiMetrics[2]?.severityDetails?.major }} Major</span>
+              <span *ngIf="kpiMetrics[2]?.severityDetails?.minor" class="severity-badge minor">{{ kpiMetrics[2]?.severityDetails?.minor }} Minor</span>
+            </p>
+          </div>
         </div>
-        <h3 class="kpi-title">Open Defects</h3>
-        <div class="kpi-value-container">
-          <h2 class="kpi-value">{{ kpiMetrics[2]?.value }}</h2>
-        </div>
-        <p class="kpi-description">
-          <span *ngIf="kpiMetrics[2]?.severityDetails?.critical" class="severity-badge critical">{{ kpiMetrics[2]?.severityDetails?.critical }} Critical</span>
-          <span *ngIf="kpiMetrics[2]?.severityDetails?.major" class="severity-badge major">{{ kpiMetrics[2]?.severityDetails?.major }} Major</span>
-          <span *ngIf="kpiMetrics[2]?.severityDetails?.minor" class="severity-badge minor">{{ kpiMetrics[2]?.severityDetails?.minor }} Minor</span>
-        </p>
-      </div>
 
-      <!-- Equipment Fit Progress Card -->
-      <div class="kpi-card equipment-fit">
-        <div class="kpi-card-header">
-          <div class="kpi-icon-container">
-            <i class="pi pi-thumbs-up kpi-icon"></i>
+        <!-- Equipment Fit Progress Tab -->
+        <div class="kpi-tab equipment-fit" (mouseenter)="showKpiData(3)" (mouseleave)="hideKpiData(3)">
+          <div class="tab-label">
+            <h3 class="tab-title">Equipment Fit Progress</h3>
           </div>
-          <div class="kpi-status"></div>
+          <div class="tab-data" [class.show]="hoveredTab === 3">
+            <div class="kpi-value-container">
+              <h2 class="kpi-value">{{ kpiMetrics[3]?.value }}</h2>
+            </div>
+            <p class="kpi-description">{{ kpiMetrics[3]?.subText }}</p>
+          </div>
         </div>
-        <h3 class="kpi-title">Equipment Fit Progress</h3>
-        <div class="kpi-value-container">
-          <h2 class="kpi-value">{{ kpiMetrics[3]?.value }}</h2>
-        </div>
-        <p class="kpi-description">{{ kpiMetrics[3]?.subText }}</p>
-      </div>
 
-      <!-- Task Completion Rate Card -->
-      <div class="kpi-card task-completion">
-        <div class="kpi-card-header">
-          <div class="kpi-icon-container">
-            <i class="pi pi-percentage kpi-icon"></i>
+        <!-- Task Completion Rate Tab -->
+        <div class="kpi-tab task-completion" (mouseenter)="showKpiData(4)" (mouseleave)="hideKpiData(4)">
+          <div class="tab-label">
+            <h3 class="tab-title">Task Completion Rate</h3>
           </div>
-          <div class="kpi-status"></div>
+          <div class="tab-data" [class.show]="hoveredTab === 4">
+            <div class="kpi-value-container">
+              <h2 class="kpi-value">{{ kpiMetrics[4]?.value }}</h2>
+            </div>
+            <p class="kpi-description">{{ kpiMetrics[4]?.subText }}</p>
+          </div>
         </div>
-        <h3 class="kpi-title">Task Completion Rate</h3>
-        <div class="kpi-value-container">
-          <h2 class="kpi-value">{{ kpiMetrics[4]?.value }}</h2>
-        </div>
-        <p class="kpi-description">{{ kpiMetrics[4]?.subText }}</p>
       </div>
     </div>
 

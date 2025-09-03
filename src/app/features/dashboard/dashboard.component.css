@@ -922,6 +922,7 @@ th{
   margin-bottom: 1rem;
   /* Ensure cards don't go under other elements */
   transform: translateZ(0);
+  border-radius: 12px;
 }
 
 /* Ensure proper spacing above KPI cards */
@@ -1016,6 +1017,7 @@ th{
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  border-radius: 12px;
 }
 
 .kpi-card:hover .kpi-icon-container {
@@ -1145,6 +1147,219 @@ th{
 .kpi-card:hover::after {
   transform: scale(1.5);
   opacity: 0.8;
+}
+
+/* --- KPI Tabs Styles --- */
+.kpi-tabs-container {
+  margin-bottom: 2rem;
+}
+
+.kpi-tabs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 100%;
+}
+
+.kpi-tab {
+  position: relative;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.kpi-tab:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #cbd5e1;
+}
+
+.tab-label {
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+
+.tab-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.tab-data {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  border-radius: inherit;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.tab-data.show {
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 3;
+}
+
+.tab-data .kpi-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tab-data .kpi-description {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.3;
+  margin: 0;
+  text-align: center;
+}
+
+/* Tab Color Variants */
+.kpi-tab.total-equipment {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+  border-color: #0ea5e9;
+}
+
+.kpi-tab.total-equipment .tab-title {
+  color: white;
+}
+
+.kpi-tab.total-equipment:hover {
+  border-color: #0284c7;
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+}
+
+.kpi-tab.active-tasks {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+  border-color: #22c55e;
+}
+
+.kpi-tab.active-tasks .tab-title {
+  color: white;
+}
+
+.kpi-tab.active-tasks:hover {
+  border-color: #16a34a;
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+}
+
+.kpi-tab.open-defects {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+  border-color: #ef4444;
+}
+
+.kpi-tab.open-defects .tab-title {
+  color: white;
+}
+
+.kpi-tab.open-defects:hover {
+  border-color: #dc2626;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+}
+
+.kpi-tab.equipment-fit {
+  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  border-color: #10b981;
+}
+
+.kpi-tab.equipment-fit .tab-title {
+  color: white;
+}
+
+.kpi-tab.equipment-fit:hover {
+  border-color: #059669;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+.kpi-tab.task-completion {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+  border-color: #3b82f6;
+}
+
+.kpi-tab.task-completion .tab-title {
+  color: white;
+}
+
+.kpi-tab.task-completion:hover {
+  border-color: #2563eb;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+/* Severity badges in tab data */
+.tab-data .severity-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin: 0.125rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.tab-data .severity-badge.critical {
+  color: #dc2626;
+}
+
+.tab-data .severity-badge.major {
+  color: #d97706;
+}
+
+.tab-data .severity-badge.minor {
+  color: #ca8a04;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .kpi-tabs-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .kpi-tab {
+    min-height: 70px;
+    padding: 0.75rem;
+  }
+  
+  .tab-title {
+    font-size: 0.75rem;
+  }
+  
+  .tab-data .kpi-value {
+    font-size: 1.5rem;
+  }
+  
+  .tab-data .kpi-description {
+    font-size: 0.7rem;
+  }
 }
 
 /* Responsive Design */

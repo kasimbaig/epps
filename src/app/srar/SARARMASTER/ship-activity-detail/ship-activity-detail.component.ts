@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ApiService } from '../../../services/api.service';
+import { ViewDetailsComponent } from '../../../shared/components/view-details/view-details.component';
 
 interface ShipActivityType {
   id?: number;
@@ -156,6 +157,21 @@ export class ShipActivityDetailComponent implements OnInit {
   showDeleteModal: boolean = false;
   itemToDelete: ShipActivityDetail | null = null;
 
+  // View details properties
+  isViewDetailsOpen: boolean = false;
+  selectedDetails: any = null;
+  viewDetailsTitle: string = 'Ship Activity Detail Details';
+  viewDetailsHeaders: any[] = [
+    { key: 'name', label: 'Activity Detail Name', type: 'text' },
+    { key: 'code', label: 'Code', type: 'text' },
+    { key: 'ship_activity_type_name', label: 'Activity Type', type: 'text' },
+    { key: 'active', label: 'Active Status', type: 'text' },
+    { key: 'created_by_name', label: 'Created By', type: 'text' },
+    { key: 'modified_by_name', label: 'Modified By', type: 'text' },
+    { key: 'created_on', label: 'Created On', type: 'text' },
+    { key: 'modified_on', label: 'Modified On', type: 'text' }
+  ];
+
   constructor(private apiService: ApiService, private messageService: MessageService) {}
 
   ngOnInit(): void {
@@ -221,21 +237,8 @@ export class ShipActivityDetailComponent implements OnInit {
 
   // Event Handlers
   onView(data: ShipActivityDetail): void {
-    this.crudName='View';
-    this.isEdit = false;
-    this.selectedShipActivityDetailId = data.id || null;
-    this.selectedShipActivityTypeId = data.ship_activity_type;
-    
-    // Reset form first, then set values
-    this.sararMasterForm.reset();
-    this.sararMasterForm.patchValue({
-      ship_activity_detail: data.name,
-      code: data.code,
-      ship_activity_type: data.ship_activity_type_name,
-      status: data.active === 1
-    });
-    this.sararMasterForm.disable();
-    this.displayDialog = true;
+    this.selectedDetails = data;
+    this.isViewDetailsOpen = true;
   }
 
   onEdit(data: ShipActivityDetail): void {

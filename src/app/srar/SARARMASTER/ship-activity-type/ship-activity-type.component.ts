@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ApiService } from '../../../services/api.service';
+import { ViewDetailsComponent } from '../../../shared/components/view-details/view-details.component';
 
 interface ShipLocation {
   id?: number;
@@ -144,6 +145,21 @@ export class ShipActivityTypeComponent  implements OnInit {
   showDeleteModal: boolean = false;
   itemToDelete: ShipActivityType | null = null;
 
+  // View details properties
+  isViewDetailsOpen: boolean = false;
+  selectedDetails: any = null;
+  viewDetailsTitle: string = 'Ship Activity Type Details';
+  viewDetailsHeaders: any[] = [
+    { key: 'name', label: 'Activity Type Name', type: 'text' },
+    { key: 'status', label: 'Status', type: 'text' },
+    { key: 'ship_location_name', label: 'Ship Location', type: 'text' },
+    { key: 'active', label: 'Active Status', type: 'text' },
+    { key: 'created_by_name', label: 'Created By', type: 'text' },
+    { key: 'modified_by_name', label: 'Modified By', type: 'text' },
+    { key: 'created_on', label: 'Created On', type: 'text' },
+    { key: 'modified_on', label: 'Modified On', type: 'text' }
+  ];
+
   constructor(private apiService: ApiService, private messageService: MessageService) {}
 
   ngOnInit(): void {
@@ -209,21 +225,8 @@ export class ShipActivityTypeComponent  implements OnInit {
 
   // Event Handlers
   onView(data: ShipActivityType): void {
-    this.crudName='View';
-    this.isEdit = false;
-    this.selectedShipActivityTypeId = data.id || null;
-    this.selectedShipLocationId = data.ship_location;
-    
-    // Reset form first, then set values
-    this.sararMasterForm.reset();
-    this.sararMasterForm.patchValue({
-      ship_activity_type: data.name,
-      ship_location: data.ship_location_name,
-      code: data.code,
-      status: data.active === 1
-    });
-    this.sararMasterForm.disable();
-    this.displayDialog = true;
+    this.selectedDetails = data;
+    this.isViewDetailsOpen = true;
   }
 
   onEdit(data: ShipActivityType): void {

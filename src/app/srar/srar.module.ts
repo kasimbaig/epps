@@ -25,6 +25,7 @@ import { SararAdjustmentComponent } from './SARARTRANSACTION/sarar-adjustment/sa
 import { SubComponentMonthlyComponent } from './SARARTRANSACTION/sarar-monthly/sub-component-monthly/sub-component-monthly.component';
 import { OperationsModule } from './SARARTRANSACTION/sarar-monthly/sub-component-monthly/operations/operations.module';
 import { DeleteConfirmationModalComponent } from '../shared/components/delete-confirmation-modal/delete-confirmation-modal.component';
+import { ViewDetailsComponent } from '../shared/components/view-details/view-details.component';
 import { SararMonthlyComponent } from './SARARTRANSACTION/sarar-monthly/sarar-monthly.component';
 import { FinalPageComponent } from './SARARTRANSACTION/sarar-monthly/sub-component-monthly/operations/final-page/final-page.component';
 import { SrarReportComponent } from './srar-report/srar-report.component';
@@ -67,6 +68,7 @@ import { MessageService } from 'primeng/api';
     CheckboxModule,
     OperationsModule,
     DeleteConfirmationModalComponent,
+    ViewDetailsComponent,
     ReportComponent,
     ToastModule
   ],

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ApiService } from '../../../services/api.service';
+import { ViewDetailsComponent } from '../../../shared/components/view-details/view-details.component';
 
 @Component({
   selector: 'app-linked-equipment',
@@ -393,30 +394,8 @@ export class LinkedEquipmentComponent implements OnInit {
 
   // Event Handlers
   onView(data: any): void {
-    this.crudName='View'
-    // Find the SRAR equipment details for proper dropdown population
-    const srarEquipmentDetails = this.srar_equipment_details_data.find(item => item.id === data.srar_equipment);
-    
-    // Map API data to form fields
-    const formData = {
-      id: data.id,
-      ship: data.ship,
-      ship_name: data.ship_name,
-      ship_id: data.ship,
-      equipment_name: data.equipment_name,
-      equipment_id: data.equipment,
-      sarar_equipemnt: srarEquipmentDetails ? srarEquipmentDetails.equipment_name : data.srar_equipment_nomenclature,
-      sarar_equipment_id: data.srar_equipment,
-      location_name: data.location_name,
-      location_id: data.location,
-      location_on_board: data.location_name,
-      active: data.active
-    };
-    this.sararMasterForm.patchValue(formData);
-    this.sararMasterForm.get('active')?.setValue(data.active == 1 ? true : false);
-    // Disable form for view mode
-    this.sararMasterForm.disable();
-    this.openDialog();
+    this.selectedDetails = data;
+    this.isViewDetailsOpen = true;
   }
   isEdit: boolean = false;
   onEdit(data: any): void {
@@ -450,6 +429,19 @@ export class LinkedEquipmentComponent implements OnInit {
   // Delete confirmation modal properties
   showDeleteModal: boolean = false;
   itemToDelete: any = null;
+
+  // View details properties
+  isViewDetailsOpen: boolean = false;
+  selectedDetails: any = null;
+  viewDetailsTitle: string = 'Linked Equipment Details';
+  viewDetailsHeaders: any[] = [
+    { key: 'ship_name', label: 'Ship Name', type: 'text' },
+    { key: 'equipment_code', label: 'Equipment Code', type: 'text' },
+    { key: 'equipment_name', label: 'Equipment Name', type: 'text' },
+    { key: 'srar_equipment_nomenclature', label: 'SRAR Equipment Nomenclature', type: 'text' },
+    { key: 'location_name', label: 'Location', type: 'text' },
+    { key: 'active', label: 'Active Status', type: 'text' }
+  ];
 
   onDelete(data: any): void {
     console.log('Delete Linked Equipment:', data);

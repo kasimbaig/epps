@@ -45,7 +45,7 @@
   </div>
 </div>  -->
 
-<!-- sfd-main.component.html -->
+<!-- masters.component.html -->
 <div class="px-4 py-1 min-h-screen ">
   <!-- SFD Dashboard Header -->
 <!-- Sub-navigation for SFD sections -->
@@ -58,7 +58,6 @@
           class="nav-item flex items-center px-4 py-2 rounded-lg transition-all duration-200 ease-in-out masters-button"
           [ngClass]="{'active bg-blue-600 text-white shadow-lg': activeSubPath === 'ship-group', 'text-gray-700 hover:bg-blue-50': activeSubPath !== 'ship-group'}"
           (click)="navigateTo('ship-group')">
-          <i class="fa-solid fa-database"></i>
           <span>Ship</span>
           <i class="fa-solid ml-2 text-xs"
               [ngClass]="showShipDropdownDropdown ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -82,7 +81,6 @@
           class="nav-item flex items-center px-4 py-2 rounded-lg transition-all duration-200 ease-in-out transactions-button"
           [ngClass]="{'active bg-blue-600 text-white shadow-lg': activeSubPath === 'equipment-group', 'text-gray-700 hover:bg-blue-50': activeSubPath !== 'equipment-group'}"
           (click)="navigateTo('equipment-group')">
-          <i class="fa-solid fa-exchange-alt"></i>
           <span>Equipment</span>
           <i class="fa-solid ml-2 text-xs"
               [ngClass]="showEquipmentDropdownDropdown ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -104,7 +102,6 @@
           class="nav-item flex items-center px-4 py-2 rounded-lg transition-all duration-200 ease-in-out transactions-button"
           [ngClass]="{'active bg-blue-600 text-white shadow-lg': activeSubPath === 'unit-group', 'text-gray-700 hover:bg-blue-50': activeSubPath !== 'unit-group'}"
           (click)="navigateTo('unit-group')">
-          <i class="fa-solid fa-chart-bar"></i>
           <span>Unit</span>
           <i class="fa-solid ml-2 text-xs"
               [ngClass]="showUnitDropdownDropdown ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
@@ -125,31 +122,26 @@
   <!-- <button class="nav-item flex items-center px-2 py-2 rounded-lg transition-all duration-200 ease-in-out text-sm"
   [ngClass]="{'active bg-blue-600 text-white shadow-lg': activeSubPath === 'overseeing-team', 'text-gray-700 hover:bg-blue-50': activeSubPath !== 'overseeing-team'}"
   (click)="navigateTo('overseeing-team')">
-  <i class="fa-solid fa-users"></i>
   <span>Overseeing</span>
 </button> -->
   <button class="nav-item flex items-center px-2 py-2 rounded-lg transition-all duration-200 ease-in-out text-sm"
   [ngClass]="{'active bg-blue-600 text-white shadow-lg': activeSubPath === 'propulsion', 'text-gray-700 hover:bg-blue-50': activeSubPath !== 'propulsion'}"
   (click)="navigateTo('propulsion')">
-  <i class="fa-solid fa-cogs"></i>
   <span>Propulsion</span>
 </button>
   <button class="nav-item flex items-center px-2 py-2 rounded-lg transition-all duration-200 ease-in-out text-sm"
   [ngClass]="{'active bg-blue-600 text-white shadow-lg': activeSubPath === 'country', 'text-gray-700 hover:bg-blue-50': activeSubPath !== 'country'}"
   (click)="navigateTo('country')">
-  <i class="fa-solid fa-flag"></i>
   <span>Country</span>
 </button>
   <button class="nav-item flex items-center px-2 py-2 rounded-lg transition-all duration-200 ease-in-out text-sm"
   [ngClass]="{'active bg-blue-600 text-white shadow-lg': activeSubPath === 'establishment', 'text-gray-700 hover:bg-blue-50': activeSubPath !== 'establishment'}"
   (click)="navigateTo('establishment')">
-  <i class="fa-solid fa-building"></i>
   <span>Establishment</span>
 </button>
   <button class="nav-item flex items-center px-2 py-2 rounded-lg transition-all duration-200 ease-in-out text-sm"
   [ngClass]="{'active bg-blue-600 text-white shadow-lg': activeSubPath === 'manufacturer', 'text-gray-700 hover:bg-blue-50': activeSubPath !== 'manufacturer'}"
   (click)="navigateTo('manufacturer')">
-  <i class="fa-solid fa-industry"></i>
   <span>Manufacturer</span>
 </button>
 </div>

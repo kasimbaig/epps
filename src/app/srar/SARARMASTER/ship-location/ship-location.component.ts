@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ApiService } from '../../../services/api.service';
+import { ViewDetailsComponent } from '../../../shared/components/view-details/view-details.component';
 
 interface ShipState {
   id?: number;
@@ -140,6 +141,22 @@ export class ShipLocationComponent implements OnInit {
   showDeleteModal: boolean = false;
   itemToDelete: ShipLocation | null = null;
 
+  // View details properties
+  isViewDetailsOpen: boolean = false;
+  selectedDetails: any = null;
+  viewDetailsTitle: string = 'Ship Location Details';
+  viewDetailsHeaders: any[] = [
+    { key: 'name', label: 'Location Name', type: 'text' },
+    { key: 'code', label: 'Code', type: 'text' },
+    { key: 'ship_state_name', label: 'Ship State', type: 'text' },
+    { key: 'status', label: 'Status', type: 'text' },
+    { key: 'active', label: 'Active Status', type: 'text' },
+    { key: 'created_by_name', label: 'Created By', type: 'text' },
+    { key: 'modified_by_name', label: 'Modified By', type: 'text' },
+    { key: 'created_on', label: 'Created On', type: 'text' },
+    { key: 'modified_on', label: 'Modified On', type: 'text' }
+  ];
+
   constructor(private apiService: ApiService, private messageService: MessageService) {}
 
   ngOnInit(): void {
@@ -205,21 +222,8 @@ export class ShipLocationComponent implements OnInit {
 
   // Event Handlers
   onView(data: ShipLocation): void {
-    this.crudName = 'View';
-    this.isEdit = false;
-    this.selectedShipLocationId = data.id || null;
-    this.selectedShipStateId = data.ship_state;
-    
-    // Reset form first, then set values
-    this.sararMasterForm.reset();
-    this.sararMasterForm.patchValue({
-      ship_location: data.name,
-      code: data.code,
-      ship_state: data.ship_state_name, // Use the API's ship_state_name directly
-      status: data.active === 1
-    });
-    this.sararMasterForm.disable();
-    this.displayDialog = true;
+    this.selectedDetails = data;
+    this.isViewDetailsOpen = true;
   }
 
   onEdit(data: ShipLocation): void {

@@ -132,7 +132,7 @@
         <form [formGroup]="sfdReferenceForm" class="space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" [ngClass]="{'lg:grid-cols-3': isMaximized, 'lg:grid-cols-2': !isMaximized}">
                 <!-- First Row: Ship -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                         <label class="text-sm font-medium text-gray-700 col-span-2">Ship<span class="text-red-500">*</span></label> 
                     <p-dropdown 
                         [options]="shipOptions" 
@@ -147,7 +147,7 @@
                 </div>
 
                 <!-- Second Row: Equipment Serial Number -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Equipment Serial Number</label>
                     <input 
                     pInputText
@@ -160,7 +160,7 @@
                
 
                 <!-- Third Row: Supplier -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Supplier<span class="text-red-500">*</span></label> 
                     <p-dropdown 
                         [options]="supplierOptions" 
@@ -175,7 +175,7 @@
                 </div>
 
                 <!-- Fourth Row: Manufacturer -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Manufacturer<span class="text-red-500">*</span></label> 
                     <p-dropdown 
                         [options]="manufacturerOptions" 
@@ -188,7 +188,7 @@
                         styleClass="w-full col-span-4">
                     </p-dropdown>
                 </div>
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Location Code<span class="text-red-500">*</span></label> 
                     <p-dropdown 
                         [options]="locationOnBoardOptions" 
@@ -202,7 +202,7 @@
                         styleClass="w-full col-span-4">
                     </p-dropdown>
                 </div>
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Location On Board<span class="text-red-500">*</span></label> 
                     <input 
                     pInputText
@@ -213,7 +213,7 @@
                 </div>
 
                 <!-- Fifth Row: Installation Date -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Installation Date</label>
                     <div class="col-span-4">
                     <p-calendar 
@@ -227,7 +227,7 @@
                 </div>
 
                 <!-- Sixth Row: Removal Date -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Removal Date</label>
                     <div class="col-span-4">
                     <p-calendar 
@@ -241,7 +241,7 @@
                 </div>
 
                 <!-- Seventh Row: OEM Part No. -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">OEM Part No.</label> 
                     <input 
                     pInputText
@@ -252,7 +252,7 @@
                 </div>
 
                 <!-- Eighth Row: No. Of Fits -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">No. Of Fits<span class="text-red-500">*</span></label> 
                     <input 
                     pInputText
@@ -263,7 +263,7 @@
                 </div>
 
                 <!-- Ninth Row: Parent Equipment -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Parent Equipment</label>
                     <p-dropdown 
                         [options]="parentEquipmentOptions" 
@@ -278,7 +278,7 @@
                 </div>
 
                 <!-- Tenth Row: Sub Department -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">SFD Group</label>
                     <select 
                         formControlName="sfd_group"
@@ -291,7 +291,7 @@
                 </div>
 
                 <!-- Eleventh Row: Nomenclature -->
-                <div class="grid grid-cols-6 gap-4 items-center">
+                        <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Department</label>
                     <select 
                         formControlName="department"
@@ -302,7 +302,7 @@
                         </option>
                     </select>
                 </div>
-                <div class="grid grid-cols-6 gap-4 items-center">
+                <div class="space-y-2">
                     <label class="text-sm font-medium text-gray-700 col-span-2">Remarks</label>
                     <textarea 
                     pInputTextarea
@@ -319,13 +319,13 @@
             <button 
                 (click)="closeDialog()" 
                 type="button" 
-                class="px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors duration-200">
+                class="px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200">
                 Cancel
             </button>
             <button 
                 *ngIf="isEdit !== 'View'"
                 type="button" 
-                class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+                class="px-6 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors duration-200"
                 (click)="saveReference()">
                 {{ isEdit === 'Add' ? 'Save' : 'Update' }}
             </button>

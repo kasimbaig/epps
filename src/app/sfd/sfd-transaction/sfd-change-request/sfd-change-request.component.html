@@ -54,7 +54,7 @@
                 </span>
                 <span *ngIf="selectedItems.length > 0 && user_role=='APP'"
                     type="button" 
-                    class="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-200 flex items-center gap-2"
+                    class="px-6 py-2 bg-orange-500 text-white p-2 rounded rounded-md hover:bg-green-600 transition-colors duration-200 flex items-center gap-2"
                     (click)="showCommentDialog =true">
                     <i class="pi pi-check-circle"></i>
                     Approve
@@ -375,7 +375,7 @@
             <!-- <button 
                 *ngIf="isEdit"
                 type="button" 
-                class="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-200"
+                class="px-6 py-2 bg-orange-500 text-white p-2 rounded rounded-md hover:bg-green-600 transition-colors duration-200"
                 (click)="approveReference()"
                 [disabled]="sfdReferenceForm.invalid">
                 Approve
@@ -423,7 +423,7 @@
         </span>
         <span 
             type="button" 
-            class="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors duration-200 flex items-center gap-2"
+            class="px-6 py-2 bg-orange-500 text-white p-2 rounded rounded-md hover:bg-green-600 transition-colors duration-200 flex items-center gap-2"
             (click)="saveComment(1)">
             <i class="pi pi-check"></i>
             Approve
